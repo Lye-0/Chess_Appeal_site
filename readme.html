@@ -3,23 +3,258 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chess README</title>
+  <meta name="description" content="Chessの最新機能と使い方を、従業員と管理者それぞれの流れに分けて説明するREADMEページです。" />
+  <title>Chess README | 最新ガイド</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <main class="readme-page">
-    <section class="readme-card">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./index.html" aria-label="Chess アピールページへ戻る">
+        <span class="brand-main">Chess</span>
+        <span class="brand-sub">SHIFT GUIDE</span>
+      </a>
+      <button class="menu-button" type="button" aria-label="メニューを開閉" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" aria-label="READMEページのナビゲーション">
+        <a href="#overview">概要</a>
+        <a href="#employee">従業員</a>
+        <a href="#admin">管理者</a>
+        <a href="#compatibility">相性</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-button secondary" href="./index.html">アピールページへ戻る</a>
+        <a class="nav-button primary" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="readme-page readme-guide">
+    <section class="readme-hero readme-panel">
       <p class="section-label">README</p>
-      <h1>詳しい説明ページ</h1>
-      <p>
-        ここにサービス概要、使い方、実装内容、アピールポイントを後から追加します。
-        現時点ではアピールページからの遷移先として仮配置しています。
+      <h1>Chess 最新ガイド</h1>
+      <p class="readme-lead">
+        Chessは、管理者が募集シフト枠を作成し、従業員がその枠に希望を出し、管理者が希望者の中から承認してシフトを確定するサービスです。相性入力、相性スコアを使った組み合わせ確認、日をまたぐシフト枠にも対応しています。
       </p>
       <div class="hero-actions center">
+        <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを開く</a>
         <a class="button light" href="./index.html">アピールページへ戻る</a>
-        <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+      </div>
+    </section>
+
+    <nav class="readme-menu" aria-label="ページ内メニュー">
+      <a href="#overview">サービス概要</a>
+      <a href="#current">現在できること</a>
+      <a href="#start">利用開始</a>
+      <a href="#employee">従業員の操作</a>
+      <a href="#admin">管理者の操作</a>
+      <a href="#compatibility">相性反映</a>
+      <a href="#overnight">日またぎ</a>
+      <a href="#status">状態表示</a>
+      <a href="#tech">使用技術</a>
+    </nav>
+
+    <section id="overview" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">OVERVIEW</p>
+        <h2>Chessとは</h2>
+        <p>
+          店舗やチームのシフト募集、希望提出、承認、勤務時間確認をまとめて扱うWebサービスです。従業員は管理者が作成したシフト枠の中から希望を出し、管理者は集まった希望と相性スコアを見ながら、当日に勤務者を決められます。
+        </p>
+      </div>
+      <div class="readme-card-grid three equal-grid">
+        <article class="guide-card">
+          <span class="number blue">01</span>
+          <h3>枠を作って募集</h3>
+          <p>管理者が日付、開始時刻、終了時刻、募集人数を入力して、従業員が希望できるシフト枠を作成します。</p>
+        </article>
+        <article class="guide-card">
+          <span class="number green">02</span>
+          <h3>希望して承認</h3>
+          <p>従業員は現在の日付以降で、まだ開始していない枠へ希望を出します。管理者が承認した時点で、その人のシフトが確定します。</p>
+        </article>
+        <article class="guide-card">
+          <span class="number amber">03</span>
+          <h3>相性を調整に使う</h3>
+          <p>従業員同士の相性を -5 から +5 で入力し、管理者画面で希望者の組み合わせスコアを確認できます。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="current" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">CURRENT</p>
+        <h2>現在できること</h2>
+        <p>最新のChessで確認できる機能を、役割ごとに整理しています。</p>
+      </div>
+      <div class="readme-card-grid two equal-grid">
+        <article class="role-flow feature-panel">
+          <h3>従業員ができること</h3>
+          <ul class="check-list">
+            <li>組織IDとメールアドレスで従業員ログイン</li>
+            <li>管理者が作った募集シフト枠から希望を追加</li>
+            <li>送信前に希望内容をまとめて確認</li>
+            <li>希望済み、承認済みのシフトを確認</li>
+            <li>他の従業員との相性を -5 から +5 で入力</li>
+          </ul>
+        </article>
+        <article class="role-flow feature-panel">
+          <h3>管理者ができること</h3>
+          <ul class="check-list">
+            <li>管理者アカウント作成、ログイン、組織選択</li>
+            <li>従業員の登録、編集、削除</li>
+            <li>日付、時刻、募集人数を指定してシフト枠を作成</li>
+            <li>希望者を承認、承認取り消し、削除</li>
+            <li>相性スコアを見ながらおすすめ組み合わせを承認</li>
+            <li>従業員別シフト表と勤務時間を確認</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="start" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">START</p>
+        <h2>利用開始までの流れ</h2>
+        <p>最初に管理者が組織と従業員を準備し、その後に従業員が希望を出します。</p>
+      </div>
+      <div class="timeline-grid">
+        <article class="timeline-card"><span>1</span><h3>管理者登録</h3><p>管理者がメールアドレスとパスワードでアカウントを作成します。</p></article>
+        <article class="timeline-card"><span>2</span><h3>組織作成</h3><p>管理する組織を作成します。従業員ログインで使う6桁の組織IDが発行されます。</p></article>
+        <article class="timeline-card"><span>3</span><h3>従業員登録</h3><p>従業員名、メールアドレス、雇用形態を登録します。希望は従業員IDに紐づきます。</p></article>
+        <article class="timeline-card"><span>4</span><h3>シフト枠作成</h3><p>管理者が日付、開始時刻、終了時刻、募集人数を設定して枠を公開します。</p></article>
+        <article class="timeline-card"><span>5</span><h3>希望と承認</h3><p>従業員が希望を送り、管理者が承認するとシフトが確定します。</p></article>
+      </div>
+    </section>
+
+    <section id="employee" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">EMPLOYEE</p>
+        <h2>従業員の操作</h2>
+        <p>従業員は、管理者が用意した募集シフト枠の中から希望を出します。</p>
+      </div>
+      <div class="detail-steps uniform-steps">
+        <article class="detail-step"><span class="step-number">1</span><div><h3>従業員ログイン</h3><p>トップ画面で「従業員」を選び、管理者から共有された6桁の組織IDと、登録済みメールアドレスを入力します。一致する従業員情報が見つかると従業員ページへ進みます。</p></div></article>
+        <article class="detail-step"><span class="step-number">2</span><div><h3>ホームで状況確認</h3><p>直近のシフト、希望シフト一覧、承認待ち、承認済みの状態を確認します。相性入力画面にも移動できます。</p></div></article>
+        <article class="detail-step"><span class="step-number">3</span><div><h3>希望シフト入力</h3><p>カレンダーから日付を選び、管理者が作ったシフト枠を選択します。枠がない日や、すでに希望済みの枠は選択できません。</p></div></article>
+        <article class="detail-step"><span class="step-number">4</span><div><h3>希望を追加して送信</h3><p>複数の希望を一度リストに追加し、送信前に内容を確認します。送信後は管理者が希望者の中から承認します。</p></div></article>
+        <article class="detail-step"><span class="step-number">5</span><div><h3>相性を入力</h3><p>他の従業員ごとに -5 から +5 のスコアを入力します。一緒に働きたい、少し避けたいなどの感覚を数値として残せます。</p></div></article>
+        <article class="detail-step"><span class="step-number">6</span><div><h3>確定を確認</h3><p>管理者に承認されると、状態が「承認済み」になります。承認済みのシフトが実際の勤務予定になります。</p></div></article>
+      </div>
+    </section>
+
+    <section id="admin" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">ADMIN</p>
+        <h2>管理者の操作</h2>
+        <p>管理者は、募集枠を作り、希望者を確認し、必要人数に合わせて承認します。</p>
+      </div>
+      <div class="detail-steps uniform-steps">
+        <article class="detail-step"><span class="step-number">1</span><div><h3>管理者ログイン</h3><p>メールアドレスとパスワードでログインします。複数組織を持っている場合は、管理する組織を選択します。</p></div></article>
+        <article class="detail-step"><span class="step-number">2</span><div><h3>従業員登録</h3><p>従業員の名前、メールアドレス、雇用形態を登録します。従業員は組織IDとメールアドレスでログインできます。</p></div></article>
+        <article class="detail-step"><span class="step-number">3</span><div><h3>シフト枠を追加</h3><p>日付、開始時刻、終了時刻、募集人数を入力して枠を追加します。この枠だけが従業員側の希望対象になります。</p></div></article>
+        <article class="detail-step"><span class="step-number">4</span><div><h3>希望者を確認</h3><p>各シフト枠に対して、承認待ちの希望者と承認済みの希望者を確認します。募集人数を超えないように承認します。</p></div></article>
+        <article class="detail-step"><span class="step-number">5</span><div><h3>相性を見て承認</h3><p>希望者同士の相性スコア合計と、おすすめ組み合わせを確認できます。必要に応じておすすめを一括承認できます。</p></div></article>
+        <article class="detail-step"><span class="step-number">6</span><div><h3>表と勤務時間を確認</h3><p>従業員別のシフト表、承認済みシフト、勤務時間、給与計算に使う時間情報を確認できます。</p></div></article>
+      </div>
+    </section>
+
+    <section id="compatibility" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">COMPATIBILITY</p>
+        <h2>好き嫌いをシフトに反映する仕組み</h2>
+        <p>
+          従業員が入力した相性スコアをもとに、管理者画面で希望者の組み合わせを見られます。完全自動で勝手に決めるのではなく、管理者が判断しやすくなる補助情報として使います。
+        </p>
+      </div>
+      <div class="readme-card-grid three equal-grid">
+        <article class="guide-card"><h3>従業員が入力</h3><p>他の従業員ごとに -5 から +5 で入力します。未入力の相手は0点として扱われます。</p></article>
+        <article class="guide-card"><h3>ペアごとに集計</h3><p>同じシフト枠に希望した人同士のスコアを合計し、注意が必要な組み合わせも見つけやすくします。</p></article>
+        <article class="guide-card"><h3>おすすめ承認</h3><p>募集人数に合わせ、相性スコアが高い組み合わせを表示します。管理者はそれを参考に承認できます。</p></article>
+      </div>
+    </section>
+
+    <section id="overnight" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">OVERNIGHT</p>
+        <h2>日をまたぐシフト</h2>
+        <p>
+          開始時刻より終了時刻が早い場合、終了時刻は翌日の時刻として扱われます。夜勤や深夜帯の勤務も、同じシフト枠として登録できます。
+        </p>
+      </div>
+      <div class="readme-card-grid two equal-grid">
+        <article class="status-card large-status"><strong>例：22:00 - 翌日06:00</strong><span>開始が22:00、終了が06:00なら、終了は次の日の朝として保存されます。</span></article>
+        <article class="status-card large-status"><strong>表示も翌日つき</strong><span>画面上では「翌日」が付いて表示されるため、通常の同日シフトと区別できます。</span></article>
+      </div>
+    </section>
+
+    <section id="status" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">STATUS</p>
+        <h2>表示の見方</h2>
+        <p>画面でよく出てくる状態です。色だけでなく、文字でも状態を確認できます。</p>
+      </div>
+      <div class="readme-card-grid four equal-grid">
+        <article class="status-card"><strong>シフト枠</strong><span>管理者が作った募集対象です。枠がない日は従業員が希望を出せません。</span></article>
+        <article class="status-card"><strong>希望済</strong><span>従業員が希望を送信済みで、管理者の承認を待っている状態です。</span></article>
+        <article class="status-card"><strong>承認済</strong><span>管理者が承認し、実際の勤務予定として確定した状態です。</span></article>
+        <article class="status-card"><strong>募集人数</strong><span>そのシフト枠で承認できる人数です。人数に達すると追加承認できません。</span></article>
+      </div>
+    </section>
+
+    <section id="faq" class="readme-section">
+      <div class="section-heading">
+        <p class="section-label">FAQ</p>
+        <h2>よくある質問</h2>
+        <p>操作中に迷いやすいところをまとめています。</p>
+      </div>
+      <div class="faq-list">
+        <details><summary>どの日でも希望を出せますか？</summary><p>現在の日付以降で、管理者がシフト枠を作っている日なら希望できます。枠がない日、すでに始まった枠、すでに自分が希望した枠は選択できません。</p></details>
+        <details><summary>送信した希望はすぐ確定ですか？</summary><p>すぐ確定ではありません。送信後は「希望済」になり、管理者が承認すると「承認済」になります。</p></details>
+        <details><summary>シフトはいつ決まりますか？</summary><p>管理者が希望者を確認し、必要人数や相性を見ながら当日に承認して決める想定です。</p></details>
+        <details><summary>相性スコアは何に使われますか？</summary><p>同じ枠を希望している人同士の組み合わせ確認に使われます。管理者が働きやすい組み合わせを考えるための補助です。</p></details>
+        <details><summary>日をまたぐシフトは登録できますか？</summary><p>できます。終了時刻が開始時刻より早い場合は、終了時刻が翌日の時刻として保存されます。</p></details>
+        <details><summary>従業員を削除するとどうなりますか？</summary><p>従業員アカウントを削除すると、その従業員の提出済みシフト希望も同時に削除されます。</p></details>
+      </div>
+    </section>
+
+    <section id="tech" class="readme-section tech-section">
+      <div class="section-heading">
+        <p class="section-label">TECH</p>
+        <h2>使用技術</h2>
+      </div>
+      <div class="tech-list" aria-label="使用技術一覧">
+        <span>Next.js</span>
+        <span>React</span>
+        <span>TypeScript</span>
+        <span>Tailwind CSS</span>
+        <span>Firebase Authentication</span>
+        <span>Cloud Firestore</span>
+        <span>Vercel</span>
+        <span>GitHub</span>
+      </div>
+    </section>
+
+    <section class="readme-section readme-cta">
+      <div>
+        <p class="section-label">TRY CHESS</p>
+        <h2>Chessを使ってみる</h2>
+        <p>シフトの募集、希望提出、承認、相性確認までをまとめて扱えます。まずはサービス画面を開いて、従業員側と管理者側の流れを確認してください。</p>
+      </div>
+      <div class="cta-actions">
+        <a class="button gold" href="https://chess-nine-xi.vercel.app/">サービスを開く</a>
+        <a class="button dark" href="#top">ページ上部へ戻る</a>
+        <a class="button light" href="./index.html">アピールページへ戻る</a>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> Chess. README Guide.</p>
+  </footer>
+
+  <script src="./script.js"></script>
 </body>
 </html>
