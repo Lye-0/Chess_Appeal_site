@@ -61,6 +61,7 @@ img {
   z-index: 20;
   border-bottom: 1px solid rgba(226, 232, 240, 0.85);
   background: rgba(255, 255, 255, 0.86);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
 }
 
@@ -206,12 +207,17 @@ p {
 
 h1 {
   margin-bottom: 0;
-  font-size: clamp(44px, 6vw, 72px);
+  font-size: clamp(40px, 4.8vw, 58px);
   line-height: 1.12;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.04em;
 }
 
-h1 span {
+.headline-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero-title .hero-title-accent {
   color: var(--amber);
 }
 
@@ -755,6 +761,10 @@ h3 {
   .photo-card.large .photo-placeholder {
     min-height: 240px;
     padding-top: 46px;
+  }
+
+  .hero-title {
+    font-size: clamp(32px, 9vw, 42px);
   }
 
   .photo-placeholder p {
