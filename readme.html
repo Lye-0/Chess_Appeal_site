@@ -3,18 +3,272 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chess README</title>
+  <meta name="description" content="Chessのサービス概要、主な機能、管理者と従業員それぞれの使い方をまとめたREADMEページです。" />
+  <title>Chess README | シフト管理サービス</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <header class="readme-header">
+    <div class="readme-header-inner">
+      <a class="brand" href="./index.html" aria-label="Chess アピールページへ戻る">
+        <span class="brand-main">Chess</span>
+        <span class="brand-sub">README</span>
+      </a>
+      <div class="readme-header-actions">
+        <a class="nav-button secondary" href="./index.html">アピールページへ戻る</a>
+        <a class="nav-button primary" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+      </div>
+    </div>
+  </header>
+
   <main class="readme-page">
-    <section class="readme-card">
+    <section class="readme-hero">
       <p class="section-label">README</p>
-      <h1>詳しい説明ページ</h1>
-      <p>
-        ここにサービス概要、使い方、実装内容、アピールポイントを後から追加します。
-        現時点ではアピールページからの遷移先として仮配置しています。
+      <h1>Chess サービス説明</h1>
+      <p class="readme-lead">
+        Chessは、希望シフトの提出からシフト枠の作成、承認、勤務時間と給与目安の確認までを
+        まとめて扱えるシフト管理サービスです。管理者の作業を減らしながら、従業員が働きやすい
+        シフトを作れるようにすることを目指しています。
       </p>
+      <div class="hero-actions">
+        <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+        <a class="button light" href="./index.html">アピールページへ戻る</a>
+      </div>
+    </section>
+
+    <section class="readme-section">
+      <div class="readme-section-heading">
+        <p class="section-label">Overview</p>
+        <h2>Chessでできること</h2>
+      </div>
+      <div class="readme-grid three">
+        <article class="readme-card">
+          <span class="number blue">1</span>
+          <h3>希望シフトを集める</h3>
+          <p>従業員は組織IDとメールアドレスで確認し、管理者が作成したシフト枠に希望を提出できます。</p>
+        </article>
+        <article class="readme-card">
+          <span class="number amber">2</span>
+          <h3>承認して確定する</h3>
+          <p>管理者は希望者を見ながら承認できます。募集人数を超えないように承認数も管理されます。</p>
+        </article>
+        <article class="readme-card">
+          <span class="number green">3</span>
+          <h3>働きやすさを考慮する</h3>
+          <p>従業員同士の働きやすさスコアを参考に、おすすめ承認組み合わせを確認できます。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="readme-section">
+      <div class="readme-section-heading">
+        <p class="section-label">Features</p>
+        <h2>主な機能</h2>
+      </div>
+      <div class="readme-two-column">
+        <article class="readme-card">
+          <h3>管理者向け</h3>
+          <ul class="readme-list">
+            <li>管理者アカウントの新規登録、メール確認、ログイン</li>
+            <li>組織の作成、選択、組織IDの確認、組織削除</li>
+            <li>従業員の登録、編集、削除</li>
+            <li>シフト枠の作成、編集、削除</li>
+            <li>提出された希望シフトの確認、承認、承認取り消し</li>
+            <li>従業員ごとのシフト希望一覧の確認</li>
+            <li>勤務時間、月間給与目安、年間給与目安の確認</li>
+            <li>時給、深夜時間帯、深夜倍率の給与設定</li>
+          </ul>
+        </article>
+        <article class="readme-card">
+          <h3>従業員向け</h3>
+          <ul class="readme-list">
+            <li>組織IDとメールアドレスによる従業員確認</li>
+            <li>従業員ホーム画面の表示</li>
+            <li>直近の確定シフト、承認待ち、承認済みシフトの確認</li>
+            <li>募集シフト枠から希望シフトを提出</li>
+            <li>複数の希望シフトをまとめて送信</li>
+            <li>一緒に働きやすさ設定の入力</li>
+            <li>今月と年間の勤務時間確認</li>
+            <li>今月と年間の給与目安確認</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="readme-section">
+      <div class="readme-section-heading">
+        <p class="section-label">Screens</p>
+        <h2>主な画面構成</h2>
+      </div>
+      <div class="readme-grid routes">
+        <article class="readme-route-card">
+          <span class="path-pill">/login</span>
+          <h3>利用者選択</h3>
+          <p>管理者として使うか、従業員として使うかを選びます。</p>
+        </article>
+        <article class="readme-route-card">
+          <span class="path-pill">/login/employee</span>
+          <h3>従業員確認</h3>
+          <p>組織IDとメールアドレスで、登録済み従業員かを確認します。</p>
+        </article>
+        <article class="readme-route-card">
+          <span class="path-pill">/employee</span>
+          <h3>従業員ホーム</h3>
+          <p>シフト、勤務時間、給与目安、希望一覧を確認します。</p>
+        </article>
+        <article class="readme-route-card">
+          <span class="path-pill">/employee/shift-request</span>
+          <h3>希望シフト入力</h3>
+          <p>管理者が作成した募集枠から、入りたいシフトを選んで送信します。</p>
+        </article>
+        <article class="readme-route-card">
+          <span class="path-pill">/employee/compatibility</span>
+          <h3>一緒に働きやすさ設定</h3>
+          <p>他の従業員との働きやすさを、-5から+5で入力します。</p>
+        </article>
+        <article class="readme-route-card">
+          <span class="path-pill">/manager/select-organization</span>
+          <h3>組織選択</h3>
+          <p>管理する組織を選びます。新しい組織の追加もできます。</p>
+        </article>
+        <article class="readme-route-card">
+          <span class="path-pill">/admin</span>
+          <h3>管理者ホーム</h3>
+          <p>シフト管理、従業員登録、勤務時間などの管理機能へ移動します。</p>
+        </article>
+        <article class="readme-route-card">
+          <span class="path-pill">/admin/shift-management</span>
+          <h3>シフト管理</h3>
+          <p>シフト枠の作成、希望者の確認、承認、おすすめ組み合わせの確認をします。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="readme-section">
+      <div class="readme-section-heading">
+        <p class="section-label">How To Use</p>
+        <h2>管理者の使い方</h2>
+      </div>
+      <div class="readme-steps">
+        <article class="readme-step">
+          <span>01</span>
+          <div>
+            <h3>管理者アカウントを作成する</h3>
+            <p>利用者選択から管理者の新規登録へ進み、メールアドレスとパスワードを登録します。確認メールのリンクを開くとログインできるようになります。</p>
+          </div>
+        </article>
+        <article class="readme-step">
+          <span>02</span>
+          <div>
+            <h3>組織を作成する</h3>
+            <p>組織名と必要に応じて部署・拠点名を入力します。登録すると6桁の組織IDが発行され、従業員ログインで使えるようになります。</p>
+          </div>
+        </article>
+        <article class="readme-step">
+          <span>03</span>
+          <div>
+            <h3>従業員を登録する</h3>
+            <p>従業員の氏名、メールアドレス、雇用形態を登録します。登録済み従業員は編集や削除もできます。</p>
+          </div>
+        </article>
+        <article class="readme-step">
+          <span>04</span>
+          <div>
+            <h3>シフト枠を作成する</h3>
+            <p>日付、開始時刻、終了時刻、募集人数を設定します。作成した枠だけが従業員側の希望シフト入力画面に表示されます。</p>
+          </div>
+        </article>
+        <article class="readme-step">
+          <span>05</span>
+          <div>
+            <h3>希望シフトを承認する</h3>
+            <p>従業員から提出された希望を確認し、必要な人数分を承認します。承認済みの希望は取り消して承認待ちに戻すこともできます。</p>
+          </div>
+        </article>
+        <article class="readme-step">
+          <span>06</span>
+          <div>
+            <h3>勤務時間と給与目安を確認する</h3>
+            <p>承認済みで終了したシフトをもとに、従業員ごとの勤務時間と給与目安を確認します。時給や深夜倍率も設定できます。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="readme-section">
+      <div class="readme-section-heading">
+        <p class="section-label">Employee Flow</p>
+        <h2>従業員の使い方</h2>
+      </div>
+      <div class="readme-steps compact">
+        <article class="readme-step">
+          <span>01</span>
+          <div>
+            <h3>組織IDとメールアドレスで確認する</h3>
+            <p>管理者から共有された6桁の組織IDと、登録済みメールアドレスを入力して従業員ページへ進みます。</p>
+          </div>
+        </article>
+        <article class="readme-step">
+          <span>02</span>
+          <div>
+            <h3>ホームで状況を確認する</h3>
+            <p>直近の確定シフト、承認待ち、承認済みシフト、勤務時間、給与目安を確認できます。</p>
+          </div>
+        </article>
+        <article class="readme-step">
+          <span>03</span>
+          <div>
+            <h3>希望シフトを提出する</h3>
+            <p>カレンダーから希望日を選び、募集されているシフト枠を追加してまとめて送信します。</p>
+          </div>
+        </article>
+        <article class="readme-step">
+          <span>04</span>
+          <div>
+            <h3>働きやすさを入力する</h3>
+            <p>他の従業員との働きやすさをスコアで保存します。この情報は管理者側のおすすめ承認組み合わせに使われます。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="readme-section readme-highlight">
+      <div>
+        <p class="section-label">Main Appeal</p>
+        <h2>人間関係まで考慮したシフト作成</h2>
+        <p>
+          シフト作成では、単に人数を合わせるだけでなく、「一緒に働きやすいか」という現場の感覚も大切です。
+          Chessでは、従業員が他の従業員との働きやすさを-5から+5で入力できます。
+          管理者はそのスコアをもとに、募集人数に対して相性の良い承認候補を確認できます。
+        </p>
+      </div>
+      <div class="readme-score-box" aria-label="働きやすさスコアの説明">
+        <div><strong>+5</strong><span>一緒に働きやすい</span></div>
+        <div><strong>0</strong><span>普通</span></div>
+        <div><strong>-5</strong><span>一緒に働きにくい</span></div>
+      </div>
+    </section>
+
+    <section class="readme-section">
+      <div class="readme-section-heading">
+        <p class="section-label">Technology</p>
+        <h2>使用技術</h2>
+      </div>
+      <div class="tech-list">
+        <span>TypeScript</span>
+        <span>React</span>
+        <span>Next.js</span>
+        <span>Firebase Authentication</span>
+        <span>Cloud Firestore</span>
+        <span>Tailwind CSS</span>
+        <span>Vercel</span>
+        <span>HTML / CSS / JavaScript</span>
+      </div>
+    </section>
+
+    <section class="readme-cta">
+      <h2>実際の画面でChessを見る</h2>
+      <p>アピールページに戻るか、デプロイ済みのサービス画面を開いて操作感を確認できます。</p>
       <div class="hero-actions center">
         <a class="button light" href="./index.html">アピールページへ戻る</a>
         <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
