@@ -3,23 +3,1170 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Chess README</title>
+  <meta name="description" content="Chessの各機能ごとの詳しい操作手順をまとめたREADMEページです。管理者・従業員それぞれの使い方を手順中心で確認できます。" />
+  <title>Chess README | 操作マニュアル</title>
   <link rel="stylesheet" href="./style.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.12), transparent 32rem),
+        linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    }
+
+    .readme-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+      background: rgba(255, 255, 255, 0.92);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+    }
+
+    .readme-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 16px 0;
+    }
+
+    .readme-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .readme-page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 72px 0 88px;
+    }
+
+    .readme-hero {
+      max-width: 920px;
+    }
+
+    .readme-hero h1 {
+      margin-top: 24px;
+      font-size: clamp(38px, 5vw, 62px);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .readme-lead {
+      margin-top: 26px;
+      color: var(--muted, #64748b);
+      font-size: 17px;
+      line-height: 2;
+    }
+
+    .readme-layout {
+      display: grid;
+      grid-template-columns: 286px minmax(0, 1fr);
+      align-items: start;
+      gap: 28px;
+      margin-top: 52px;
+    }
+
+    .toc-card {
+      position: sticky;
+      top: 92px;
+      max-height: calc(100vh - 118px);
+      overflow: auto;
+      padding: 22px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+    }
+
+    .toc-card h2 {
+      font-size: 17px;
+      margin: 0;
+    }
+
+    .toc-card p {
+      margin: 8px 0 0;
+      color: var(--muted, #64748b);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .toc-group {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .toc-group strong {
+      display: block;
+      margin-bottom: 10px;
+      color: #0f172a;
+      font-size: 13px;
+    }
+
+    .toc-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .toc-links a,
+    .jump-links a {
+      text-decoration: none;
+    }
+
+    .toc-links a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 12px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .toc-links a:hover,
+    .toc-links a:focus-visible {
+      color: #0f172a;
+      background: #f1f5f9;
+      transform: translateX(2px);
+      outline: none;
+    }
+
+    .jump-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .jump-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 9px 14px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 999px;
+      background: #fff;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+    }
+
+    .manual-content {
+      min-width: 0;
+    }
+
+    .manual-section {
+      scroll-margin-top: 110px;
+      margin-top: 34px;
+      padding: 34px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 16px 42px rgba(15, 23, 42, 0.06);
+    }
+
+    .manual-section:first-child {
+      margin-top: 0;
+    }
+
+    .manual-section > .section-label {
+      margin: 0;
+    }
+
+    .manual-section h2 {
+      margin-top: 18px;
+      font-size: clamp(28px, 3.4vw, 42px);
+      letter-spacing: -0.03em;
+    }
+
+    .manual-section h3 {
+      margin-top: 30px;
+      padding-top: 26px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 23px;
+      letter-spacing: -0.02em;
+      scroll-margin-top: 110px;
+    }
+
+    .manual-section h3:first-of-type {
+      margin-top: 22px;
+    }
+
+    .manual-section h4 {
+      margin-top: 22px;
+      color: #0f172a;
+      font-size: 16px;
+    }
+
+    .manual-section p {
+      margin-top: 12px;
+      color: var(--muted, #64748b);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .manual-card {
+      margin-top: 22px;
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      background: #f8fafc;
+    }
+
+    .manual-card h4:first-child {
+      margin-top: 0;
+    }
+
+    .step-list,
+    .plain-list {
+      margin: 16px 0 0;
+      padding: 0;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 10px;
+      counter-reset: step;
+      list-style: none;
+    }
+
+    .step-list li {
+      position: relative;
+      min-height: 42px;
+      padding: 10px 12px 10px 52px;
+      border-radius: 14px;
+      background: #fff;
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.7;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .step-list li::before {
+      counter-increment: step;
+      content: counter(step, decimal-leading-zero);
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      color: #9a6b11;
+      background: #fff2c7;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .plain-list {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .plain-list li {
+      position: relative;
+      padding-left: 20px;
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .plain-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.75em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #f4b740;
+    }
+
+    .note,
+    .warning,
+    .ok-box {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .note {
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .warning {
+      border: 1px solid #fed7aa;
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .ok-box {
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .mini-box {
+      padding: 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .mini-box strong {
+      display: block;
+      color: #0f172a;
+      font-size: 14px;
+    }
+
+    .mini-box span {
+      display: block;
+      margin-top: 8px;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .simple-table {
+      width: 100%;
+      margin-top: 18px;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+    }
+
+    .simple-table th,
+    .simple-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.7;
+      vertical-align: top;
+    }
+
+    .simple-table th {
+      width: 30%;
+      color: #0f172a;
+      background: #f8fafc;
+    }
+
+    .simple-table tr:last-child th,
+    .simple-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .route-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .route-card {
+      padding: 18px;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      background: #fff;
+    }
+
+    .route-card code {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .route-card strong {
+      display: block;
+      margin-top: 12px;
+      color: #0f172a;
+      font-size: 15px;
+    }
+
+    .route-card span {
+      display: block;
+      margin-top: 8px;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .back-to-top {
+      display: inline-flex;
+      margin-top: 28px;
+      color: #1d4ed8;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .readme-cta {
+      margin-top: 34px;
+      padding: 34px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 28px;
+      background: #fff;
+      text-align: center;
+      box-shadow: 0 16px 42px rgba(15, 23, 42, 0.06);
+    }
+
+    .readme-cta h2 {
+      font-size: clamp(26px, 3.2vw, 38px);
+    }
+
+    .readme-cta p {
+      margin-top: 14px;
+      color: #64748b;
+      line-height: 1.9;
+    }
+
+    .hero-actions.center {
+      justify-content: center;
+    }
+
+    @media (max-width: 980px) {
+      .readme-layout,
+      .mini-grid,
+      .route-list {
+        grid-template-columns: 1fr;
+      }
+
+      .toc-card {
+        position: static;
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .readme-header-inner,
+      .readme-page {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .readme-header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .readme-header-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .readme-page {
+        padding: 48px 0 64px;
+      }
+
+      .manual-section,
+      .readme-cta,
+      .toc-card {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .manual-card {
+        padding: 18px;
+      }
+
+      .step-list li {
+        padding-left: 48px;
+      }
+
+      .simple-table,
+      .simple-table tbody,
+      .simple-table tr,
+      .simple-table th,
+      .simple-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .simple-table th {
+        border-bottom: 0;
+        padding-bottom: 6px;
+      }
+
+      .simple-table td {
+        padding-top: 6px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="readme-header" id="top">
+    <div class="readme-header-inner">
+      <a class="brand" href="./index.html" aria-label="Chess アピールページへ戻る">
+        <span class="brand-main">Chess</span>
+        <span class="brand-sub">README</span>
+      </a>
+      <div class="readme-header-actions">
+        <a class="nav-button secondary" href="./index.html">アピールページへ戻る</a>
+        <a class="nav-button primary" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+      </div>
+    </div>
+  </header>
+
   <main class="readme-page">
-    <section class="readme-card">
+    <section class="readme-hero" aria-labelledby="readme-title">
       <p class="section-label">README</p>
-      <h1>詳しい説明ページ</h1>
-      <p>
-        ここにサービス概要、使い方、実装内容、アピールポイントを後から追加します。
-        現時点ではアピールページからの遷移先として仮配置しています。
+      <h1 id="readme-title">Chess 操作マニュアル</h1>
+      <p class="readme-lead">
+        このページは、デプロイ済みのChessを実際に操作するためのREADMEです。
+        管理者が行う操作、従業員が行う操作、各画面でできることを手順中心でまとめています。
+        見たい項目へすぐ移動できるように、目次とジャンプリンクを用意しています。
       </p>
-      <div class="hero-actions center">
-        <a class="button light" href="./index.html">アピールページへ戻る</a>
+      <div class="hero-actions">
         <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+        <a class="button light" href="./index.html">アピールページへ戻る</a>
+      </div>
+      <div class="jump-links" aria-label="よく見る項目へのジャンプ">
+        <a href="#first-flow">初回利用の流れ</a>
+        <a href="#admin">管理者の操作</a>
+        <a href="#employee">従業員の操作</a>
+        <a href="#admin-shift-create">シフト枠作成</a>
+        <a href="#employee-submit">希望シフト送信</a>
+        <a href="#compatibility">働きやすさ設定</a>
+        <a href="#faq">困ったとき</a>
       </div>
     </section>
+
+    <div class="readme-layout">
+      <aside class="toc-card" aria-label="README目次">
+        <h2>目次</h2>
+        <p>項目を押すと、その説明へ移動できます。</p>
+
+        <div class="toc-group">
+          <strong>はじめに</strong>
+          <nav class="toc-links">
+            <a href="#first-flow">利用開始の流れ</a>
+            <a href="#screens">画面一覧</a>
+          </nav>
+        </div>
+
+        <div class="toc-group">
+          <strong>管理者</strong>
+          <nav class="toc-links">
+            <a href="#admin-signup">新規登録</a>
+            <a href="#admin-login">ログイン</a>
+            <a href="#admin-org-create">組織追加・選択</a>
+            <a href="#admin-employee-create">従業員登録</a>
+            <a href="#admin-employee-edit">従業員編集・削除</a>
+            <a href="#admin-shift-create">シフト枠追加</a>
+            <a href="#admin-shift-edit">シフト枠編集・削除</a>
+            <a href="#admin-approve">希望確認・承認</a>
+            <a href="#admin-recommend">おすすめ承認</a>
+            <a href="#admin-list">従業員シフト表</a>
+            <a href="#admin-timesheet">勤務時間・給与設定</a>
+            <a href="#admin-org-delete">組織削除</a>
+          </nav>
+        </div>
+
+        <div class="toc-group">
+          <strong>従業員</strong>
+          <nav class="toc-links">
+            <a href="#employee-login">ログイン</a>
+            <a href="#employee-home">ホーム確認</a>
+            <a href="#employee-date">日付・枠選択</a>
+            <a href="#employee-submit">希望シフト送信</a>
+            <a href="#employee-status">承認待ち・承認済み</a>
+            <a href="#employee-hours">勤務時間・給与確認</a>
+            <a href="#compatibility">働きやすさ設定</a>
+            <a href="#employee-logout">ログアウト</a>
+          </nav>
+        </div>
+
+        <div class="toc-group">
+          <strong>補足</strong>
+          <nav class="toc-links">
+            <a href="#faq">よくある困りごと</a>
+            <a href="#notes">現在の実装上の注意</a>
+          </nav>
+        </div>
+      </aside>
+
+      <div class="manual-content">
+        <section class="manual-section" id="first-flow">
+          <p class="section-label">Start</p>
+          <h2>利用開始の流れ</h2>
+          <p>初めて使う場合は、管理者が先に組織、従業員、シフト枠を準備します。その後、従業員が希望シフトを提出し、管理者が承認します。</p>
+          <ol class="step-list">
+            <li>管理者がアカウントを新規登録します。</li>
+            <li>管理者がメール確認を完了します。</li>
+            <li>管理者がログインします。</li>
+            <li>管理者が組織を作成します。</li>
+            <li>管理者が従業員を登録します。</li>
+            <li>管理者がシフト枠を作成します。</li>
+            <li>従業員が組織IDとメールアドレスでログインします。</li>
+            <li>従業員が希望シフトを追加して送信します。</li>
+            <li>管理者が提出された希望シフトを確認します。</li>
+            <li>管理者が希望シフトを承認します。</li>
+            <li>従業員が承認済みシフトを確認します。</li>
+          </ol>
+          <p class="note">従業員に共有する必要がある情報は、管理者ホームに表示される6桁の組織IDと、従業員登録で登録したメールアドレスです。</p>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="screens">
+          <p class="section-label">Screens</p>
+          <h2>画面一覧</h2>
+          <p>Chessでは、管理者用と従業員用で画面が分かれています。</p>
+          <div class="route-list">
+            <article class="route-card"><code>/login</code><strong>利用者選択</strong><span>管理者として使うか、従業員として使うかを選びます。</span></article>
+            <article class="route-card"><code>/login/employee</code><strong>従業員確認</strong><span>組織IDとメールアドレスを入力します。</span></article>
+            <article class="route-card"><code>/employee</code><strong>従業員ホーム</strong><span>直近のシフト、勤務時間、給与目安、希望一覧を確認します。</span></article>
+            <article class="route-card"><code>/employee/shift-request</code><strong>希望シフト入力</strong><span>日付とシフト枠を選び、希望シフトを送信します。</span></article>
+            <article class="route-card"><code>/employee/compatibility</code><strong>一緒に働きやすさ設定</strong><span>他の従業員との働きやすさを-5から+5で入力します。</span></article>
+            <article class="route-card"><code>/login/manager</code><strong>管理者ログイン</strong><span>メールアドレスとパスワードでログインします。</span></article>
+            <article class="route-card"><code>/signup/manager</code><strong>管理者新規登録</strong><span>管理者アカウントを作成します。</span></article>
+            <article class="route-card"><code>/manager/select-organization</code><strong>組織選択</strong><span>管理する組織を選択します。</span></article>
+            <article class="route-card"><code>/manager/organizations/new</code><strong>組織追加</strong><span>新しい組織を作成します。</span></article>
+            <article class="route-card"><code>/admin</code><strong>管理者ホーム</strong><span>管理者向けメニューと概要を表示します。</span></article>
+            <article class="route-card"><code>/admin/shift-management</code><strong>シフト管理</strong><span>シフト枠の追加、編集、削除、承認を行います。</span></article>
+            <article class="route-card"><code>/admin/employee-registration</code><strong>従業員登録</strong><span>従業員の登録、編集、削除を行います。</span></article>
+            <article class="route-card"><code>/admin/employee-list</code><strong>従業員シフト表</strong><span>従業員ごとのシフト希望を確認します。</span></article>
+            <article class="route-card"><code>/admin/timesheet</code><strong>勤務時間</strong><span>勤務時間、給与目安、給与設定を確認します。</span></article>
+          </div>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="admin">
+          <p class="section-label">Admin</p>
+          <h2>管理者の操作手順</h2>
+          <p>管理者は、組織、従業員、シフト枠、希望シフト、勤務時間、給与設定を管理します。</p>
+
+          <h3 id="admin-signup">1. 管理者アカウントを新規登録する</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>サービスのURLを開きます。</li>
+              <li>利用者選択画面で「管理者」を選択します。</li>
+              <li>管理者ログイン画面で「新規登録」を押します。</li>
+              <li>メールアドレスを入力します。</li>
+              <li>パスワードを入力します。</li>
+              <li>「登録」を押します。</li>
+              <li>入力したメールアドレスに届く確認メールを開きます。</li>
+              <li>メール内の確認リンクを開きます。</li>
+              <li>メール確認を完了します。</li>
+              <li>管理者ログイン画面に戻ります。</li>
+            </ol>
+            <p class="warning">メール確認が完了していない場合、管理者としてログインできません。パスワードは6文字以上で入力してください。</p>
+          </div>
+
+          <h3 id="admin-login">2. 管理者としてログインする</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>サービスのURLを開きます。</li>
+              <li>利用者選択画面で「管理者」を選択します。</li>
+              <li>メールアドレスを入力します。</li>
+              <li>パスワードを入力します。</li>
+              <li>「次へ」を押します。</li>
+              <li>組織選択画面へ移動します。</li>
+            </ol>
+            <h4>ログインできない場合</h4>
+            <ul class="plain-list">
+              <li>メールアドレスが間違っていないか確認します。</li>
+              <li>パスワードが間違っていないか確認します。</li>
+              <li>メール確認が完了しているか確認します。</li>
+              <li>新規登録したアカウントでログインしているか確認します。</li>
+            </ul>
+          </div>
+
+          <h3 id="admin-org-create">3. 組織を追加・選択する</h3>
+          <div class="manual-card">
+            <h4>組織を追加する手順</h4>
+            <ol class="step-list">
+              <li>管理者としてログインします。</li>
+              <li>組織選択画面で「組織を追加」を押します。</li>
+              <li>組織名を入力します。</li>
+              <li>必要に応じて部署・拠点名を入力します。</li>
+              <li>「登録」を押します。</li>
+              <li>組織が作成され、管理者ホームへ移動します。</li>
+            </ol>
+            <h4>組織を選択する手順</h4>
+            <ol class="step-list">
+              <li>管理者としてログインします。</li>
+              <li>組織選択画面を確認します。</li>
+              <li>管理したい組織を選択します。</li>
+              <li>「次へ」を押します。</li>
+              <li>選択した組織の管理者ホームへ移動します。</li>
+            </ol>
+            <p class="note">組織を作成すると、従業員ログインに使う6桁の組織IDが自動発行されます。従業員には「組織ID」と「登録済みメールアドレス」を共有してください。</p>
+          </div>
+
+          <h3 id="admin-employee-create">4. 従業員を登録する</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>管理者ホームを開きます。</li>
+              <li>「従業員登録」を押します。</li>
+              <li>姓を入力します。</li>
+              <li>名を入力します。</li>
+              <li>メールアドレスを入力します。</li>
+              <li>雇用形態を選択します。</li>
+              <li>「登録」を押します。</li>
+              <li>登録完了メッセージを確認します。</li>
+              <li>発行された従業員IDを確認します。</li>
+            </ol>
+            <table class="simple-table">
+              <tr><th>姓</th><td>従業員の名字を入力します。</td></tr>
+              <tr><th>名</th><td>従業員の名前を入力します。</td></tr>
+              <tr><th>メールアドレス</th><td>従業員ログインに使用するメールアドレスです。</td></tr>
+              <tr><th>雇用形態</th><td>正社員、アルバイト、契約社員などから選択します。</td></tr>
+            </table>
+            <p class="warning">同じメールアドレスを重複して登録することはできません。従業員はここで登録されたメールアドレスを使ってログインします。</p>
+          </div>
+
+          <h3 id="admin-employee-edit">5. 従業員情報を編集・削除する</h3>
+          <div class="manual-card">
+            <h4>編集手順</h4>
+            <ol class="step-list">
+              <li>管理者ホームを開きます。</li>
+              <li>「従業員登録」を押します。</li>
+              <li>登録済み従業員一覧を確認します。</li>
+              <li>編集したい従業員の編集ボタンを押します。</li>
+              <li>姓、名、メールアドレス、雇用形態を変更します。</li>
+              <li>保存します。</li>
+              <li>更新完了メッセージを確認します。</li>
+            </ol>
+            <p class="note">従業員情報を更新すると、その従業員に紐づく希望シフトの従業員名、メールアドレス、雇用形態も更新されます。</p>
+            <h4>削除手順</h4>
+            <ol class="step-list">
+              <li>登録済み従業員一覧を確認します。</li>
+              <li>削除したい従業員のゴミ箱ボタンを押します。</li>
+              <li>確認画面を読みます。</li>
+              <li>削除を実行します。</li>
+              <li>削除完了メッセージを確認します。</li>
+            </ol>
+            <p class="warning">従業員を削除すると、その従業員に紐づく希望シフトも削除されます。削除後は元に戻せないため、実行前に確認してください。</p>
+          </div>
+
+          <h3 id="admin-shift-create">6. シフト枠を追加する</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>管理者ホームを開きます。</li>
+              <li>「シフト管理」を押します。</li>
+              <li>「シフト枠を追加」を押します。</li>
+              <li>日付を入力します。</li>
+              <li>開始時刻を入力します。</li>
+              <li>終了時刻を入力します。</li>
+              <li>募集人数を入力します。</li>
+              <li>保存します。</li>
+              <li>シフト管理画面に追加されたことを確認します。</li>
+            </ol>
+            <table class="simple-table">
+              <tr><th>日付</th><td>募集するシフトの日付です。</td></tr>
+              <tr><th>開始時刻</th><td>勤務開始時刻です。</td></tr>
+              <tr><th>終了時刻</th><td>勤務終了時刻です。</td></tr>
+              <tr><th>募集人数</th><td>そのシフトで承認できる人数です。</td></tr>
+            </table>
+            <p class="warning">開始時刻と終了時刻を同じ時刻にすることはできません。終了時刻が開始時刻より早い場合は、翌日の終了時刻として扱われます。</p>
+          </div>
+
+          <h3 id="admin-shift-edit">7. シフト枠を編集・削除する</h3>
+          <div class="manual-card">
+            <h4>編集手順</h4>
+            <ol class="step-list">
+              <li>管理者ホームを開きます。</li>
+              <li>「シフト管理」を押します。</li>
+              <li>編集したいシフト枠を探します。</li>
+              <li>鉛筆ボタンを押します。</li>
+              <li>内容を変更します。</li>
+              <li>保存します。</li>
+            </ol>
+            <div class="mini-grid">
+              <div class="mini-box"><strong>希望者がいない場合</strong><span>日付、開始時刻、終了時刻、募集人数を編集できます。</span></div>
+              <div class="mini-box"><strong>希望者がいる場合</strong><span>募集人数のみ変更できます。日付、開始時刻、終了時刻は変更できません。</span></div>
+            </div>
+            <h4>削除手順</h4>
+            <ol class="step-list">
+              <li>削除したいシフト枠を探します。</li>
+              <li>ゴミ箱ボタンを押します。</li>
+              <li>確認画面を読みます。</li>
+              <li>削除を実行します。</li>
+            </ol>
+            <p class="warning">シフト枠を削除すると、そのシフト枠に紐づく希望シフトも削除されます。</p>
+          </div>
+
+          <h3 id="admin-approve">8. 希望シフトを確認・承認する</h3>
+          <div class="manual-card">
+            <h4>希望シフトを確認する手順</h4>
+            <ol class="step-list">
+              <li>管理者ホームを開きます。</li>
+              <li>「シフト管理」を押します。</li>
+              <li>日付ごとのシフト枠を確認します。</li>
+              <li>各シフト枠の希望者を確認します。</li>
+              <li>「承認待ち」に表示されている従業員を確認します。</li>
+            </ol>
+            <h4>承認する手順</h4>
+            <ol class="step-list">
+              <li>承認したいシフト枠を探します。</li>
+              <li>「承認待ち」の従業員を確認します。</li>
+              <li>承認したい従業員の「承認」を押します。</li>
+              <li>対象の従業員が「承認済み」に移動したことを確認します。</li>
+            </ol>
+            <p class="warning">承認済みの人数が募集人数に達している場合、それ以上は承認できません。</p>
+            <h4>承認を取り消す手順</h4>
+            <ol class="step-list">
+              <li>承認を取り消したいシフト枠を探します。</li>
+              <li>「承認済み」の従業員を確認します。</li>
+              <li>対象従業員のゴミ箱ボタンを押します。</li>
+              <li>確認画面を読みます。</li>
+              <li>実行します。</li>
+              <li>対象の希望が「承認待ち」に戻ったことを確認します。</li>
+            </ol>
+            <p class="note">承認済みの希望に対してゴミ箱ボタンを押した場合、希望シフト自体を削除するのではなく、承認を取り消します。</p>
+          </div>
+
+          <h3 id="admin-recommend">9. おすすめ承認組み合わせを確認する</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>従業員が「一緒に働きやすさ設定」を保存します。</li>
+              <li>管理者が「シフト管理」を開きます。</li>
+              <li>希望者が複数いるシフト枠を確認します。</li>
+              <li>相性スコアを確認します。</li>
+              <li>「おすすめ承認組み合わせ」を確認します。</li>
+              <li>問題なければ「おすすめを一括承認」を押します。</li>
+            </ol>
+            <p class="note">おすすめ承認組み合わせは、募集人数に対して相性スコアが高い組み合わせを表示します。最終的に承認するかどうかは管理者が判断します。</p>
+          </div>
+
+          <h3 id="admin-list">10. 従業員シフト表を確認する</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>管理者ホームを開きます。</li>
+              <li>「従業員シフト表」を押します。</li>
+              <li>従業員一覧を確認します。</li>
+              <li>確認したい従業員を選択します。</li>
+              <li>その従業員のシフト希望を確認します。</li>
+            </ol>
+            <p>検索欄では、従業員名、メールアドレス、従業員IDで絞り込めます。</p>
+          </div>
+
+          <h3 id="admin-timesheet">11. 勤務時間を確認し、給与設定を変更する</h3>
+          <div class="manual-card">
+            <h4>勤務時間を確認する手順</h4>
+            <ol class="step-list">
+              <li>管理者ホームを開きます。</li>
+              <li>「勤務時間」を押します。</li>
+              <li>対象月を選択します。</li>
+              <li>総勤務時間を確認します。</li>
+              <li>従業員ごとの勤務時間を確認します。</li>
+              <li>月ごとの給与目安を確認します。</li>
+              <li>年間給与目安を確認します。</li>
+            </ol>
+            <p class="note">勤務時間と給与は、承認済みかつ終了済みのシフトをもとに計算されます。承認待ちのシフトや、まだ終了していないシフトは集計されません。</p>
+            <h4>給与設定を変更する手順</h4>
+            <ol class="step-list">
+              <li>勤務時間画面を開きます。</li>
+              <li>給与設定エリアを確認します。</li>
+              <li>雇用形態ごとの時給を入力します。</li>
+              <li>深夜開始時刻を入力します。</li>
+              <li>深夜終了時刻を入力します。</li>
+              <li>深夜倍率を入力します。</li>
+              <li>保存します。</li>
+            </ol>
+            <table class="simple-table">
+              <tr><th>時給</th><td>雇用形態ごとの1時間あたりの給与です。</td></tr>
+              <tr><th>深夜開始時刻</th><td>深夜手当を開始する時刻です。</td></tr>
+              <tr><th>深夜終了時刻</th><td>深夜手当を終了する時刻です。</td></tr>
+              <tr><th>深夜倍率</th><td>深夜時間にかける倍率です。</td></tr>
+            </table>
+          </div>
+
+          <h3 id="admin-org-delete">12. 組織を削除する</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>管理者ホームを開きます。</li>
+              <li>組織削除ボタンを押します。</li>
+              <li>確認画面を読みます。</li>
+              <li>削除を実行します。</li>
+            </ol>
+            <p>組織を削除すると、従業員、シフト枠、希望シフト、働きやすさ設定、給与設定が削除されます。</p>
+            <p class="warning">削除後は元に戻せません。本当に削除してよい組織か確認してから実行してください。</p>
+          </div>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="employee">
+          <p class="section-label">Employee</p>
+          <h2>従業員の操作手順</h2>
+          <p>従業員は、管理者が登録した組織IDとメールアドレスを使ってログインし、希望シフトの提出やシフト確認を行います。</p>
+
+          <h3 id="employee-login">1. 従業員としてログインする</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>サービスのURLを開きます。</li>
+              <li>利用者選択画面で「従業員」を選択します。</li>
+              <li>組織IDを入力します。</li>
+              <li>メールアドレスを入力します。</li>
+              <li>「次へ」を押します。</li>
+              <li>確認用コード画面へ移動します。</li>
+              <li>確認用コードを入力します。</li>
+              <li>「次へ」を押します。</li>
+              <li>従業員ホームへ移動します。</li>
+            </ol>
+            <table class="simple-table">
+              <tr><th>組織ID</th><td>管理者ホームに表示される6桁の数字です。</td></tr>
+              <tr><th>メールアドレス</th><td>管理者が従業員登録で登録したメールアドレスです。</td></tr>
+            </table>
+          </div>
+
+          <h3 id="employee-home">2. 従業員ホームを確認する</h3>
+          <div class="manual-card">
+            <p>従業員ホームでは、自分に関するシフト情報を確認できます。</p>
+            <ul class="plain-list">
+              <li>自分の名前</li>
+              <li>所属組織</li>
+              <li>雇用形態</li>
+              <li>直近の確定シフト</li>
+              <li>今月の勤務時間</li>
+              <li>年間の勤務時間</li>
+              <li>今月の給与目安</li>
+              <li>年間の給与目安</li>
+              <li>承認待ちの希望シフト</li>
+              <li>承認済みのシフト</li>
+            </ul>
+          </div>
+
+          <h3 id="employee-date">3. 希望する日付とシフト枠を選択する</h3>
+          <div class="manual-card">
+            <h4>希望シフト入力画面を開く</h4>
+            <ol class="step-list">
+              <li>従業員ホームを開きます。</li>
+              <li>「希望シフト入力」を押します。</li>
+              <li>希望シフト入力画面へ移動します。</li>
+            </ol>
+            <h4>日付を選択する</h4>
+            <ol class="step-list">
+              <li>カレンダーを確認します。</li>
+              <li>希望を出したい日付を探します。</li>
+              <li>選択できる日付を押します。</li>
+              <li>選択した日付のシフト枠を確認します。</li>
+            </ol>
+            <h4>シフト枠を選択する</h4>
+            <ol class="step-list">
+              <li>シフト枠のプルダウンを開きます。</li>
+              <li>希望する時間帯を選択します。</li>
+              <li>募集人数と希望人数を確認します。</li>
+            </ol>
+            <p class="warning">管理者がシフト枠を作成していない日、開始済みのシフト、終了済みのシフト、すでに自分が希望を出しているシフトしかない日は選択できません。</p>
+          </div>
+
+          <h3 id="employee-submit">4. 希望を追加して送信する</h3>
+          <div class="manual-card">
+            <h4>希望を追加する手順</h4>
+            <ol class="step-list">
+              <li>シフト枠を選択します。</li>
+              <li>「希望を追加」を押します。</li>
+              <li>右側の「追加したシフト希望」に表示されることを確認します。</li>
+            </ol>
+            <p class="note">この時点では、まだ管理者には送信されていません。送信前であれば、追加した希望を削除できます。</p>
+            <h4>追加した希望を削除する手順</h4>
+            <ol class="step-list">
+              <li>「追加したシフト希望」を確認します。</li>
+              <li>削除したい希望シフトを探します。</li>
+              <li>「削除」を押します。</li>
+              <li>一覧から消えたことを確認します。</li>
+            </ol>
+            <h4>希望シフトを送信する手順</h4>
+            <ol class="step-list">
+              <li>追加したシフト希望を確認します。</li>
+              <li>日付と時間に間違いがないか確認します。</li>
+              <li>「シフト希望を送信」を押します。</li>
+              <li>確認画面を読みます。</li>
+              <li>「送信する」を押します。</li>
+              <li>送信が完了します。</li>
+              <li>従業員ホームに戻ります。</li>
+              <li>シフト希望一覧に表示されることを確認します。</li>
+            </ol>
+            <p class="warning">送信後は、従業員側から変更できません。変更したい場合は、管理者に連絡してください。</p>
+          </div>
+
+          <h3 id="employee-status">5. 承認待ち・承認済みシフトを確認する</h3>
+          <div class="manual-card">
+            <h4>承認待ちシフトを確認する手順</h4>
+            <ol class="step-list">
+              <li>従業員ホームを開きます。</li>
+              <li>「シフト希望一覧」を確認します。</li>
+              <li>「承認待ち」を確認します。</li>
+            </ol>
+            <p>承認待ちのシフトは、まだ確定していません。管理者が承認すると、承認済みに移動します。</p>
+            <h4>承認済みシフトを確認する手順</h4>
+            <ol class="step-list">
+              <li>従業員ホームを開きます。</li>
+              <li>「シフト希望一覧」を確認します。</li>
+              <li>「承認済み」を確認します。</li>
+            </ol>
+            <p class="ok-box">承認済みのシフトは、管理者が承認した確定シフトです。</p>
+          </div>
+
+          <h3 id="employee-hours">6. 直近のシフト・勤務時間・給与目安を確認する</h3>
+          <div class="manual-card">
+            <h4>直近のシフトを確認する手順</h4>
+            <ol class="step-list">
+              <li>従業員ホームを開きます。</li>
+              <li>「直近のシフト」を確認します。</li>
+              <li>日付、時間、給与目安、ステータスを確認します。</li>
+            </ol>
+            <p>直近に承認済みシフトがない場合は、「直近のシフトはありません」と表示されます。</p>
+            <h4>勤務時間を確認する手順</h4>
+            <ol class="step-list">
+              <li>従業員ホームを開きます。</li>
+              <li>「今月の勤務時間」を確認します。</li>
+              <li>「年間の勤務時間」を確認します。</li>
+            </ol>
+            <h4>給与目安を確認する手順</h4>
+            <ol class="step-list">
+              <li>従業員ホームを開きます。</li>
+              <li>「今月のお給料」を確認します。</li>
+              <li>「年間のお給料」を確認します。</li>
+            </ol>
+            <p class="note">勤務時間と給与は、承認済みかつ終了済みのシフトをもとに計算されます。実際の給与額と完全に一致するとは限りません。</p>
+          </div>
+
+          <h3 id="compatibility">7. 一緒に働きやすさ設定を入力する</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>従業員ホームを開きます。</li>
+              <li>「一緒に働きやすさ設定」を押します。</li>
+              <li>他の従業員一覧を確認します。</li>
+              <li>各従業員ごとにスライダーを動かします。</li>
+              <li>-5から+5の範囲で設定します。</li>
+              <li>全員分を確認します。</li>
+              <li>「保存する」を押します。</li>
+              <li>保存完了メッセージを確認します。</li>
+            </ol>
+            <table class="simple-table">
+              <tr><th>+5</th><td>とても一緒に働きやすい。</td></tr>
+              <tr><th>0</th><td>普通。</td></tr>
+              <tr><th>-5</th><td>一緒に働きにくい。</td></tr>
+            </table>
+            <p class="note">未入力の相手は0点として保存されます。この設定は、管理者側の相性スコアやおすすめ承認組み合わせに使われます。</p>
+          </div>
+
+          <h3 id="employee-logout">8. ログアウトする</h3>
+          <div class="manual-card">
+            <h4>操作手順</h4>
+            <ol class="step-list">
+              <li>従業員ホームを開きます。</li>
+              <li>右上のログアウトボタンを押します。</li>
+              <li>ログイン画面へ戻ります。</li>
+            </ol>
+            <p class="warning">共有端末を使っている場合は、利用後に必ずログアウトしてください。</p>
+          </div>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="faq">
+          <p class="section-label">FAQ</p>
+          <h2>よくある困りごと</h2>
+
+          <h3>管理者でログインできない</h3>
+          <ul class="plain-list">
+            <li>メールアドレスが正しいか確認します。</li>
+            <li>パスワードが正しいか確認します。</li>
+            <li>メール確認が完了しているか確認します。</li>
+            <li>登録したアカウントでログインしているか確認します。</li>
+          </ul>
+
+          <h3>従業員でログインできない</h3>
+          <ul class="plain-list">
+            <li>組織IDが6桁の数字になっているか確認します。</li>
+            <li>組織IDが正しいか確認します。</li>
+            <li>メールアドレスが正しいか確認します。</li>
+            <li>管理者がそのメールアドレスを登録しているか確認します。</li>
+            <li>別の組織IDを入力していないか確認します。</li>
+          </ul>
+
+          <h3>希望できる日付が表示されない</h3>
+          <ul class="plain-list">
+            <li>管理者がシフト枠を作成しているか確認します。</li>
+            <li>そのシフトが開始済みではないか確認します。</li>
+            <li>すでに同じシフトへ希望を出していないか確認します。</li>
+            <li>別の月を表示していないか確認します。</li>
+          </ul>
+
+          <h3>シフトを承認できない</h3>
+          <ul class="plain-list">
+            <li>募集人数に達していないか確認します。</li>
+            <li>対象のシフト枠が削除されていないか確認します。</li>
+            <li>承認対象がすでに承認済みではないか確認します。</li>
+          </ul>
+
+          <h3>勤務時間や給与が表示されない</h3>
+          <p>勤務時間と給与は、承認済みかつ終了済みのシフトだけが対象です。承認待ちのシフト、まだ終了していないシフト、削除されたシフトは集計されません。</p>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="notes">
+          <p class="section-label">Notes</p>
+          <h2>現在の実装上の注意</h2>
+
+          <h3>従業員の確認用コードについて</h3>
+          <p>従業員ログインには確認用コード入力画面があります。現在の実装では、確認用コード欄が空でないことを確認し、組織IDとメールアドレスに一致する従業員情報を再確認して従業員ホームへ進みます。</p>
+          <p class="note">本番運用でメール送信やコード照合を厳密に行う場合は、追加実装が必要です。</p>
+
+          <h3>CSVエクスポートについて</h3>
+          <p>勤務時間画面にはCSVエクスポートボタンがあります。現在の実装では、ボタンの表示はありますが、CSVファイルを生成してダウンロードする処理は未実装です。</p>
+
+          <h3>管理者ログアウトについて</h3>
+          <p>管理者ホームにはログアウト導線があります。現在の実装ではログイン画面への遷移が中心です。Firebase Authenticationの明示的なサインアウト処理は、今後の改善対象です。</p>
+
+          <h3>削除操作について</h3>
+          <p>従業員の削除、シフト枠の削除、組織の削除は、関連データも削除される場合があります。実行前に内容を確認してください。</p>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="readme-cta">
+          <h2>実際の画面で操作を確認する</h2>
+          <p>READMEで手順を確認したら、デプロイ済みのサービス画面で実際の操作感を確認できます。</p>
+          <div class="hero-actions center">
+            <a class="button light" href="./index.html">アピールページへ戻る</a>
+            <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+          </div>
+        </section>
+      </div>
+    </div>
   </main>
 </body>
 </html>
