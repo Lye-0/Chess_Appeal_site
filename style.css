@@ -771,33 +771,92 @@ h3 {
     width: min(100% - 28px, 1180px);
   }
 
+  .header-inner {
+    min-height: 68px;
+    padding: 12px 0;
+  }
+
   .brand {
     gap: 8px;
+    min-width: 0;
+  }
+
+  .brand-logo {
+    width: 36px;
+    height: 36px;
   }
 
   .brand-main {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .brand-sub {
-    font-size: 9px;
+    display: none;
+  }
+
+  .menu-button {
+    flex: 0 0 auto;
+  }
+
+  .site-nav {
+    top: 68px;
+    right: 14px;
+    left: 14px;
   }
 
   .section {
     padding: 58px 0;
   }
 
-  h1 {
-    font-size: clamp(30px, 8.8vw, 46px);
-    letter-spacing: -0.03em;
+  h1,
+  .hero-title {
+    font-size: 32px;
+    line-height: 1.22;
+    letter-spacing: -0.05em;
+  }
+
+  .headline-line {
+    white-space: normal;
   }
 
   .headline-line-indent {
-    margin-left: 0.9em;
+    margin-left: 0;
   }
 
   .hero {
-    padding-top: 56px;
+    padding-top: 58px;
+  }
+
+  .hero-grid {
+    gap: 32px;
+  }
+
+  .hero-grid > * {
+    min-width: 0;
+  }
+
+  .hero-copy .section-label {
+    margin-bottom: 0;
+  }
+
+  .hero-copy .hero-title {
+    margin-top: 28px;
+  }
+
+  .hero-copy .lead {
+    margin-top: 24px;
+  }
+
+  .hero-actions {
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .hero-actions .button {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-right: 12px;
+    padding-left: 12px;
   }
 
   .card-grid.three,
@@ -808,7 +867,18 @@ h3 {
   }
 
   .hero-tags {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .hero-tags span {
+    display: grid;
+    place-items: center;
+    min-height: 42px;
+    padding: 8px 5px;
+    font-size: 11px;
+    line-height: 1.35;
   }
 
   .photo-card,
@@ -819,13 +889,10 @@ h3 {
     border-radius: 24px;
   }
 
-  .photo-card.large .photo-placeholder {
-    min-height: 240px;
-    padding-top: 46px;
-  }
-
-  .hero-title {
-    font-size: clamp(32px, 9vw, 42px);
+  .photo-card.large .photo-placeholder,
+  .photo-card.large .photo-placeholder:has(img) {
+    min-height: 0;
+    padding-top: 0;
   }
 
   .photo-placeholder p {
