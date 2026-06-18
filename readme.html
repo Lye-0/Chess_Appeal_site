@@ -612,7 +612,6 @@
           <strong>補足</strong>
           <nav class="toc-links">
             <a href="#faq">よくある困りごと</a>
-            <a href="#notes">現在の実装上の注意</a>
           </nav>
         </div>
       </aside>
@@ -644,20 +643,20 @@
           <h2>画面一覧</h2>
           <p>Chessでは、管理者用と従業員用で画面が分かれています。</p>
           <div class="route-list">
-            <article class="route-card"><code>/login</code><strong>利用者選択</strong><span>管理者として使うか、従業員として使うかを選びます。</span></article>
-            <article class="route-card"><code>/login/employee</code><strong>従業員確認</strong><span>組織IDとメールアドレスを入力します。</span></article>
-            <article class="route-card"><code>/employee</code><strong>従業員ホーム</strong><span>直近のシフト、勤務時間、給与目安、希望一覧を確認します。</span></article>
-            <article class="route-card"><code>/employee/shift-request</code><strong>希望シフト入力</strong><span>日付とシフト枠を選び、希望シフトを送信します。</span></article>
-            <article class="route-card"><code>/employee/compatibility</code><strong>一緒に働きやすさ設定</strong><span>他の従業員との働きやすさを-5から+5で入力します。</span></article>
-            <article class="route-card"><code>/login/manager</code><strong>管理者ログイン</strong><span>メールアドレスとパスワードでログインします。</span></article>
-            <article class="route-card"><code>/signup/manager</code><strong>管理者新規登録</strong><span>管理者アカウントを作成します。</span></article>
-            <article class="route-card"><code>/manager/select-organization</code><strong>組織選択</strong><span>管理する組織を選択します。</span></article>
-            <article class="route-card"><code>/manager/organizations/new</code><strong>組織追加</strong><span>新しい組織を作成します。</span></article>
-            <article class="route-card"><code>/admin</code><strong>管理者ホーム</strong><span>管理者向けメニューと概要を表示します。</span></article>
-            <article class="route-card"><code>/admin/shift-management</code><strong>シフト管理</strong><span>シフト枠の追加、編集、削除、承認を行います。</span></article>
-            <article class="route-card"><code>/admin/employee-registration</code><strong>従業員登録</strong><span>従業員の登録、編集、削除を行います。</span></article>
-            <article class="route-card"><code>/admin/employee-list</code><strong>従業員シフト表</strong><span>従業員ごとのシフト希望を確認します。</span></article>
-            <article class="route-card"><code>/admin/timesheet</code><strong>勤務時間</strong><span>勤務時間、給与目安、給与設定を確認します。</span></article>
+            <article class="route-card"><strong>利用者選択</strong><span>管理者として使うか、従業員として使うかを選びます。</span></article>
+            <article class="route-card"><strong>従業員確認</strong><span>組織IDとメールアドレスを入力します。</span></article>
+            <article class="route-card"><strong>従業員ホーム</strong><span>直近のシフト、勤務時間、給与目安、希望一覧を確認します。</span></article>
+            <article class="route-card"><strong>希望シフト入力</strong><span>日付とシフト枠を選び、希望シフトを送信します。</span></article>
+            <article class="route-card"><strong>一緒に働きやすさ設定</strong><span>他の従業員との働きやすさを-5から+5で入力します。</span></article>
+            <article class="route-card"><strong>管理者ログイン</strong><span>メールアドレスとパスワードでログインします。</span></article>
+            <article class="route-card"><strong>管理者新規登録</strong><span>管理者アカウントを作成します。</span></article>
+            <article class="route-card"><strong>組織選択</strong><span>管理する組織を選択します。</span></article>
+            <article class="route-card"><strong>組織追加</strong><span>新しい組織を作成します。</span></article>
+            <article class="route-card"><strong>管理者ホーム</strong><span>管理者向けメニューと概要を表示します。</span></article>
+            <article class="route-card"><strong>シフト管理</strong><span>シフト枠の追加、編集、削除、承認を行います。</span></article>
+            <article class="route-card"><strong>従業員登録</strong><span>従業員の登録、編集、削除を行います。</span></article>
+            <article class="route-card"><strong>従業員シフト表</strong><span>従業員ごとのシフト希望を確認します。</span></article>
+            <article class="route-card"><strong>勤務時間</strong><span>勤務時間、給与目安、給与設定を確認します。</span></article>
           </div>
           <a class="back-to-top" href="#top">ページ上部へ戻る</a>
         </section>
@@ -667,7 +666,7 @@
           <h2>管理者の操作手順</h2>
           <p>管理者は、組織、従業員、シフト枠、希望シフト、勤務時間、給与設定を管理します。</p>
 
-          <h3 id="admin-signup">1. 管理者アカウントを新規登録する</h3>
+          <h3 id="admin-signup">1. 新規登録</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -685,7 +684,7 @@
             <p class="warning">メール確認が完了していない場合、管理者としてログインできません。パスワードは6文字以上で入力してください。</p>
           </div>
 
-          <h3 id="admin-login">2. 管理者としてログインする</h3>
+          <h3 id="admin-login">2. ログイン</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -705,7 +704,7 @@
             </ul>
           </div>
 
-          <h3 id="admin-org-create">3. 組織を追加・選択する</h3>
+          <h3 id="admin-org-create">3. 組織を追加・選択</h3>
           <div class="manual-card">
             <h4>組織を追加する手順</h4>
             <ol class="step-list">
@@ -727,7 +726,7 @@
             <p class="note">組織を作成すると、従業員ログインに使う6桁の組織IDが自動発行されます。従業員には「組織ID」と「登録済みメールアドレス」を共有してください。</p>
           </div>
 
-          <h3 id="admin-employee-create">4. 従業員を登録する</h3>
+          <h3 id="admin-employee-create">4. 従業員登録</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -750,7 +749,7 @@
             <p class="warning">同じメールアドレスを重複して登録することはできません。従業員はここで登録されたメールアドレスを使ってログインします。</p>
           </div>
 
-          <h3 id="admin-employee-edit">5. 従業員情報を編集・削除する</h3>
+          <h3 id="admin-employee-edit">5. 従業員編集・削除</h3>
           <div class="manual-card">
             <h4>編集手順</h4>
             <ol class="step-list">
@@ -774,7 +773,7 @@
             <p class="warning">従業員を削除すると、その従業員に紐づく希望シフトも削除されます。削除後は元に戻せないため、実行前に確認してください。</p>
           </div>
 
-          <h3 id="admin-shift-create">6. シフト枠を追加する</h3>
+          <h3 id="admin-shift-create">6. シフト枠追加</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -797,7 +796,7 @@
             <p class="warning">開始時刻と終了時刻を同じ時刻にすることはできません。終了時刻が開始時刻より早い場合は、翌日の終了時刻として扱われます。</p>
           </div>
 
-          <h3 id="admin-shift-edit">7. シフト枠を編集・削除する</h3>
+          <h3 id="admin-shift-edit">7. シフト枠編集・削除</h3>
           <div class="manual-card">
             <h4>編集手順</h4>
             <ol class="step-list">
@@ -822,7 +821,7 @@
             <p class="warning">シフト枠を削除すると、そのシフト枠に紐づく希望シフトも削除されます。</p>
           </div>
 
-          <h3 id="admin-approve">8. 希望シフトを確認・承認する</h3>
+          <h3 id="admin-approve">8. 希望確認・承認</h3>
           <div class="manual-card">
             <h4>希望シフトを確認する手順</h4>
             <ol class="step-list">
@@ -852,7 +851,7 @@
             <p class="note">承認済みの希望に対してゴミ箱ボタンを押した場合、希望シフト自体を削除するのではなく、承認を取り消します。</p>
           </div>
 
-          <h3 id="admin-recommend">9. おすすめ承認組み合わせを確認する</h3>
+          <h3 id="admin-recommend">9. おすすめ承認</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -866,7 +865,7 @@
             <p class="note">おすすめ承認組み合わせは、募集人数に対して相性スコアが高い組み合わせを表示します。最終的に承認するかどうかは管理者が判断します。</p>
           </div>
 
-          <h3 id="admin-list">10. 従業員シフト表を確認する</h3>
+          <h3 id="admin-list">10. 従業員シフト表</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -879,7 +878,7 @@
             <p>検索欄では、従業員名、メールアドレス、従業員IDで絞り込めます。</p>
           </div>
 
-          <h3 id="admin-timesheet">11. 勤務時間を確認し、給与設定を変更する</h3>
+          <h3 id="admin-timesheet">11. 勤務時間・給与設定</h3>
           <div class="manual-card">
             <h4>勤務時間を確認する手順</h4>
             <ol class="step-list">
@@ -910,7 +909,7 @@
             </table>
           </div>
 
-          <h3 id="admin-org-delete">12. 組織を削除する</h3>
+          <h3 id="admin-org-delete">12. 組織削除</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -930,7 +929,7 @@
           <h2>従業員の操作手順</h2>
           <p>従業員は、管理者が登録した組織IDとメールアドレスを使ってログインし、希望シフトの提出やシフト確認を行います。</p>
 
-          <h3 id="employee-login">1. 従業員としてログインする</h3>
+          <h3 id="employee-login">1. ログイン</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -950,7 +949,7 @@
             </table>
           </div>
 
-          <h3 id="employee-home">2. 従業員ホームを確認する</h3>
+          <h3 id="employee-home">2. ホーム確認</h3>
           <div class="manual-card">
             <p>従業員ホームでは、自分に関するシフト情報を確認できます。</p>
             <ul class="plain-list">
@@ -967,7 +966,7 @@
             </ul>
           </div>
 
-          <h3 id="employee-date">3. 希望する日付とシフト枠を選択する</h3>
+          <h3 id="employee-date">3. 日付・枠選択</h3>
           <div class="manual-card">
             <h4>希望シフト入力画面を開く</h4>
             <ol class="step-list">
@@ -991,7 +990,7 @@
             <p class="warning">管理者がシフト枠を作成していない日、開始済みのシフト、終了済みのシフト、すでに自分が希望を出しているシフトしかない日は選択できません。</p>
           </div>
 
-          <h3 id="employee-submit">4. 希望を追加して送信する</h3>
+          <h3 id="employee-submit">4. 希望シフト送信</h3>
           <div class="manual-card">
             <h4>希望を追加する手順</h4>
             <ol class="step-list">
@@ -1021,7 +1020,7 @@
             <p class="warning">送信後は、従業員側から変更できません。変更したい場合は、管理者に連絡してください。</p>
           </div>
 
-          <h3 id="employee-status">5. 承認待ち・承認済みシフトを確認する</h3>
+          <h3 id="employee-status">5. 承認待ち・承認済み</h3>
           <div class="manual-card">
             <h4>承認待ちシフトを確認する手順</h4>
             <ol class="step-list">
@@ -1039,7 +1038,7 @@
             <p class="ok-box">承認済みのシフトは、管理者が承認した確定シフトです。</p>
           </div>
 
-          <h3 id="employee-hours">6. 直近のシフト・勤務時間・給与目安を確認する</h3>
+          <h3 id="employee-hours">6. 勤務時間・給与確認</h3>
           <div class="manual-card">
             <h4>直近のシフトを確認する手順</h4>
             <ol class="step-list">
@@ -1063,7 +1062,7 @@
             <p class="note">勤務時間と給与は、承認済みかつ終了済みのシフトをもとに計算されます。実際の給与額と完全に一致するとは限りません。</p>
           </div>
 
-          <h3 id="compatibility">7. 一緒に働きやすさ設定を入力する</h3>
+          <h3 id="compatibility">7. 働きやすさ設定</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -1084,7 +1083,7 @@
             <p class="note">未入力の相手は0点として保存されます。この設定は、管理者側の相性スコアやおすすめ承認組み合わせに使われます。</p>
           </div>
 
-          <h3 id="employee-logout">8. ログアウトする</h3>
+          <h3 id="employee-logout">8. ログアウト</h3>
           <div class="manual-card">
             <h4>操作手順</h4>
             <ol class="step-list">
@@ -1135,25 +1134,6 @@
 
           <h3>勤務時間や給与が表示されない</h3>
           <p>勤務時間と給与は、承認済みかつ終了済みのシフトだけが対象です。承認待ちのシフト、まだ終了していないシフト、削除されたシフトは集計されません。</p>
-          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
-        </section>
-
-        <section class="manual-section" id="notes">
-          <p class="section-label">Notes</p>
-          <h2>現在の実装上の注意</h2>
-
-          <h3>従業員の確認用コードについて</h3>
-          <p>従業員ログインには確認用コード入力画面があります。現在の実装では、確認用コード欄が空でないことを確認し、組織IDとメールアドレスに一致する従業員情報を再確認して従業員ホームへ進みます。</p>
-          <p class="note">本番運用でメール送信やコード照合を厳密に行う場合は、追加実装が必要です。</p>
-
-          <h3>CSVエクスポートについて</h3>
-          <p>勤務時間画面にはCSVエクスポートボタンがあります。現在の実装では、ボタンの表示はありますが、CSVファイルを生成してダウンロードする処理は未実装です。</p>
-
-          <h3>管理者ログアウトについて</h3>
-          <p>管理者ホームにはログアウト導線があります。現在の実装ではログイン画面への遷移が中心です。Firebase Authenticationの明示的なサインアウト処理は、今後の改善対象です。</p>
-
-          <h3>削除操作について</h3>
-          <p>従業員の削除、シフト枠の削除、組織の削除は、関連データも削除される場合があります。実行前に内容を確認してください。</p>
           <a class="back-to-top" href="#top">ページ上部へ戻る</a>
         </section>
 
