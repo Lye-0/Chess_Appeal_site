@@ -19,4 +19,3 @@ if (menuButton && siteNav) {
     });
   });
 }
-
