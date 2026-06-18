@@ -124,12 +124,13 @@
     .toc-links a {
       display: block;
       padding: 8px 10px;
+      border: 1px solid transparent;
       border-radius: 12px;
       color: #475569;
       font-size: 13px;
       font-weight: 700;
       line-height: 1.45;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
     .toc-links a:hover,
@@ -140,6 +141,33 @@
       outline: none;
     }
 
+
+    .toc-links a.is-active {
+      position: relative;
+      color: #0f172a;
+      border-color: #f1d38a;
+      background: #fff4d6;
+      box-shadow:
+        inset 4px 0 0 #d9a634,
+        0 10px 22px rgba(154, 107, 17, 0.12);
+      transform: translateX(2px);
+    }
+
+    .toc-links a.is-active::after {
+      content: "現在地";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: #9a6b11;
+      background: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      vertical-align: middle;
+      box-shadow: 0 4px 10px rgba(154, 107, 17, 0.1);
+    }
     .jump-links {
       display: flex;
       flex-wrap: wrap;
@@ -1148,5 +1176,83 @@
       </div>
     </div>
   </main>
+  <script>
+    (() => {
+      const tocCard = document.querySelector(".toc-card");
+      const tocLinks = Array.from(document.querySelectorAll('.toc-links a[href^="#"]'));
+      const targets = tocLinks
+        .map((link) => {
+          const id = decodeURIComponent(link.getAttribute("href").slice(1));
+          return { link, target: document.getElementById(id) };
+        })
+        .filter((item) => item.target);
+
+      if (targets.length === 0) {
+        return;
+      }
+
+      let activeLink = null;
+      let ticking = false;
+
+      const centerActiveLink = (link) => {
+        if (!tocCard || window.matchMedia("(max-width: 980px)").matches) {
+          return;
+        }
+
+        const targetTop = link.offsetTop - tocCard.clientHeight / 2 + link.offsetHeight / 2;
+        tocCard.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+      };
+
+      const setActiveLink = (link) => {
+        if (activeLink === link) {
+          return;
+        }
+
+        tocLinks.forEach((item) => {
+          item.classList.toggle("is-active", item === link);
+          if (item === link) {
+            item.setAttribute("aria-current", "location");
+          } else {
+            item.removeAttribute("aria-current");
+          }
+        });
+
+        activeLink = link;
+        centerActiveLink(link);
+      };
+
+      const updateActiveLink = () => {
+        const markerY = 142;
+        let current = targets[0];
+
+        for (const item of targets) {
+          if (item.target.getBoundingClientRect().top <= markerY) {
+            current = item;
+          } else {
+            break;
+          }
+        }
+
+        setActiveLink(current.link);
+        ticking = false;
+      };
+
+      const requestUpdate = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateActiveLink);
+          ticking = true;
+        }
+      };
+
+      tocLinks.forEach((link) => {
+        link.addEventListener("click", () => setActiveLink(link));
+      });
+
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+      window.addEventListener("hashchange", requestUpdate);
+      updateActiveLink();
+    })();
+  </script>
 </body>
 </html>
