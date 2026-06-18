@@ -86,9 +86,22 @@
       box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
     }
 
+    .toc-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
     .toc-card h2 {
       font-size: 17px;
       margin: 0;
+    }
+
+    .toc-toggle,
+    .toc-close,
+    .toc-backdrop {
+      display: none;
     }
 
     .toc-card p {
@@ -490,9 +503,137 @@
         grid-template-columns: 1fr;
       }
 
-      .toc-card {
-        position: static;
+      html.toc-ready .toc-toggle {
+        position: fixed;
+        right: 18px;
+        bottom: calc(18px + env(safe-area-inset-bottom));
+        z-index: 50;
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        min-width: 138px;
+        padding: 11px 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 18px;
+        color: #fff;
+        background: #0f172a;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.28);
+        cursor: pointer;
+      }
+
+      .toc-toggle-icon {
+        display: grid;
+        gap: 4px;
+        width: 22px;
+        flex: 0 0 auto;
+      }
+
+      .toc-toggle-icon span {
+        display: block;
+        height: 2px;
+        border-radius: 999px;
+        background: currentColor;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+
+      .toc-toggle-copy {
+        display: grid;
+        min-width: 0;
+        text-align: left;
+      }
+
+      .toc-toggle-label {
+        font-size: 13px;
+        font-weight: 900;
+        line-height: 1.2;
+      }
+
+      .toc-toggle-current {
+        max-width: 128px;
+        overflow: hidden;
+        color: #cbd5e1;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1.4;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      html.toc-ready .toc-toggle[aria-expanded="true"] .toc-toggle-icon span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      html.toc-ready .toc-toggle[aria-expanded="true"] .toc-toggle-icon span:nth-child(2) {
+        opacity: 0;
+      }
+
+      html.toc-ready .toc-toggle[aria-expanded="true"] .toc-toggle-icon span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      html.toc-ready .toc-toggle[aria-expanded="true"] {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      html.toc-ready .toc-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 55;
+        display: block;
+        border: 0;
+        padding: 0;
+        background: rgba(15, 23, 42, 0.52);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+      }
+
+      html.toc-ready .toc-backdrop.is-open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      html.toc-ready .toc-card {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        bottom: 16px;
+        z-index: 60;
+        width: min(360px, calc(100% - 32px));
         max-height: none;
+        overflow: auto;
+        overscroll-behavior: contain;
+        transform: translateX(calc(100% + 32px));
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.28s ease, opacity 0.2s ease, visibility 0.28s ease;
+      }
+
+      html.toc-ready .toc-card.is-open {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      html.toc-ready .toc-close {
+        display: inline-grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        color: #0f172a;
+        background: #f8fafc;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      body.toc-open {
+        overflow: hidden;
       }
     }
 
@@ -592,8 +733,24 @@
     </section>
 
     <div class="readme-layout">
-      <aside class="toc-card" aria-label="README目次">
-        <h2>目次</h2>
+      <button class="toc-toggle" type="button" aria-controls="readme-toc" aria-expanded="false">
+        <span class="toc-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="toc-toggle-copy">
+          <span class="toc-toggle-label">目次</span>
+          <span class="toc-toggle-current">現在地を確認</span>
+        </span>
+      </button>
+      <button class="toc-backdrop" type="button" aria-label="目次を閉じる"></button>
+
+      <aside class="toc-card" id="readme-toc" aria-label="README目次">
+        <div class="toc-card-header">
+          <h2>目次</h2>
+          <button class="toc-close" type="button" aria-label="目次を閉じる">×</button>
+        </div>
         <p>項目を押すと、その説明へ移動できます。</p>
 
         <div class="toc-group">
@@ -1180,6 +1337,11 @@
     (() => {
       const tocCard = document.querySelector(".toc-card");
       const tocLinks = Array.from(document.querySelectorAll('.toc-links a[href^="#"]'));
+      const tocToggle = document.querySelector(".toc-toggle");
+      const tocToggleCurrent = document.querySelector(".toc-toggle-current");
+      const tocClose = document.querySelector(".toc-close");
+      const tocBackdrop = document.querySelector(".toc-backdrop");
+      const mobileToc = window.matchMedia("(max-width: 980px)");
       const targets = tocLinks
         .map((link) => {
           const id = decodeURIComponent(link.getAttribute("href").slice(1));
@@ -1195,7 +1357,7 @@
       let ticking = false;
 
       const centerActiveLink = (link) => {
-        if (!tocCard || window.matchMedia("(max-width: 980px)").matches) {
+        if (!tocCard || (mobileToc.matches && !tocCard.classList.contains("is-open"))) {
           return;
         }
 
@@ -1218,7 +1380,46 @@
         });
 
         activeLink = link;
+        if (tocToggleCurrent) {
+          tocToggleCurrent.textContent = link.textContent.trim();
+        }
         centerActiveLink(link);
+      };
+
+      const setTocOpen = (shouldOpen, returnFocus = false) => {
+        if (!tocCard || !tocToggle || !tocBackdrop || !mobileToc.matches) {
+          return;
+        }
+
+        tocCard.classList.toggle("is-open", shouldOpen);
+        tocBackdrop.classList.toggle("is-open", shouldOpen);
+        tocToggle.setAttribute("aria-expanded", String(shouldOpen));
+        tocCard.setAttribute("aria-hidden", String(!shouldOpen));
+        tocCard.inert = !shouldOpen;
+        document.body.classList.toggle("toc-open", shouldOpen);
+
+        if (shouldOpen) {
+          window.requestAnimationFrame(() => centerActiveLink(activeLink));
+        } else if (returnFocus) {
+          tocToggle.focus();
+        }
+      };
+
+      const syncTocMode = () => {
+        if (!tocCard || !tocToggle) {
+          return;
+        }
+
+        if (mobileToc.matches) {
+          setTocOpen(false);
+        } else {
+          tocCard.classList.remove("is-open");
+          tocCard.removeAttribute("aria-hidden");
+          tocCard.inert = false;
+          tocToggle.setAttribute("aria-expanded", "false");
+          tocBackdrop?.classList.remove("is-open");
+          document.body.classList.remove("toc-open");
+        }
       };
 
       const updateActiveLink = () => {
@@ -1245,12 +1446,28 @@
       };
 
       tocLinks.forEach((link) => {
-        link.addEventListener("click", () => setActiveLink(link));
+        link.addEventListener("click", () => {
+          setActiveLink(link);
+          setTocOpen(false);
+        });
       });
 
+      tocToggle?.addEventListener("click", () => {
+        setTocOpen(tocToggle.getAttribute("aria-expanded") !== "true");
+      });
+      tocClose?.addEventListener("click", () => setTocOpen(false, true));
+      tocBackdrop?.addEventListener("click", () => setTocOpen(false, true));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && tocToggle?.getAttribute("aria-expanded") === "true") {
+          setTocOpen(false, true);
+        }
+      });
+      mobileToc.addEventListener("change", syncTocMode);
       window.addEventListener("scroll", requestUpdate, { passive: true });
       window.addEventListener("resize", requestUpdate);
       window.addEventListener("hashchange", requestUpdate);
+      document.documentElement.classList.add("toc-ready");
+      syncTocMode();
       updateActiveLink();
     })();
   </script>
