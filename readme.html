@@ -504,77 +504,54 @@
       }
 
       html.toc-ready .toc-toggle {
-        position: fixed;
-        right: 18px;
-        bottom: calc(18px + env(safe-area-inset-bottom));
-        z-index: 50;
-        display: inline-flex;
+        position: static;
+        z-index: auto;
+        display: block;
         align-items: center;
-        gap: 11px;
-        min-width: 138px;
-        padding: 11px 16px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 18px;
-        color: #fff;
-        background: #0f172a;
-        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.28);
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        padding: 0;
+        border: 1px solid var(--border, #e2e8f0);
+        border-radius: 14px;
+        color: var(--text, #0f172a);
+        background: #fff;
         cursor: pointer;
       }
 
       .toc-toggle-icon {
-        display: grid;
-        gap: 4px;
-        width: 22px;
-        flex: 0 0 auto;
+        display: block;
+        width: 18px;
+        margin: 0 auto;
       }
 
       .toc-toggle-icon span {
         display: block;
+        width: 18px;
         height: 2px;
+        margin: 5px auto;
         border-radius: 999px;
         background: currentColor;
-        transition: transform 0.2s ease, opacity 0.2s ease;
       }
 
       .toc-toggle-copy {
-        display: grid;
-        min-width: 0;
-        text-align: left;
-      }
-
-      .toc-toggle-label {
-        font-size: 13px;
-        font-weight: 900;
-        line-height: 1.2;
-      }
-
-      .toc-toggle-current {
-        max-width: 128px;
+        position: absolute;
+        width: 1px;
+        height: 1px;
         overflow: hidden;
-        color: #cbd5e1;
-        font-size: 10px;
-        font-weight: 700;
-        line-height: 1.4;
-        text-overflow: ellipsis;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
         white-space: nowrap;
-      }
-
-      html.toc-ready .toc-toggle[aria-expanded="true"] .toc-toggle-icon span:nth-child(1) {
-        transform: translateY(6px) rotate(45deg);
-      }
-
-      html.toc-ready .toc-toggle[aria-expanded="true"] .toc-toggle-icon span:nth-child(2) {
-        opacity: 0;
-      }
-
-      html.toc-ready .toc-toggle[aria-expanded="true"] .toc-toggle-icon span:nth-child(3) {
-        transform: translateY(-6px) rotate(-45deg);
       }
 
       html.toc-ready .toc-toggle[aria-expanded="true"] {
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
+      }
+
+      .readme-header-actions {
+        display: none;
       }
 
       html.toc-ready .toc-backdrop {
@@ -644,15 +621,11 @@
       }
 
       .readme-header-inner {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .readme-header-actions {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
+        min-height: 68px;
+        align-items: center;
+        flex-direction: row;
+        gap: 12px;
+        padding: 12px 0;
       }
 
       .readme-page {
@@ -702,6 +675,16 @@
         <span class="brand-main">Chess</span>
         <span class="brand-sub">README</span>
       </a>
+      <button class="toc-toggle" type="button" aria-label="目次を開く" aria-controls="readme-toc" aria-expanded="false">
+        <span class="toc-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </span>
+        <span class="toc-toggle-copy">
+          <span class="toc-toggle-label">目次</span>
+          <span class="toc-toggle-current">現在地を確認</span>
+        </span>
+      </button>
       <div class="readme-header-actions">
         <a class="nav-button secondary" href="./index.html">アピールページへ戻る</a>
         <a class="nav-button primary" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
@@ -734,17 +717,6 @@
     </section>
 
     <div class="readme-layout">
-      <button class="toc-toggle" type="button" aria-controls="readme-toc" aria-expanded="false">
-        <span class="toc-toggle-icon" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-        <span class="toc-toggle-copy">
-          <span class="toc-toggle-label">目次</span>
-          <span class="toc-toggle-current">現在地を確認</span>
-        </span>
-      </button>
       <button class="toc-backdrop" type="button" aria-label="目次を閉じる"></button>
 
       <aside class="toc-card" id="readme-toc" aria-label="README目次">
@@ -1395,6 +1367,7 @@
         tocCard.classList.toggle("is-open", shouldOpen);
         tocBackdrop.classList.toggle("is-open", shouldOpen);
         tocToggle.setAttribute("aria-expanded", String(shouldOpen));
+        tocToggle.setAttribute("aria-label", shouldOpen ? "目次を閉じる" : "目次を開く");
         tocCard.setAttribute("aria-hidden", String(!shouldOpen));
         tocCard.inert = !shouldOpen;
         document.body.classList.toggle("toc-open", shouldOpen);
@@ -1418,6 +1391,7 @@
           tocCard.removeAttribute("aria-hidden");
           tocCard.inert = false;
           tocToggle.setAttribute("aria-expanded", "false");
+          tocToggle.setAttribute("aria-label", "目次を開く");
           tocBackdrop?.classList.remove("is-open");
           document.body.classList.remove("toc-open");
         }
