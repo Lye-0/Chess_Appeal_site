@@ -592,7 +592,56 @@ h3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
-  margin-top: 42px;
+  margin-top: 32px;
+}
+
+.ui-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 38px;
+}
+
+.ui-points article {
+  position: relative;
+  overflow: hidden;
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.05);
+}
+
+.ui-points article::after {
+  content: "";
+  position: absolute;
+  right: -34px;
+  bottom: -48px;
+  width: 120px;
+  height: 120px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.ui-points article:nth-child(2)::after { background: rgba(22, 163, 74, 0.08); }
+.ui-points article:nth-child(3)::after { background: rgba(124, 58, 237, 0.09); }
+
+.ui-points span {
+  color: var(--amber-dark);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.ui-points h3 { margin-top: 18px; font-size: 19px; }
+
+.ui-points p {
+  position: relative;
+  z-index: 1;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
 }
 
 .screen-card {
@@ -788,6 +837,7 @@ h3 {
   .card-grid.three,
   .feature-list,
   .screens-grid,
+  .ui-points,
   .flow-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -895,6 +945,7 @@ h3 {
   .card-grid.three,
   .feature-list,
   .screens-grid,
+  .ui-points,
   .flow-grid {
     grid-template-columns: 1fr;
   }

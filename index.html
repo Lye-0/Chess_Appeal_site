@@ -26,7 +26,7 @@
         <a href="#problem">課題</a>
         <a href="#main-feature">強み</a>
         <a href="#features">機能</a>
-        <a href="#screens">画面イメージ</a>
+        <a href="#screens">見やすいUI</a>
         <a href="#flow">使い方</a>
         <a class="nav-button primary" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
         <a class="nav-button secondary" href="./readme.html">詳しい使い方</a>
@@ -59,7 +59,7 @@
         <div class="hero-visual">
           <div class="photo-card large">
             <div class="photo-placeholder">
-              <img src="./assets/screenshots/service-login.png" alt="サービス画面 / ログイン画面のスクリーンショット" />
+              <img src="./assets/screenshots/current/login-select.png" alt="Chessの管理者・従業員を選ぶ利用者選択画面" />
             </div>
           </div>
           <div class="hero-tags">
@@ -116,7 +116,7 @@
         </div>
         <div class="photo-card">
           <div class="photo-placeholder">
-            <img src="./assets/screenshots/current/admin-settings.png" alt="公平性スコアを設定する管理者設定画面" />
+            <img src="./assets/screenshots/current/admin-recommendation.png" alt="相性・業務スキル・公平性を確認するおすすめ承認画面" />
           </div>
         </div>
       </div>
@@ -153,7 +153,7 @@
         </div>
         <div class="photo-card">
           <div class="photo-placeholder">
-            <img src="./assets/screenshots/employee-login.png" alt="従業員ログイン画面のスクリーンショット" />
+            <img src="./assets/screenshots/current/employee-login.png" alt="従業員ログイン画面のスクリーンショット" />
           </div>
         </div>
       </div>
@@ -189,7 +189,7 @@
         </div>
         <div class="photo-card">
           <div class="photo-placeholder">
-            <img src="./assets/screenshots/employee-registration.png" alt="従業員ごとのシゴデキ度を数値で設定する画面のスクリーンショット" />
+            <img src="./assets/screenshots/current/employee-registration.png" alt="従業員の基本情報と業務スキルを登録する画面" />
           </div>
         </div>
       </div>
@@ -237,11 +237,13 @@
           <article class="feature-card">
             <span class="number green">7</span>
             <h3>従業員ホーム</h3>
+            <p>確定シフト、希望、履歴、勤務時間を見渡せます。</p>
             <p>確定シフトのマイカレンダー、勤務履歴、勤務時間と給与を確認できます。</p>
           </article>
           <article class="feature-card">
             <span class="number amber">8</span>
             <h3>希望シフト入力</h3>
+            <p>月間カレンダーと時間帯表示から直感的に希望を選べます。</p>
             <p>募集枠への希望に加え、管理者が許可した場合は募集枠のない時間にも希望を提出できます。</p>
           </article>
         </div>
@@ -256,23 +258,42 @@
     <section id="screens" class="section">
       <div class="container">
         <p class="section-label">Screens</p>
-        <h2>画面イメージ</h2>
+        <h2>カレンダー中心の、見やすいUI</h2>
         <p class="section-text">
-          管理者画面と従業員画面の主なイメージをご紹介します。
+          管理者・従業員それぞれのホームから目的の画面へすぐ移動できます。月間カレンダーと日別表示を使い分け、募集・希望・確定の状態も分かりやすく整理しています。
         </p>
 
+        <div class="ui-points" aria-label="ChessのUIの特長">
+          <article>
+            <span>01</span>
+            <h3>入口をまとめたホーム</h3>
+            <p>よく使う機能をカードで整理し、次に行う操作を見つけやすくしています。</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>月と日を行き来できる</h3>
+            <p>月間カレンダーで全体を見て、日を選ぶと時間帯の詳細を確認できます。</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>状態がひと目で分かる</h3>
+            <p>承認待ち・勤務予定・勤務済みを、色とラベルで分かりやすく表示します。</p>
+          </article>
+        </div>
         <div class="screens-grid">
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/login-user-select.png" alt="ログイン / 利用者選択画面のスクリーンショット" />
+              <img src="./assets/screenshots/current/login-select.png" alt="ログイン / 利用者選択画面のスクリーンショット" />
             </div>
             <h3>ログイン / 利用者選択</h3>
+            <p>管理者と従業員の入口を明確に分けています。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/admin-home.png" alt="管理者ホーム画面のスクリーンショット" />
+              <img src="./assets/screenshots/current/admin-home.png" alt="管理者ホーム画面のスクリーンショット" />
             </div>
             <h3>管理者ホーム</h3>
+            <p>募集、従業員、勤務時間、設定をひとつの画面から開けます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
@@ -283,21 +304,24 @@
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/employee-registration.png" alt="従業員登録画面のスクリーンショット" />
+              <img src="./assets/screenshots/current/employee-my-calendar.png" alt="従業員の確定シフトを表示するマイカレンダー" />
             </div>
-            <h3>従業員登録画面</h3>
+            <h3>マイカレンダー</h3>
+            <p>承認済みシフトを月と日の両方から確認できます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/employee-home.png" alt="従業員ホーム画面のスクリーンショット" />
+              <img src="./assets/screenshots/current/employee-home.png" alt="従業員ホーム画面のスクリーンショット" />
             </div>
             <h3>従業員ホーム</h3>
+            <p>確定シフト、希望、履歴、勤務時間を見渡せます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/shift-request.png" alt="希望シフト入力画面のスクリーンショット" />
+              <img src="./assets/screenshots/current/employee-shift-request.png" alt="希望シフト入力画面のスクリーンショット" />
             </div>
             <h3>希望シフト入力</h3>
+            <p>月間カレンダーと時間帯表示から直感的に希望を選べます。</p>
           </article>
         </div>
       </div>
