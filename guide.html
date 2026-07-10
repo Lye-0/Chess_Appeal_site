@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Chessの現在の操作方法を、管理者・従業員それぞれの流れに沿って説明する使い方ガイドです。" />
+  <title>Chess 操作マニュアル | 現在の使い方</title>
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(250, 204, 21, 0.12), transparent 32rem),
+        linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    }
+
+    .readme-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+      background: rgba(255, 255, 255, 0.92);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+    }
+
+    .readme-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 16px 0;
+    }
+
+    .readme-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .readme-page {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 72px 0 88px;
+    }
+
+    .readme-hero {
+      max-width: 920px;
+    }
+
+    .readme-hero h1 {
+      margin-top: 24px;
+      font-size: clamp(38px, 5vw, 62px);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .readme-lead {
+      margin-top: 26px;
+      color: var(--muted, #64748b);
+      font-size: 17px;
+      line-height: 2;
+    }
+
+    .readme-layout {
+      display: grid;
+      grid-template-columns: 286px minmax(0, 1fr);
+      align-items: start;
+      gap: 28px;
+      margin-top: 52px;
+    }
+
+    .toc-card {
+      position: sticky;
+      top: 92px;
+      max-height: calc(100vh - 118px);
+      overflow: auto;
+      padding: 22px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+    }
+
+    .toc-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .toc-card h2 {
+      font-size: 17px;
+      margin: 0;
+    }
+
+    .toc-toggle,
+    .toc-close,
+    .toc-backdrop {
+      display: none;
+    }
+
+    .toc-card p {
+      margin: 8px 0 0;
+      color: var(--muted, #64748b);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .toc-group {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .toc-group strong {
+      display: block;
+      margin-bottom: 10px;
+      color: #0f172a;
+      font-size: 13px;
+    }
+
+    .toc-links {
+      display: grid;
+      gap: 8px;
+    }
+
+    .toc-links a,
+    .jump-links a {
+      text-decoration: none;
+    }
+
+    .toc-links a {
+      display: block;
+      padding: 8px 10px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+      transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .toc-links a:hover,
+    .toc-links a:focus-visible {
+      color: #0f172a;
+      background: #f1f5f9;
+      transform: translateX(2px);
+      outline: none;
+    }
+
+
+    .toc-links a.is-active {
+      position: relative;
+      color: #0f172a;
+      border-color: #f1d38a;
+      background: #fff4d6;
+      box-shadow:
+        inset 4px 0 0 #d9a634,
+        0 10px 22px rgba(154, 107, 17, 0.12);
+      transform: translateX(2px);
+    }
+
+    .toc-links a.is-active::after {
+      content: "現在地";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: #9a6b11;
+      background: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      vertical-align: middle;
+      box-shadow: 0 4px 10px rgba(154, 107, 17, 0.1);
+    }
+    .jump-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .jump-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 9px 14px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 999px;
+      background: #fff;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+    }
+
+    .manual-content {
+      min-width: 0;
+    }
+
+    .manual-section {
+      scroll-margin-top: 110px;
+      margin-top: 34px;
+      padding: 34px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 16px 42px rgba(15, 23, 42, 0.06);
+    }
+
+    .manual-section:first-child {
+      margin-top: 0;
+    }
+
+    .manual-section > .section-label {
+      margin: 0;
+    }
+
+    .manual-section h2 {
+      margin-top: 18px;
+      font-size: clamp(28px, 3.4vw, 42px);
+      letter-spacing: -0.03em;
+    }
+
+    .manual-section h3 {
+      margin-top: 30px;
+      padding-top: 26px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 23px;
+      letter-spacing: -0.02em;
+      scroll-margin-top: 110px;
+    }
+
+    .manual-section h3:first-of-type {
+      margin-top: 22px;
+    }
+
+    .manual-section h4 {
+      margin-top: 22px;
+      color: #0f172a;
+      font-size: 16px;
+    }
+
+    .manual-section p {
+      margin-top: 12px;
+      color: var(--muted, #64748b);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .manual-card {
+      margin-top: 22px;
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      background: #f8fafc;
+    }
+
+    .manual-card h4:first-child {
+      margin-top: 0;
+    }
+
+    .step-list,
+    .plain-list {
+      margin: 16px 0 0;
+      padding: 0;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 10px;
+      counter-reset: step;
+      list-style: none;
+    }
+
+    .step-list li {
+      position: relative;
+      min-height: 42px;
+      padding: 10px 12px 10px 52px;
+      border-radius: 14px;
+      background: #fff;
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.7;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+    }
+
+    .step-list li::before {
+      counter-increment: step;
+      content: counter(step, decimal-leading-zero);
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      color: #9a6b11;
+      background: #fff2c7;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .plain-list {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .plain-list li {
+      position: relative;
+      padding-left: 20px;
+      color: #334155;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .plain-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.75em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #f4b740;
+    }
+
+    .note,
+    .warning,
+    .ok-box {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .note {
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .warning {
+      border: 1px solid #fed7aa;
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .ok-box {
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .mini-box {
+      padding: 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    .mini-box strong {
+      display: block;
+      color: #0f172a;
+      font-size: 14px;
+    }
+
+    .mini-box span {
+      display: block;
+      margin-top: 8px;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .simple-table {
+      width: 100%;
+      margin-top: 18px;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.04);
+    }
+
+    .simple-table th,
+    .simple-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.7;
+      vertical-align: top;
+    }
+
+    .simple-table th {
+      width: 30%;
+      color: #0f172a;
+      background: #f8fafc;
+    }
+
+    .simple-table tr:last-child th,
+    .simple-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .route-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .route-card {
+      padding: 18px;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      background: #fff;
+    }
+
+    .route-card code {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .route-card strong {
+      display: block;
+      margin-top: 12px;
+      color: #0f172a;
+      font-size: 15px;
+    }
+
+    .route-card span {
+      display: block;
+      margin-top: 8px;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .back-to-top {
+      display: inline-flex;
+      margin-top: 28px;
+      color: #1d4ed8;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .readme-cta {
+      margin-top: 34px;
+      padding: 34px;
+      border: 1px solid var(--border, #e2e8f0);
+      border-radius: 28px;
+      background: #fff;
+      text-align: center;
+      box-shadow: 0 16px 42px rgba(15, 23, 42, 0.06);
+    }
+
+    .readme-cta h2 {
+      font-size: clamp(26px, 3.2vw, 38px);
+    }
+
+    .readme-cta p {
+      margin-top: 14px;
+      color: #64748b;
+      line-height: 1.9;
+    }
+
+    .hero-actions.center {
+      justify-content: center;
+    }
+
+    @media (max-width: 980px) {
+      .readme-layout,
+      .mini-grid,
+      .route-list {
+        grid-template-columns: 1fr;
+      }
+
+      html.toc-ready .toc-toggle {
+        position: static;
+        z-index: auto;
+        display: block;
+        align-items: center;
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        padding: 0;
+        border: 1px solid var(--border, #e2e8f0);
+        border-radius: 14px;
+        color: var(--text, #0f172a);
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .toc-toggle-icon {
+        display: block;
+        width: 18px;
+        margin: 0 auto;
+      }
+
+      .toc-toggle-icon span {
+        display: block;
+        width: 18px;
+        height: 2px;
+        margin: 5px auto;
+        border-radius: 999px;
+        background: currentColor;
+      }
+
+      .toc-toggle-copy {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      html.toc-ready .toc-toggle[aria-expanded="true"] {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .readme-header-actions {
+        display: none;
+      }
+
+      html.toc-ready .toc-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 55;
+        display: block;
+        border: 0;
+        padding: 0;
+        background: rgba(15, 23, 42, 0.52);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+      }
+
+      html.toc-ready .toc-backdrop.is-open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      html.toc-ready .toc-card {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        bottom: 16px;
+        z-index: 60;
+        width: min(360px, calc(100% - 32px));
+        max-height: none;
+        overflow: auto;
+        overscroll-behavior: contain;
+        transform: translateX(calc(100% + 32px));
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.28s ease, opacity 0.2s ease, visibility 0.28s ease;
+      }
+
+      html.toc-ready .toc-card.is-open {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      html.toc-ready .toc-close {
+        display: inline-grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        color: #0f172a;
+        background: #f8fafc;
+        font-size: 24px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      body.toc-open {
+        overflow: hidden;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .readme-header-inner,
+      .readme-page {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .readme-header-inner {
+        min-height: 68px;
+        align-items: center;
+        flex-direction: row;
+        gap: 12px;
+        padding: 12px 0;
+      }
+
+      .readme-page {
+        padding: 48px 0 64px;
+      }
+
+      .manual-section,
+      .readme-cta,
+      .toc-card {
+        padding: 22px;
+        border-radius: 22px;
+      }
+
+      .manual-card {
+        padding: 18px;
+      }
+
+      .step-list li {
+        padding-left: 48px;
+      }
+
+      .simple-table,
+      .simple-table tbody,
+      .simple-table tr,
+      .simple-table th,
+      .simple-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .simple-table th {
+        border-bottom: 0;
+        padding-bottom: 6px;
+      }
+
+      .simple-table td {
+        padding-top: 6px;
+      }
+    }
+    .status-grid,
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .status-grid article,
+    .score-grid article {
+      display: grid;
+      gap: 8px;
+      padding: 18px;
+      border: 1px solid #dbe4ef;
+      border-radius: 18px;
+      background: #f8fafc;
+    }
+
+    .status-grid strong,
+    .score-grid strong { color: #172033; font-size: 15px; }
+    .status-grid span,
+    .score-grid span { color: #64748b; font-size: 13px; line-height: 1.7; }
+    .score-grid article:nth-child(1) { border-color: #bfdbfe; background: #eff6ff; }
+    .score-grid article:nth-child(2) { border-color: #fde68a; background: #fffbeb; }
+    .score-grid article:nth-child(3) { border-color: #c4b5fd; background: linear-gradient(145deg, #faf5ff, #f5f3ff); }
+    .fairness-manual-card { border-color: #c4b5fd; box-shadow: 0 18px 44px rgba(109, 40, 217, 0.09); }
+
+    .manual-shot {
+      margin: 24px 0 4px;
+      padding: 12px;
+      border: 1px solid #dbe4ef;
+      border-radius: 22px;
+      background: #f8fafc;
+    }
+
+    .manual-shot img {
+      display: block;
+      width: 100%;
+      max-height: 660px;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      background: #fff;
+      object-fit: contain;
+    }
+
+    .manual-shot figcaption {
+      padding: 12px 6px 3px;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .compact-shot { width: min(520px, 100%); }
+
+    @media (max-width: 720px) {
+      .status-grid, .score-grid { grid-template-columns: 1fr; }
+      .manual-shot { margin-right: -4px; margin-left: -4px; padding: 7px; border-radius: 16px; }
+      .manual-shot img { border-radius: 11px; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="readme-header">
+    <div class="readme-header-inner">
+      <a class="brand" href="./index.html" aria-label="Chess アピールページへ戻る">
+        <img class="brand-logo" src="./assets/screenshots/blIAaSTQdn9rzX81781509686_1781509855.png" alt="Chess ロゴ" />
+        <span class="brand-main">Chess</span><span class="brand-sub">GUIDE</span>
+      </a>
+      <button class="toc-toggle" type="button" aria-label="目次を開く" aria-controls="readme-toc" aria-expanded="false">
+        <span class="toc-toggle-icon" aria-hidden="true"><span></span><span></span></span>
+        <span class="toc-toggle-copy"><span class="toc-toggle-label">目次</span><span class="toc-toggle-current">現在地を確認</span></span>
+      </button>
+      <div class="readme-header-actions">
+        <a class="nav-button secondary" href="./index.html">アピールページへ戻る</a>
+        <a class="nav-button primary" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="readme-page">
+    <section class="readme-hero" aria-labelledby="readme-title">
+      <p class="section-label">User Guide</p>
+      <h1 id="readme-title">Chess 操作マニュアル</h1>
+      <p class="readme-lead">管理者と従業員それぞれの操作を、現在の画面に沿って説明します。募集枠の作成、希望提出、相性・業務スキル・公平性を使った承認、確定シフト、勤務時間・給与、出力・カレンダー連携まで確認できます。</p>
+      <div class="hero-actions">
+        <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
+        <a class="button light" href="./index.html">アピールページへ戻る</a>
+      </div>
+      <div class="jump-links" aria-label="よく見る項目へのジャンプ">
+        <a href="#first-flow">初回利用</a><a href="#admin-shift">枠を作る</a><a href="#admin-fairness">公平性</a>
+        <a href="#employee-request">希望を出す</a><a href="#employee-calendar">確定を確認</a><a href="#faq">困ったとき</a>
+      </div>
+    </section>
+
+    <div class="readme-layout">
+      <button class="toc-backdrop" type="button" aria-label="目次を閉じる"></button>
+      <aside class="toc-card" id="readme-toc" aria-label="操作マニュアル目次">
+        <div class="toc-card-header"><h2>目次</h2><button class="toc-close" type="button" aria-label="目次を閉じる">×</button></div>
+        <p>項目を押すと、その説明へ移動できます。</p>
+        <div class="toc-group"><strong>はじめに</strong><nav class="toc-links"><a href="#first-flow">利用開始の流れ</a><a href="#screens">画面と状態</a></nav></div>
+        <div class="toc-group"><strong>管理者</strong><nav class="toc-links">
+          <a href="#admin-start">登録・組織</a><a href="#admin-people">従業員・ポジション</a><a href="#admin-shift">シフト枠</a>
+          <a href="#admin-approve">希望・承認</a><a href="#admin-fairness">おすすめ・公平性</a><a href="#admin-settings">設定</a>
+          <a href="#admin-results">勤務実績・給与</a><a href="#admin-export">出力・印刷</a>
+        </nav></div>
+        <div class="toc-group"><strong>従業員</strong><nav class="toc-links">
+          <a href="#employee-start">ログイン・ホーム</a><a href="#employee-request">希望提出</a><a href="#employee-own">自主希望・撤回</a>
+          <a href="#employee-calendar">カレンダー・履歴</a><a href="#compatibility">働きやすさ</a><a href="#employee-export">出力・連携</a>
+        </nav></div>
+        <div class="toc-group"><strong>補足</strong><nav class="toc-links"><a href="#faq">よくある困りごと</a><a href="#safety">変更・共有の注意</a></nav></div>
+      </aside>
+
+      <div class="manual-content">
+        <section class="manual-section" id="first-flow">
+          <p class="section-label">Start</p><h2>利用開始の流れ</h2>
+          <ol class="step-list">
+            <li>管理者がアカウントを作り、確認メールのリンクを開きます。</li>
+            <li>組織を作成し、シフトで使うポジションを追加します。</li>
+            <li>従業員の氏名、メールアドレス、雇用形態、業務スキルを登録します。</li>
+            <li>従業員へ6桁の組織IDと登録済みメールアドレスを共有します。</li>
+            <li>管理者が日時、ポジション、募集人数を指定してシフト枠を作ります。</li>
+            <li>従業員が希望を追加し、内容を確認して送信します。</li>
+            <li>管理者が希望者とおすすめ候補を確認し、承認します。</li>
+            <li>従業員がマイカレンダーで確定シフトを確認します。</li>
+            <li>勤務後は必要に応じて、管理者が実時間・実給与・メモを補正します。</li>
+          </ol>
+          <p class="note">従業員のログインにパスワードや確認用コードは不要です。「6桁の組織ID」と「管理者が登録したメールアドレス」を使います。</p>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="screens">
+          <p class="section-label">Map</p><h2>主な画面とステータス</h2>
+          <div class="route-list">
+            <article class="route-card"><strong>管理者ホーム</strong><span>シフト管理、従業員、勤務時間、設定、出力への入口です。</span></article>
+            <article class="route-card"><strong>シフト管理</strong><span>月間カレンダーと日別時間帯ビューで募集・希望・承認を管理します。</span></article>
+            <article class="route-card"><strong>従業員シフト表</strong><span>従業員別の予定と勤務済みシフトを確認し、実績を補正します。</span></article>
+            <article class="route-card"><strong>設定</strong><span>公平性、自動承認、自主希望、給与、実績表示などを設定します。</span></article>
+            <article class="route-card"><strong>従業員ホーム</strong><span>直近の確定シフト、マイカレンダー、勤務時間・給与を確認します。</span></article>
+            <article class="route-card"><strong>希望シフト入力</strong><span>募集枠または自主希望を追加し、まとめて送信します。</span></article>
+            <article class="route-card"><strong>勤務履歴・予定</strong><span>勤務予定、承認待ち、勤務済みを年月ごとに確認します。</span></article>
+            <article class="route-card"><strong>一緒に働きやすさ</strong><span>他の従業員との働きやすさを-5から+5で入力します。</span></article>
+          </div>
+          <div class="status-grid">
+            <article><strong>承認待ち</strong><span>送信済みで、まだ管理者が確定していない希望です。</span></article>
+            <article><strong>勤務予定</strong><span>管理者が承認した、これからの確定シフトです。</span></article>
+            <article><strong>勤務済み</strong><span>終了時刻を過ぎた承認済みシフトです。</span></article>
+          </div>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="admin">
+          <p class="section-label">Admin</p><h2>管理者の操作</h2>
+
+          <h3 id="admin-start">1. 登録・ログイン・組織作成</h3>
+          <div class="manual-card">
+            <ol class="step-list">
+              <li>利用者選択で「管理者」を選び、ログイン画面から「新規登録」へ進みます。</li>
+              <li>メールアドレスと6文字以上のパスワードを入力します。</li>
+              <li>届いた確認メールのリンクを開き、登録した情報でログインします。</li>
+              <li>「組織を追加」から組織名と、必要に応じて部署・拠点名を入力します。</li>
+              <li>管理者ホームに表示される6桁の組織IDを確認します。</li>
+            </ol>
+            <p class="note">1つの管理者アカウントで複数組織を作り、ログイン後に切り替えられます。</p>
+          </div>
+
+          <h3 id="admin-people">2. 従業員とポジションを登録</h3>
+          <div class="manual-card">
+            <h4>ポジションを追加</h4>
+            <ol class="step-list"><li>管理者ホームから「従業員登録」を開きます。</li><li>ホール・キッチン・レジなどのポジション名を追加します。</li><li>一覧に表示されたことを確認します。</li></ol>
+            <h4>従業員を登録</h4>
+            <ol class="step-list"><li>姓、名、メールアドレスを入力します。</li><li>正社員・アルバイト・契約社員から雇用形態を選びます。</li><li>業務スキルを-5から+5で設定します。</li><li>登録し、発行された従業員IDを確認します。</li><li>従業員へ組織IDと登録済みメールアドレスを伝えます。</li></ol>
+            <p class="warning">ログインに使うのは従業員IDではありません。従業員IDは、希望や履歴を紐づけるための識別情報です。</p>
+          </div>
+
+          <h3 id="admin-shift">3. シフト枠を作る</h3>
+          <div class="manual-card">
+            <ol class="step-list">
+              <li>管理者ホームから「シフト管理」を開きます。</li><li>対象月を表示し、「シフト枠を追加」を押します。</li>
+              <li>日付、開始・終了時刻、ポジション、募集人数を入力します。</li>
+              <li>毎週同じ枠を作る場合は「この曜日で月内一括作成」を選びます。</li>
+              <li>保存後、カレンダーの日付を押し、時間帯ビューと枠カードを確認します。</li>
+            </ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-shift-calendar.png" alt="管理者の月間シフトカレンダー" /><figcaption>日ごとの募集枠・希望・承認状況を月全体で確認できます。</figcaption></figure>
+            <p class="note">終了時刻が開始時刻より早い場合は翌日終了の夜勤として扱われます。月内一括作成では既存の同一枠は除外されます。</p>
+            <p class="warning">希望者がいる枠では日付・時間・ポジションを変更できません。枠を削除すると、その枠への希望も削除されます。</p>
+          </div>
+
+          <h3 id="admin-approve">4. 希望を確認・承認</h3>
+          <div class="manual-card">
+            <ol class="step-list"><li>カレンダーで希望がある日を選びます。</li><li>枠カードの「承認待ち」と「承認済み」を確認します。</li><li>個別に確定する場合は承認ボタンを押します。</li><li>承認を戻す場合は「承認取消」を使います。</li><li>希望そのものを消す場合は削除の確認内容を読んで実行します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-shift-day.png" alt="管理者の日別時間帯ビュー" /><figcaption>ポジション別の時間帯と、各枠の希望状況を確認できます。</figcaption></figure>
+            <p class="note">承認取消は希望を削除せず「承認待ち」に戻します。</p>
+            <p class="warning">募集人数に達した枠へ追加承認はできません。終了済みシフトでは承認・削除・承認取消を行えません。</p>
+          </div>
+
+          <h3 id="admin-fairness">5. おすすめ承認と公平性スコア</h3>
+          <div class="manual-card fairness-manual-card">
+            <p>おすすめ候補は、次の3つの材料を組み合わせて表示されます。</p>
+            <div class="score-grid">
+              <article><strong>一緒に働きやすさ</strong><span>従業員同士が入力した双方向の評価を平均します。</span></article>
+              <article><strong>業務スキル</strong><span>管理者が設定した-5から+5の値を使います。</span></article>
+              <article><strong>公平性</strong><span>月内の希望時間が少ない人を優先し、勤務機会の偏りを抑えます。</span></article>
+            </div>
+            <ol class="step-list"><li>設定画面で、おすすめ計算の比重と公平性を設定します。</li><li>希望者がいる管理者作成枠を開きます。</li><li>候補者名、相性、業務スキル、月内の希望時間を確認します。</li><li>問題がなければ「おすすめを一括承認」を押します。</li></ol>
+            <table class="simple-table">
+              <tr><th>相性のみ</th><td>相性100%</td></tr><tr><th>相性重視</th><td>相性70%・業務スキル30%</td></tr>
+              <tr><th>バランス</th><td>相性50%・業務スキル50%</td></tr><tr><th>スキル重視</th><td>相性30%・業務スキル70%</td></tr>
+              <tr><th>スキルのみ</th><td>業務スキル100%</td></tr>
+            </table>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-recommendation.png" alt="公平性を含むおすすめ承認候補" /><figcaption>公平性が有効な場合は月内の希望時間を優先し、同条件で相性・業務スキルを比較します。</figcaption></figure>
+            <p class="note">公平性の時間には、承認済みだけでなく承認待ちを含む月内の希望が使われます。</p>
+            <p class="warning">おすすめは判断材料です。勤務経験や当日の事情を確認し、最終判断は管理者が行ってください。</p>
+          </div>
+
+          <h3 id="admin-settings">6. 各種設定</h3>
+          <div class="manual-card">
+            <p>管理者ホームの「設定」では、次の項目を管理できます。</p>
+            <ul class="plain-list">
+              <li>相性・業務スキルの比重と公平性スコア</li><li>手動、期限到達、期間ごとの自動承認ルール</li>
+              <li>自主希望を許可するか、自動承認へ含めるか</li><li>実績補正を従業員画面に表示するか</li>
+              <li>雇用形態別時給、深夜時間帯、深夜倍率</li><li>組織の削除</li>
+            </ul>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-settings.png" alt="公平性と自動承認を含む管理者設定" /><figcaption>おすすめ、公平性、自主希望、給与などを設定画面にまとめています。</figcaption></figure>
+            <p class="warning">自動承認を設定した場合も、シフト管理画面で対象と結果を確認してください。手動で確定したシフトは変更されません。</p>
+          </div>
+
+          <h3 id="admin-results">7. 勤務時間・給与・実績補正</h3>
+          <div class="manual-card">
+            <h4>月全体を確認</h4>
+            <ol class="step-list"><li>管理者ホームから「勤務時間」を開きます。</li><li>対象月を選びます。</li><li>平均・合計の勤務時間と給与、出勤人数を確認します。</li><li>従業員別の時間、給与、シフト件数を確認します。</li></ol>
+            <h4>勤務後の実績を補正</h4>
+            <ol class="step-list"><li>「従業員シフト表」で従業員と対象月を選びます。</li><li>「勤務済み」から補正する承認済みシフトを開きます。</li><li>実開始時刻、実終了時刻、実給与、メモを入力します。</li><li>プレビューを確認して保存します。</li><li>元に戻す場合は補正を解除します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-actual-pay-edit.png" alt="実時間と実給与の補正画面" /><figcaption>予定と実績が異なる場合に、実時間・実給与・メモを記録できます。</figcaption></figure>
+            <p class="note">実績補正を従業員画面に表示するかは、設定で切り替えられます。</p>
+          </div>
+
+          <h3 id="admin-export">8. PDF・CSV・Excel・印刷</h3>
+          <div class="manual-card">
+            <ol class="step-list"><li>管理者ホーム上部の出力メニューを開きます。</li><li>形式と対象範囲を選びます。</li><li>対象月または日付を指定して出力します。</li></ol>
+            <table class="simple-table">
+              <tr><th>PDF・印刷</th><td>月単位、月単位（一日ずつ）、日単位</td></tr>
+              <tr><th>CSV</th><td>月単位、日単位</td></tr><tr><th>Excel</th><td>日単位</td></tr>
+            </table>
+            <figure class="manual-shot compact-shot"><img src="./assets/screenshots/current/admin-export-menu.png" alt="管理者ホームの出力メニュー" /><figcaption>用途に合わせて形式と範囲を選びます。</figcaption></figure>
+            <p class="note">管理者の出力対象は承認済みシフトです。</p>
+          </div>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="employee">
+          <p class="section-label">Employee</p><h2>従業員の操作</h2>
+
+          <h3 id="employee-start">1. ログイン・ホーム</h3>
+          <div class="manual-card">
+            <ol class="step-list"><li>利用者選択で「従業員」を選びます。</li><li>管理者から共有された6桁の組織IDを入力します。</li><li>管理者が登録したメールアドレスを入力します。</li><li>「従業員ページへ」を押します。</li></ol>
+            <p class="ok-box">パスワード、確認用コード、従業員IDは必要ありません。</p>
+            <p>ホームでは、直近7日間の確定シフト、承認待ち件数、今月の勤務時間・給与、マイカレンダー、各機能への入口を確認できます。</p>
+          </div>
+
+          <h3 id="employee-request">2. 募集枠へ希望を提出</h3>
+          <div class="manual-card">
+            <ol class="step-list"><li>ホームから「希望シフトを入力」を開きます。</li><li>対象月と未来の日付を選びます。</li><li>時間帯ビューで時間とポジションを確認します。</li><li>希望する枠を送信前リストへ追加します。</li><li>毎週同じ希望には「月内追加」を使います。</li><li>不要な項目を削除し、「シフト希望を送信」を押します。</li><li>確認画面から送信します。</li></ol>
+            <p class="note">「月内追加」は、同じ月の同一曜日・同一時間・同一ポジションの募集枠をまとめて追加します。希望済み・追加済みは除外されます。</p>
+            <p class="warning">過去の日付や開始済みの枠には希望を出せません。送信後の希望は直接編集できません。</p>
+          </div>
+
+          <h3 id="employee-own">3. 自主希望・希望の撤回</h3>
+          <div class="manual-card">
+            <h4>募集枠なしの時間へ希望</h4>
+            <ol class="step-list"><li>管理者が自主希望を許可していることを確認します。</li><li>日付、開始・終了時刻、ポジションを入力します。</li><li>「追加」または「月内追加」を押します。</li><li>通常の希望と一緒に確認して送信します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/employee-generated-request.png" alt="従業員が追加した自主希望" /><figcaption>自主希望は「自主追加枠」と表示され、管理者が通常の希望と一緒に確認します。</figcaption></figure>
+            <h4>承認待ちを撤回</h4>
+            <ol class="step-list"><li>ホームまたは「勤務履歴・予定」で承認待ちの希望を開きます。</li><li>「撤回」を押し、日時・ポジションを確認します。</li><li>「撤回する」を押します。</li><li>必要なら内容を変えて再提出します。</li></ol>
+            <p class="warning">自主希望には管理者の許可とポジション登録が必要です。承認済みシフトは従業員側から撤回できません。</p>
+          </div>
+
+          <h3 id="employee-calendar">4. マイカレンダー・勤務履歴</h3>
+          <div class="manual-card">
+            <h4>確定シフトを確認</h4>
+            <ol class="step-list"><li>ホームの「マイカレンダー」を確認します。</li><li>対象月へ移動します。</li><li>シフトがある日を選び、タイムラインを確認します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/employee-my-calendar.png" alt="従業員のマイカレンダー" /><figcaption>マイカレンダーには、管理者が承認した確定シフトだけが表示されます。</figcaption></figure>
+            <h4>状態別に履歴を確認</h4>
+            <ol class="step-list"><li>「勤務履歴・予定」を開きます。</li><li>年と月を選びます。</li><li>勤務予定、承認待ち、勤務済みを切り替えます。</li><li>選択月と年間の勤務時間・給与を確認します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/employee-work-history.png" alt="勤務履歴・予定画面" /><figcaption>確定前の希望も含めて、状態別に確認できます。</figcaption></figure>
+            <p class="note">マイカレンダーは承認済み限定です。承認待ちは「勤務履歴・予定」で確認してください。時間・給与の集計は終了済みかつ承認済みのシフトが対象です。</p>
+          </div>
+
+          <h3 id="compatibility">5. 一緒に働きやすさ設定</h3>
+          <div class="manual-card">
+            <ol class="step-list"><li>ホームから「一緒に働きやすさ設定」を開きます。</li><li>自分以外の従業員ごとに-5から+5で入力します。</li><li>全員分を確認し「保存する」を押します。</li></ol>
+            <table class="simple-table"><tr><th>+5</th><td>とても一緒に働きやすい</td></tr><tr><th>0</th><td>普通・未入力時の基準</td></tr><tr><th>-5</th><td>一緒に働きにくい</td></tr></table>
+            <p class="note">双方の評価を平均した値がおすすめ候補に使われます。未入力の相手は0として扱われます。</p>
+          </div>
+
+          <h3 id="employee-export">6. PNG・ICS・カレンダー購読</h3>
+          <div class="manual-card">
+            <ol class="step-list"><li>従業員ホームの出力メニューを開きます。</li><li>画像保存は「PNG」、月のカレンダーファイルは「ICS」を選びます。</li><li>外部カレンダーへ継続的に追加する場合は「ICS（カレンダー購読）」を選びます。</li><li>コピーされたURLをカレンダーアプリの購読機能へ登録します。</li></ol>
+            <table class="simple-table"><tr><th>PNG</th><td>選択月の確定シフトを画像で保存</td></tr><tr><th>ICS</th><td>選択月の確定シフトをファイルで保存</td></tr><tr><th>購読URL</th><td>アクセス時点の承認済みシフトを取得</td></tr></table>
+            <p class="warning">購読URLを知っている人はカレンダーを取得できるため、第三者へ共有しないでください。反映間隔はカレンダーアプリ側の仕様によって異なります。</p>
+          </div>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="faq">
+          <p class="section-label">FAQ</p><h2>よくある困りごと</h2>
+          <h3>従業員でログインできない</h3><ul class="plain-list"><li>組織IDが6桁の数字か確認します。</li><li>管理者が登録したメールアドレスと同じか確認します。</li><li>従業員IDや確認用コードを入力しようとしていないか確認します。</li></ul>
+          <h3>希望できる枠がない</h3><ul class="plain-list"><li>管理者が対象月に募集枠を作成しているか確認します。</li><li>過去または開始済みの枠ではないか確認します。</li><li>すでに同じ枠へ希望を出していないか確認します。</li><li>自主希望は管理者が許可しているか確認します。</li></ul>
+          <h3>希望を撤回できない</h3><p>従業員が撤回できるのは承認待ちだけです。承認済みシフトの変更は管理者へ相談してください。</p>
+          <h3>マイカレンダーに表示されない</h3><p>マイカレンダーには承認済みシフトだけが表示されます。承認待ちは「勤務履歴・予定」で確認してください。</p>
+          <h3>給与や勤務時間が表示されない</h3><p>従業員側の集計は、終了済みかつ承認済みのシフトが対象です。実績補正の表示は管理者設定によって異なります。</p>
+          <h3>購読カレンダーがすぐ更新されない</h3><p>取得間隔は、利用するカレンダーアプリ側に依存します。</p>
+          <a class="back-to-top" href="#top">ページ上部へ戻る</a>
+        </section>
+
+        <section class="manual-section" id="safety">
+          <p class="section-label">Safety</p><h2>変更・削除・共有時の注意</h2>
+          <ul class="plain-list"><li>従業員やシフト枠を削除すると、関連する希望も削除される場合があります。</li><li>組織削除は設定画面から行い、組織に紐づくデータも削除対象になります。</li><li>承認済みシフトは従業員側から撤回できません。</li><li>共有端末では、利用後にログアウトしてください。</li><li>カレンダー購読URLは第三者へ共有しないでください。</li><li>おすすめ候補や給与表示は判断・確認を支援する機能です。最終判断は管理者が行ってください。</li></ul>
+        </section>
+
+        <section class="readme-cta">
+          <h2>実際の画面で操作する</h2><p>手順を確認したら、サービス画面で管理者または従業員を選んで操作を始められます。</p>
+          <div class="hero-actions center"><a class="button light" href="./index.html">アピールページへ戻る</a><a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a></div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <script>
+    (() => {
+      const tocCard = document.querySelector(".toc-card");
+      const tocLinks = Array.from(document.querySelectorAll('.toc-links a[href^="#"]'));
+      const tocToggle = document.querySelector(".toc-toggle");
+      const tocToggleCurrent = document.querySelector(".toc-toggle-current");
+      const tocClose = document.querySelector(".toc-close");
+      const tocBackdrop = document.querySelector(".toc-backdrop");
+      const mobileToc = window.matchMedia("(max-width: 980px)");
+      const backToTopLinks = Array.from(document.querySelectorAll(".back-to-top"));
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      backToTopLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: reducedMotion.matches ? "auto" : "smooth",
+          });
+        });
+      });
+      const targets = tocLinks
+        .map((link) => {
+          const id = decodeURIComponent(link.getAttribute("href").slice(1));
+          return { link, target: document.getElementById(id) };
+        })
+        .filter((item) => item.target);
+
+      if (targets.length === 0) {
+        return;
+      }
+
+      let activeLink = null;
+      let ticking = false;
+
+      const centerActiveLink = (link) => {
+        if (!tocCard || (mobileToc.matches && !tocCard.classList.contains("is-open"))) {
+          return;
+        }
+
+        const targetTop = link.offsetTop - tocCard.clientHeight / 2 + link.offsetHeight / 2;
+        tocCard.scrollTo({ top: Math.max(0, targetTop), behavior: "smooth" });
+      };
+
+      const setActiveLink = (link) => {
+        if (activeLink === link) {
+          return;
+        }
+
+        tocLinks.forEach((item) => {
+          item.classList.toggle("is-active", item === link);
+          if (item === link) {
+            item.setAttribute("aria-current", "location");
+          } else {
+            item.removeAttribute("aria-current");
+          }
+        });
+
+        activeLink = link;
+        if (tocToggleCurrent) {
+          tocToggleCurrent.textContent = link.textContent.trim();
+        }
+        centerActiveLink(link);
+      };
+
+      const setTocOpen = (shouldOpen, returnFocus = false) => {
+        if (!tocCard || !tocToggle || !tocBackdrop || !mobileToc.matches) {
+          return;
+        }
+
+        tocCard.classList.toggle("is-open", shouldOpen);
+        tocBackdrop.classList.toggle("is-open", shouldOpen);
+        tocToggle.setAttribute("aria-expanded", String(shouldOpen));
+        tocToggle.setAttribute("aria-label", shouldOpen ? "目次を閉じる" : "目次を開く");
+        tocCard.setAttribute("aria-hidden", String(!shouldOpen));
+        tocCard.inert = !shouldOpen;
+        document.body.classList.toggle("toc-open", shouldOpen);
+
+        if (shouldOpen) {
+          window.requestAnimationFrame(() => centerActiveLink(activeLink));
+        } else if (returnFocus) {
+          tocToggle.focus();
+        }
+      };
+
+      const syncTocMode = () => {
+        if (!tocCard || !tocToggle) {
+          return;
+        }
+
+        if (mobileToc.matches) {
+          setTocOpen(false);
+        } else {
+          tocCard.classList.remove("is-open");
+          tocCard.removeAttribute("aria-hidden");
+          tocCard.inert = false;
+          tocToggle.setAttribute("aria-expanded", "false");
+          tocToggle.setAttribute("aria-label", "目次を開く");
+          tocBackdrop?.classList.remove("is-open");
+          document.body.classList.remove("toc-open");
+        }
+      };
+
+      const updateActiveLink = () => {
+        const markerY = 142;
+        let current = targets[0];
+
+        for (const item of targets) {
+          if (item.target.getBoundingClientRect().top <= markerY) {
+            current = item;
+          } else {
+            break;
+          }
+        }
+
+        setActiveLink(current.link);
+        ticking = false;
+      };
+
+      const requestUpdate = () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateActiveLink);
+          ticking = true;
+        }
+      };
+
+      tocLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          setActiveLink(link);
+          setTocOpen(false);
+        });
+      });
+
+      tocToggle?.addEventListener("click", () => {
+        setTocOpen(tocToggle.getAttribute("aria-expanded") !== "true");
+      });
+      tocClose?.addEventListener("click", () => setTocOpen(false, true));
+      tocBackdrop?.addEventListener("click", () => setTocOpen(false, true));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && tocToggle?.getAttribute("aria-expanded") === "true") {
+          setTocOpen(false, true);
+        }
+      });
+      mobileToc.addEventListener("change", syncTocMode);
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+      window.addEventListener("hashchange", requestUpdate);
+      document.documentElement.classList.add("toc-ready");
+      syncTocMode();
+      updateActiveLink();
+    })();
+  </script>
+</body>
+</html>
