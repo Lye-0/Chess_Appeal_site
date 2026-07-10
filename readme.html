@@ -727,8 +727,8 @@
     }
   </style>
 </head>
-<body>
-  <header class="readme-header" id="top">
+<body id="top">
+  <header class="readme-header">
     <div class="readme-header-inner">
       <a class="brand" href="./index.html" aria-label="Chess アピールページへ戻る">
         <img class="brand-logo" src="./assets/screenshots/blIAaSTQdn9rzX81781509686_1781509855.png" alt="Chess ロゴ" />
@@ -1001,6 +1001,19 @@
       const tocClose = document.querySelector(".toc-close");
       const tocBackdrop = document.querySelector(".toc-backdrop");
       const mobileToc = window.matchMedia("(max-width: 980px)");
+      const backToTopLinks = Array.from(document.querySelectorAll(".back-to-top"));
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      backToTopLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: reducedMotion.matches ? "auto" : "smooth",
+          });
+        });
+      });
       const targets = tocLinks
         .map((link) => {
           const id = decodeURIComponent(link.getAttribute("href").slice(1));
