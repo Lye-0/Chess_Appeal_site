@@ -1,0 +1,397 @@
+@media (max-width: 1180px) {
+  .concept-five .site-nav { gap: 13px; }
+  .concept-five .site-nav a:not(.nav-button) { display: none; }
+  .concept-five .hero-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(460px, 1.1fr);
+  }
+  .concept-five .feature-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-height: 360px) and (min-width: 981px) {
+  .concept-five.story-enhanced .story-hero,
+  .concept-five.story-enhanced .story-screens,
+  .concept-five.story-enhanced .story-flow {
+    min-height: auto;
+    overflow: hidden;
+  }
+  .concept-five.story-enhanced .story-hero .hero-grid,
+  .concept-five.story-enhanced .story-screens > .container,
+  .concept-five.story-enhanced .story-flow > .container {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+  .concept-five.story-enhanced .story-hero .hero-grid { padding-top: 0; }
+  .concept-five.story-enhanced .story-screens > .container,
+  .concept-five.story-enhanced .story-flow > .container { padding-top: 0; }
+  .concept-five.story-enhanced .screens-grid {
+    display: grid;
+    height: auto;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .concept-five.story-enhanced .screen-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .concept-five .container,
+  .concept-five .header-inner {
+    width: min(100% - 40px, 1320px);
+  }
+  .concept-five .story-map { display: none; }
+  .concept-five .site-nav a:not(.nav-button) { display: block; }
+  .concept-five .site-nav {
+    top: 76px;
+    right: 0;
+    left: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    background: rgba(8, 8, 18, 0.97);
+  }
+  .concept-five .story-hero,
+  .concept-five.story-enhanced .story-hero {
+    min-height: auto;
+    padding: 136px 0 96px;
+    overflow: hidden;
+  }
+  .concept-five.story-enhanced .story-hero .hero-grid {
+    position: relative;
+    top: auto;
+    height: auto;
+    padding-top: 0;
+  }
+  .concept-five .hero-grid,
+  .concept-five .problem-grid,
+  .concept-five .feature-grid,
+  .concept-five #accountless .feature-grid,
+  .concept-five .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  .concept-five .hero-grid { gap: 52px; }
+  .concept-five .hero-copy {
+    max-width: 740px;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .concept-five .story-stage {
+    width: min(760px, 96%);
+    min-height: 620px;
+    margin-left: auto;
+    transform: none !important;
+  }
+  .concept-five .feature-grid .photo-card,
+  .concept-five .quote-card,
+  .concept-five .benefit-card,
+  .concept-five .cta-card { transform: none !important; }
+  .concept-five.story-enhanced .story-screens,
+  .concept-five.story-enhanced .story-flow {
+    min-height: auto;
+    overflow: hidden;
+  }
+  .concept-five.story-enhanced .story-screens > .container,
+  .concept-five.story-enhanced .story-flow > .container {
+    position: relative;
+    top: auto;
+    height: auto;
+    padding-top: 0;
+  }
+  .concept-five.story-enhanced .screens-grid {
+    display: grid;
+    height: auto;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .concept-five.story-enhanced .screen-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .concept-five .flow-grid { grid-template-columns: repeat(2, 1fr); }
+  .concept-five .flow-card { opacity: 1; transform: none; }
+}
+
+@media (max-width: 640px) {
+  .concept-five .site-header {
+    top: 7px;
+    right: 7px;
+    left: 7px;
+  }
+  .concept-five .header-inner,
+  .concept-five .container {
+    width: min(100% - 28px, 1320px);
+  }
+  .concept-five .header-inner { min-height: 62px; }
+  .concept-five .brand-logo { width: 34px; height: 34px; }
+  .concept-five .brand-main { font-size: 22px; }
+  .concept-five .brand-sub { display: none; }
+  .concept-five .site-nav { top: 68px; }
+  .concept-five .section { padding: 84px 0; }
+  .concept-five h2 { font-size: clamp(36px, 11.5vw, 54px); }
+  .concept-five .story-hero,
+  .concept-five.story-enhanced .story-hero { padding: 112px 0 76px; }
+  .concept-five .story-kicker {
+    margin-bottom: 18px;
+    font-size: 8px;
+  }
+  .concept-five .hero-title {
+    font-size: clamp(42px, 13vw, 60px);
+    line-height: 1;
+  }
+  .concept-five .headline-line { white-space: normal; }
+  .concept-five .headline-line-indent { margin-left: 0; }
+  .concept-five .hero-copy .lead,
+  .concept-five .lead,
+  .concept-five .section-text {
+    font-size: 13px;
+    line-height: 1.95;
+  }
+  .concept-five .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .concept-five .hero-actions .button { width: 100%; }
+  .concept-five .story-stage {
+    width: 100%;
+    min-height: 405px;
+  }
+  .concept-five .halo-a {
+    width: 400px;
+    height: 400px;
+    margin: -200px;
+  }
+  .concept-five .halo-b {
+    width: 300px;
+    height: 300px;
+    margin: -150px;
+  }
+  .concept-five .story-frame {
+    inset: 44px 0 auto;
+    width: 100%;
+    border-radius: 20px;
+  }
+  .concept-five .story-frame img { border-radius: 13px; }
+  .concept-five .story-frame p {
+    padding: 10px 6px 3px;
+    font-size: 10px;
+  }
+  .concept-five .story-stage-status {
+    right: 0;
+    bottom: 18px;
+  }
+  .concept-five .story-stage-status span {
+    padding: 6px 7px;
+    font-size: 7px;
+  }
+  .concept-five .hero-tags,
+  .concept-five .story-scroll-cue { display: none; }
+  .concept-five .quote-card { padding: 32px 26px; }
+  .concept-five .card-grid.three,
+  .concept-five .feature-list,
+  .concept-five .screens-grid,
+  .concept-five.story-enhanced .screens-grid,
+  .concept-five .flow-grid {
+    grid-template-columns: 1fr;
+  }
+  .concept-five .small-card,
+  .concept-five .feature-card,
+  .concept-five .flow-card { min-height: auto; }
+  .concept-five .feature-card h3,
+  .concept-five .flow-card h3 { margin-top: 40px; }
+  .concept-five .benefit-card {
+    min-height: auto;
+    padding: 34px 26px;
+  }
+  .concept-five .cta-section { min-height: auto; }
+  .concept-five .cta-card {
+    padding: 36px 26px;
+    border-radius: 28px;
+  }
+  .concept-five .cta-card h2 {
+    font-size: clamp(36px, 10.5vw, 52px);
+  }
+  .concept-five .site-footer {
+    flex-direction: column;
+    padding: 30px 24px 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .concept-five .story-scroll-cue span::after { animation: none; }
+  .concept-five .story-reveal,
+  .concept-five .story-reveal.is-visible,
+  .concept-five .story-frame,
+  .concept-five .screen-card,
+  .concept-five .flow-card {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+}
+@media (max-height: 760px) and (min-width: 981px) {
+  .concept-five.story-enhanced .story-hero .hero-grid {
+    padding-top: 76px;
+  }
+
+  .concept-five .hero-title {
+    font-size: clamp(48px, 4.8vw, 72px);
+  }
+
+  .concept-five .hero-copy .lead {
+    margin-top: 24px;
+    line-height: 1.75;
+  }
+
+  .concept-five .hero-actions {
+    margin-top: 24px;
+  }
+
+  .concept-five .story-stage {
+    min-height: 490px;
+  }
+
+  .concept-five .story-frame {
+    inset: 38px 0 auto 5%;
+  }
+
+  .concept-five .story-scroll-cue {
+    display: none;
+  }
+
+  .concept-five.story-enhanced .screen-card {
+    width: min(420px, 40vw);
+  }
+
+  .concept-five.story-enhanced .screens-grid {
+    height: 46vh;
+  }
+}
+
+@media (max-width: 1200px) {
+  .concept-five .cta-card {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .concept-five .cta-actions {
+    width: min(320px, 100%);
+    flex-basis: auto;
+  }
+
+  .concept-five .cta-heading-line {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 640px) {
+  .concept-five .heading-phrase {
+    white-space: normal;
+  }
+
+  .concept-five .cta-heading-line {
+    white-space: normal;
+  }
+}
+@media (max-height: 360px) and (min-width: 981px) {
+  .concept-five h2 {
+    font-size: clamp(36px, 4.5vw, 60px);
+  }
+
+  .concept-five .section {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+}
+@media (max-width: 980px) {
+  .concept-five.story-enhanced .story-screens {
+    min-height: 520vh;
+    overflow: visible;
+  }
+
+  .concept-five.story-enhanced .story-screens > .container {
+    position: sticky;
+    top: 70px;
+    overflow: hidden;
+    height: calc(100svh - 70px);
+    padding-top: 18px;
+  }
+
+  .concept-five .story-screens h2 {
+    max-width: 100%;
+    font-size: clamp(32px, 8vw, 46px);
+  }
+
+  .concept-five .story-screens .section-text {
+    max-width: 92%;
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .concept-five.story-enhanced .screens-grid {
+    position: absolute;
+    top: var(--screens-stage-top, 180px);
+    right: 0;
+    bottom: 10px;
+    left: 0;
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 0;
+  }
+
+  .concept-five.story-enhanced .screen-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--screen-card-width, min(96vw, 900px));
+    height: auto;
+    opacity: var(--screen-opacity, 1) !important;
+    transform:
+      translate3d(calc(-50% + var(--screen-x, 0px)), calc(-50% + var(--screen-y, 0px)), var(--screen-depth, 0px))
+      rotate(var(--screen-r, 0deg))
+      scale(var(--screen-scale, 1)) !important;
+  }
+
+  .concept-five.story-enhanced .screen-card h3 {
+    right: 20px;
+    bottom: 48px;
+    left: 20px;
+    font-size: 18px;
+  }
+
+  .concept-five.story-enhanced .screen-card > p {
+    right: 20px;
+    bottom: 18px;
+    left: 20px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .concept-five.story-enhanced .screen-card .mini-photo,
+  .concept-five.story-enhanced .screen-card .mini-photo img {
+    height: auto;
+  }
+
+  .concept-five .heading-phrase {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 360px) {
+  .concept-five .heading-phrase {
+    white-space: normal;
+  }
+
+  .concept-five .story-screens h2 {
+    font-size: 30px;
+  }
+}

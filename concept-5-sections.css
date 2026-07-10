@@ -1,0 +1,607 @@
+.concept-five #problem {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+}
+.concept-five .problem-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.82fr);
+  gap: clamp(62px, 9vw, 142px);
+}
+.concept-five .problem-grid h2,
+.concept-five .feature-grid h2,
+.concept-five #features h2,
+.concept-five #screens h2,
+.concept-five #flow h2,
+.concept-five #benefits h2 { margin-top: 32px; }
+.concept-five .problem-grid .section-text,
+.concept-five .feature-grid .section-text,
+.concept-five #features .section-text,
+.concept-five #screens .section-text,
+.concept-five #flow .section-text { margin-top: 28px; }
+
+.concept-five .quote-card {
+  padding: clamp(38px, 5vw, 66px);
+  border: 0;
+  border-radius: 34px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(139, 124, 255, 0.36), transparent 13rem),
+    var(--s5-ink);
+  box-shadow: 0 36px 100px rgba(8, 8, 18, 0.18);
+  transform: translate3d(0, var(--quote-y, 0), 0) rotate(var(--quote-r, 0deg));
+}
+.concept-five .quote-mark { color: var(--s5-mint); font-size: 72px; }
+.concept-five .quote-main {
+  font-size: clamp(27px, 3vw, 43px);
+  line-height: 1.5;
+}
+.concept-five .quote-text { color: rgba(255, 255, 255, 0.58); }
+
+.concept-five #main-feature,
+.concept-five #skill-feature,
+.concept-five #features,
+.concept-five #flow {
+  color: #fff;
+  background: var(--s5-ink);
+}
+.concept-five #main-feature::before,
+.concept-five #skill-feature::before,
+.concept-five #features::before,
+.concept-five #flow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at var(--dark-glow-x, 78%) var(--dark-glow-y, 36%), rgba(139, 124, 255, 0.18), transparent 25rem),
+    radial-gradient(circle at 10% 90%, rgba(148, 243, 218, 0.08), transparent 24rem);
+}
+.concept-five #main-feature .section-label,
+.concept-five #skill-feature .section-label,
+.concept-five #features .section-label,
+.concept-five #flow .section-label { color: var(--s5-mint); }
+.concept-five #main-feature .section-text,
+.concept-five #skill-feature .section-text,
+.concept-five #features .section-text,
+.concept-five #flow .section-text { color: rgba(255, 255, 255, 0.56); }
+
+.concept-five .feature-grid {
+  position: relative;
+  z-index: 2;
+  grid-template-columns: minmax(0, 0.8fr) minmax(520px, 1.2fr);
+  gap: clamp(58px, 8vw, 120px);
+}
+.concept-five .feature-grid .photo-card {
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.075);
+  box-shadow: 0 36px 100px rgba(0, 0, 0, 0.34);
+  transform:
+    translate3d(var(--image-x, 0), var(--image-y, 0), 0)
+    rotate(var(--image-r, 0deg))
+    scale(var(--image-scale, 1));
+}
+.concept-five .photo-card::before { display: none; }
+.concept-five .photo-placeholder,
+.concept-five .mini-photo,
+.concept-five .photo-placeholder:has(img),
+.concept-five .mini-photo:has(img) {
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 19px;
+  background: #e9edf2;
+}
+.concept-five .photo-placeholder img,
+.concept-five .mini-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.concept-five .card-grid {
+  position: relative;
+  z-index: 2;
+  gap: 18px;
+  margin-top: 72px;
+}
+.concept-five .card-grid.three { grid-template-columns: repeat(3, 1fr); }
+.concept-five .small-card,
+.concept-five .feature-card,
+.concept-five .flow-card,
+.concept-five .benefit-card,
+.concept-five .ui-points article {
+  border-radius: 28px;
+  box-shadow: none;
+}
+.concept-five .small-card {
+  min-height: 252px;
+  padding: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.055);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+}
+.concept-five .small-card:hover {
+  background: rgba(148, 243, 218, 0.12);
+  transform: translateY(-15px);
+}
+.concept-five .small-card h3 { margin-top: 46px; font-size: 20px; }
+.concept-five .small-card p,
+.concept-five .feature-card p,
+.concept-five .flow-card p {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 13px;
+  line-height: 1.85;
+}
+.concept-five .number,
+.concept-five .number.blue,
+.concept-five .number.amber,
+.concept-five .number.green,
+.concept-five .number.purple,
+.concept-five .number.orange {
+  height: auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  color: var(--s5-mint);
+  background: transparent;
+  font: 11px ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.16em;
+}
+.concept-five .fairness-card {
+  border-color: rgba(139, 124, 255, 0.42);
+  background:
+    radial-gradient(circle at 88% 10%, rgba(139, 124, 255, 0.26), transparent 9rem),
+    rgba(255, 255, 255, 0.06);
+}
+
+.concept-five #accountless {
+  background:
+    radial-gradient(circle at 0% 28%, rgba(139, 124, 255, 0.16), transparent 29rem),
+    var(--s5-paper);
+}
+.concept-five #accountless .feature-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(460px, 0.9fr);
+}
+.concept-five #accountless .feature-grid .photo-card {
+  border-color: var(--s5-line);
+  background: #fff;
+  box-shadow: 0 30px 90px rgba(23, 23, 36, 0.12);
+}
+.concept-five #accountless .small-card {
+  color: var(--s5-text);
+  border: 1px solid var(--s5-line);
+  background: rgba(255, 255, 255, 0.68);
+}
+.concept-five #accountless .small-card p { color: var(--s5-muted); }
+.concept-five #skill-feature {
+  background:
+    radial-gradient(circle at 12% 84%, rgba(255, 121, 93, 0.16), transparent 27rem),
+    var(--s5-ink-soft);
+}
+
+.concept-five #features {
+  background: linear-gradient(180deg, var(--s5-ink), #131126);
+}
+.concept-five #features > .container { position: relative; z-index: 2; }
+.concept-five .feature-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 72px;
+}
+.concept-five .feature-card {
+  min-height: 260px;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.055);
+  transform: translate3d(0, var(--feature-y, 0), 0);
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.35s ease;
+}
+.concept-five .feature-card:hover {
+  border-color: rgba(148, 243, 218, 0.44);
+  background: rgba(148, 243, 218, 0.12);
+  transform: translateY(-13px);
+}
+.concept-five .feature-card h3 { margin-top: 58px; font-size: 18px; }
+.concept-five .highlight-box {
+  gap: 16px;
+  margin-top: 18px;
+  padding: 26px 32px;
+  border: 0;
+  border-radius: 24px;
+  color: var(--s5-ink);
+  background: var(--s5-mint);
+}
+.concept-five .highlight-box span { color: var(--s5-ink); }
+.concept-five .highlight-box p { margin: 0; font-size: 17px; }
+
+.concept-five #screens {
+  color: var(--s5-text);
+  background:
+    radial-gradient(circle at 78% 18%, rgba(139, 124, 255, 0.14), transparent 27rem),
+    var(--s5-paper);
+}
+.concept-five.story-enhanced .story-screens {
+  min-height: 360vh;
+  overflow: visible;
+}
+.concept-five.story-enhanced .story-screens > .container {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  height: 100vh;
+  padding-top: 108px;
+}
+.concept-five .ui-points { display: none; }
+.concept-five .screens-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 50px;
+}
+.concept-five.story-enhanced .screens-grid {
+  position: relative;
+  display: block;
+  height: 58vh;
+  margin-top: 32px;
+  perspective: 1600px;
+}
+.concept-five .screen-card {
+  padding: 10px;
+  border: 1px solid var(--s5-line);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 28px 90px rgba(23, 23, 36, 0.13);
+}
+.concept-five.story-enhanced .screen-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(620px, 52vw);
+  margin: 0;
+  opacity: var(--screen-opacity, 1);
+  z-index: var(--screen-z, 1);
+  transform:
+    translate3d(calc(-50% + var(--screen-x, 0px)), calc(-50% + var(--screen-y, 0px)), var(--screen-depth, 0px))
+    rotate(var(--screen-r, 0deg))
+    scale(var(--screen-scale, 1));
+  will-change: transform, opacity;
+}
+.concept-five .mini-photo { aspect-ratio: 16 / 10; border-radius: 20px; }
+.concept-five .screen-card h3 {
+  margin: 18px 14px 0;
+  font-size: 17px;
+  text-align: left;
+}
+.concept-five .screen-card > p {
+  margin: 8px 14px 12px;
+  color: var(--s5-muted);
+  text-align: left;
+}
+
+.concept-five .story-flow {
+  background:
+    radial-gradient(circle at 84% 20%, rgba(139, 124, 255, 0.26), transparent 27rem),
+    var(--s5-ink);
+}
+.concept-five.story-enhanced .story-flow {
+  min-height: 255vh;
+  overflow: visible;
+}
+.concept-five.story-enhanced .story-flow > .container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding-top: 116px;
+}
+.concept-five .flow-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 58px;
+}
+.concept-five .flow-card {
+  min-height: 210px;
+  padding: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.055);
+  opacity: 0.44;
+  transform: scale(0.96);
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), background 0.45s ease;
+}
+.concept-five .flow-card.is-story-active {
+  border-color: rgba(148, 243, 218, 0.56);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(139, 124, 255, 0.38), transparent 9rem),
+    rgba(148, 243, 218, 0.12);
+  opacity: 1;
+  transform: scale(1.035);
+}
+.concept-five .flow-card span {
+  color: var(--s5-mint);
+  font: 24px ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+.concept-five .flow-card h3 { margin-top: 38px; font-size: 18px; }
+
+.concept-five #benefits {
+  background:
+    radial-gradient(circle at 74% 12%, rgba(148, 243, 218, 0.18), transparent 27rem),
+    var(--s5-paper);
+}
+.concept-five .benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-top: 64px;
+}
+.concept-five .benefit-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 430px;
+  padding: clamp(38px, 5vw, 64px);
+  border: 1px solid var(--s5-line);
+  background: rgba(255, 255, 255, 0.7);
+  transform: translate3d(0, var(--benefit-y, 0), 0) rotate(var(--benefit-r, 0deg));
+}
+.concept-five .benefit-card::after {
+  content: "";
+  position: absolute;
+  right: -100px;
+  bottom: -100px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: var(--s5-mint);
+  opacity: 0.8;
+}
+.concept-five .benefit-card:nth-child(2)::after { background: var(--s5-violet); }
+.concept-five .benefit-card h3,
+.concept-five .benefit-card ul { position: relative; z-index: 1; }
+.concept-five .benefit-card h3 { font-size: 25px; }
+.concept-five .benefit-card li { color: var(--s5-muted); }
+.concept-five .benefit-card li::before,
+.concept-five .benefit-card:nth-child(2) li::before { background: #5c4ce2; }
+
+.concept-five .cta-section {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  color: #fff;
+  background:
+    radial-gradient(circle at var(--cta-glow-x, 74%) var(--cta-glow-y, 24%), rgba(148, 243, 218, 0.45), transparent 24rem),
+    radial-gradient(circle at 14% 86%, rgba(139, 124, 255, 0.42), transparent 25rem),
+    var(--s5-ink);
+}
+.concept-five .cta-card {
+  padding: clamp(46px, 7vw, 88px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 38px;
+  background: rgba(8, 8, 18, 0.54);
+  box-shadow: 0 40px 110px rgba(0, 0, 0, 0.24);
+  transform: scale(var(--cta-scale, 1));
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+}
+.concept-five .cta-card h2 {
+  color: #fff;
+  font-size: clamp(43px, 6vw, 84px);
+}
+.concept-five .cta-card h2 strong { color: var(--s5-mint); }
+.concept-five .cta-actions { min-width: 220px; }
+.concept-five .site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 36px 48px;
+  color: rgba(255, 255, 255, 0.42);
+  background: var(--s5-ink);
+  font: 10px ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.08em;
+}
+.concept-five .site-footer p { margin: 0; }
+.concept-five .story-reveal { opacity: 1; }
+.concept-five .story-reveal.is-visible {
+  animation: s5-reveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes s5-reveal {
+  from { opacity: 0; transform: translateY(48px); clip-path: inset(0 0 100% 0); }
+  to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+}
+/* Refined scrollytelling geometry for readable pinned scenes. */
+.concept-five.story-enhanced .story-screens {
+  min-height: 390vh;
+}
+
+.concept-five.story-enhanced .story-screens > .container {
+  top: 76px;
+  height: calc(100vh - 76px);
+  padding-top: 30px;
+}
+
+.concept-five .story-screens h2 {
+  max-width: 900px;
+  font-size: clamp(38px, 5vw, 70px);
+}
+
+.concept-five .story-screens .section-text {
+  margin-top: 18px;
+}
+
+.concept-five.story-enhanced .screens-grid {
+  height: 48vh;
+  margin-top: 22px;
+}
+
+.concept-five.story-enhanced .story-flow {
+  min-height: 370vh;
+}
+
+.concept-five.story-enhanced .story-flow > .container {
+  top: 76px;
+  height: calc(100vh - 76px);
+  padding-top: 28px;
+  overflow: hidden;
+}
+
+.concept-five .story-flow h2 {
+  font-size: clamp(38px, 4.5vw, 68px);
+}
+
+.concept-five .story-flow .section-text {
+  margin-top: 14px;
+}
+
+.concept-five .story-flow .flow-grid {
+  margin-top: 22px;
+}
+
+.concept-five .story-flow .flow-card {
+  min-height: 150px;
+  padding: 20px;
+}
+
+.concept-five .story-flow .flow-card h3 {
+  margin-top: 20px;
+}
+
+.concept-five .story-flow .flow-card p {
+  margin-top: 10px;
+  line-height: 1.65;
+}
+
+.concept-five .cta-card {
+  align-items: center;
+  gap: clamp(34px, 5vw, 76px);
+  overflow: hidden;
+}
+
+.concept-five .cta-card > div:first-child {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.concept-five .cta-card h2 {
+  max-width: none;
+  font-size: clamp(36px, 4vw, 64px);
+  line-height: 1.13;
+  letter-spacing: -0.065em;
+}
+
+.concept-five .cta-heading-line {
+  white-space: nowrap;
+}
+
+.concept-five .cta-actions {
+  flex: 0 0 240px;
+  min-width: 0;
+}
+/* Full-viewport screen chapter. Copy yields to the product UI while scrolling. */
+.concept-five.story-enhanced .story-screens {
+  min-height: 520vh;
+}
+
+.concept-five .story-screens .section-label,
+.concept-five .story-screens h2,
+.concept-five .story-screens .section-text {
+  opacity: var(--screens-copy-opacity, 1);
+  transform: translate3d(0, var(--screens-copy-y, 0), 0);
+  transition: opacity 0.18s linear;
+}
+
+.concept-five.story-enhanced .story-screens > .container {
+  padding-top: 28px;
+}
+
+.concept-five.story-enhanced .screens-grid {
+  position: absolute;
+  top: var(--screens-stage-top, 210px);
+  right: 0;
+  bottom: 18px;
+  left: 0;
+  height: auto;
+  margin: 0;
+}
+
+.concept-five.story-enhanced .screen-card {
+  width: var(--screen-card-width, min(1200px, 88vw));
+  height: auto;
+  overflow: hidden;
+  padding: 8px;
+  background: #eef0f4;
+  transition:
+    transform 0.58s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.34s ease;
+}
+
+.concept-five.story-enhanced .screen-card::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  left: 8px;
+  z-index: 1;
+  height: 38%;
+  border-radius: 0 0 20px 20px;
+  background: linear-gradient(transparent, rgba(8, 8, 18, 0.82));
+  pointer-events: none;
+}
+
+.concept-five.story-enhanced .screen-card .mini-photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+.concept-five.story-enhanced .screen-card .mini-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.concept-five.story-enhanced .screen-card h3,
+.concept-five.story-enhanced .screen-card > p {
+  position: absolute;
+  right: 30px;
+  left: 30px;
+  z-index: 2;
+  margin-right: 0;
+  margin-left: 0;
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
+}
+
+.concept-five.story-enhanced .screen-card h3 {
+  bottom: 58px;
+  margin-top: 0;
+  font-size: clamp(18px, 2vw, 26px);
+}
+
+.concept-five.story-enhanced .screen-card > p {
+  bottom: 24px;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.concept-five.story-enhanced .screen-card::after,
+.concept-five.story-enhanced .screen-card h3,
+.concept-five.story-enhanced .screen-card > p {
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.concept-five.story-enhanced .screen-card.is-screen-active::after,
+.concept-five.story-enhanced .screen-card.is-screen-active h3,
+.concept-five.story-enhanced .screen-card.is-screen-active > p {
+  opacity: 1;
+}

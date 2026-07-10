@@ -1,0 +1,510 @@
+@import "./concept-5-sections.css";
+@import "./concept-5-responsive.css";
+
+:root {
+  --s5-ink: #080812;
+  --s5-ink-soft: #111124;
+  --s5-paper: #f3f1eb;
+  --s5-mint: #94f3da;
+  --s5-violet: #8b7cff;
+  --s5-coral: #ff795d;
+  --s5-text: #171724;
+  --s5-muted: #6e6c78;
+  --s5-line: rgba(23, 23, 36, 0.14);
+}
+
+.concept-five {
+  margin: 0;
+  color: var(--s5-text);
+  background: var(--s5-paper);
+  font-family: "Helvetica Neue", "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  font-feature-settings: "palt" 1;
+}
+
+.concept-five::selection {
+  color: var(--s5-ink);
+  background: var(--s5-mint);
+}
+
+.concept-five .site-header {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  left: 22px;
+  z-index: 60;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  color: #fff;
+  background: rgba(8, 8, 18, 0.62);
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+  transition: top 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.concept-five .site-header.is-scrolled {
+  top: 8px;
+  background: rgba(8, 8, 18, 0.9);
+  box-shadow: 0 18px 70px rgba(8, 8, 18, 0.24);
+}
+
+.concept-five .site-header::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: -1px;
+  left: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--s5-mint), var(--s5-violet), var(--s5-coral));
+  transform: scaleX(var(--s5-page-progress, 0));
+  transform-origin: left;
+}
+
+.concept-five .header-inner {
+  width: min(1400px, calc(100% - 38px));
+  min-height: 68px;
+  padding: 8px 0;
+}
+
+.concept-five .brand { gap: 10px; }
+.concept-five .brand-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  filter: saturate(0) brightness(2.4);
+}
+.concept-five .brand-main {
+  font-size: 26px;
+  font-weight: 860;
+  letter-spacing: -0.065em;
+}
+.concept-five .brand-sub {
+  color: var(--s5-mint);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 9px;
+  letter-spacing: 0.17em;
+}
+
+.concept-five .site-nav {
+  gap: 21px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px;
+  font-weight: 750;
+}
+.concept-five .site-nav a:not(.nav-button) {
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.concept-five .site-nav a:not(.nav-button):hover,
+.concept-five .site-nav a:not(.nav-button).is-current {
+  color: var(--s5-mint);
+  transform: translateY(-2px);
+}
+
+.concept-five .nav-button,
+.concept-five .button {
+  min-height: 48px;
+  padding: 0 24px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.concept-five .nav-button.primary,
+.concept-five .button.dark,
+.concept-five .button.gold {
+  color: var(--s5-ink);
+  border-color: var(--s5-mint);
+  background: var(--s5-mint);
+}
+.concept-five .nav-button.secondary,
+.concept-five .button.light,
+.concept-five .button.white {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+.concept-five .nav-button:hover,
+.concept-five .button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 44px rgba(148, 243, 218, 0.19);
+}
+.concept-five .menu-button {
+  border-color: rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+}
+.concept-five .menu-button span { background: #fff; }
+
+.concept-five .story-map {
+  position: fixed;
+  top: 50%;
+  right: 24px;
+  z-index: 55;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  mix-blend-mode: difference;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.concept-five .story-map-line {
+  position: relative;
+  width: 1px;
+  height: 108px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25);
+}
+.concept-five .story-map-line i {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform: scaleY(var(--s5-page-progress, 0));
+  transform-origin: top;
+}
+.concept-five .story-map ol {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.concept-five .story-map li {
+  font: 8px ui-monospace, "SFMono-Regular", Consolas, monospace;
+  opacity: 0.4;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.concept-five .story-map li.is-current {
+  opacity: 1;
+  transform: scale(1.35);
+}
+.concept-five .story-map p {
+  margin: 0;
+  font: 7px ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.17em;
+  writing-mode: vertical-rl;
+}
+
+.concept-five .container { width: min(1320px, calc(100% - 70px)); }
+.concept-five .section {
+  position: relative;
+  overflow: clip;
+  padding: 132px 0;
+  border: 0;
+  background: var(--s5-paper);
+}
+.concept-five .section-label,
+.concept-five .story-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  color: #5c4ce2;
+  background: transparent;
+  font: 800 10px ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+.concept-five .section-label::before,
+.concept-five .story-kicker::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+.concept-five h1,
+.concept-five h2,
+.concept-five h3,
+.concept-five p { margin-top: 0; }
+.concept-five h1,
+.concept-five h2,
+.concept-five h3 {
+  line-break: strict;
+  overflow-wrap: normal;
+  text-wrap: pretty;
+  word-break: auto-phrase;
+}
+.concept-five .heading-phrase {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+}
+.concept-five h2 {
+  max-width: 1000px;
+  margin-bottom: 0;
+  font-size: clamp(43px, 6.5vw, 90px);
+  line-height: 1;
+  letter-spacing: -0.08em;
+}
+.concept-five .lead,
+.concept-five .section-text {
+  max-width: 700px;
+  color: var(--s5-muted);
+  font-size: 15px;
+  line-height: 2.05;
+}
+
+.concept-five .story-hero {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding: 126px 0 86px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 82% 24%, rgba(139, 124, 255, 0.34), transparent 29rem),
+    radial-gradient(circle at 48% 80%, rgba(148, 243, 218, 0.13), transparent 28rem),
+    linear-gradient(145deg, #070711, #12122b 64%, #102633);
+}
+.concept-five.story-enhanced .story-hero {
+  min-height: 255vh;
+  display: block;
+  padding: 0;
+  overflow: visible;
+}
+.concept-five.story-enhanced .story-hero .hero-grid {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  align-content: center;
+  padding-top: 94px;
+}
+.concept-five .story-hero::before,
+.concept-five .story-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.concept-five .story-hero::before {
+  top: -18vw;
+  right: -10vw;
+  width: 55vw;
+  height: 55vw;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transform: translate3d(0, var(--hero-orbit-y, 0), 0) rotate(var(--hero-orbit-r, 0deg));
+}
+.concept-five .story-hero::after {
+  bottom: -23vw;
+  left: -15vw;
+  width: 48vw;
+  height: 48vw;
+  background: rgba(148, 243, 218, 0.07);
+  transform: translate3d(var(--hero-orbit-x, 0), 0, 0);
+}
+
+.concept-five .hero-grid {
+  position: relative;
+  z-index: 2;
+  grid-template-columns: minmax(0, 0.88fr) minmax(540px, 1.12fr);
+  gap: clamp(52px, 7vw, 112px);
+}
+.concept-five .hero-copy {
+  position: relative;
+  z-index: 7;
+  opacity: var(--hero-copy-opacity, 1);
+  transform: translate3d(0, var(--hero-copy-y, 0), 0) scale(var(--hero-copy-scale, 1));
+  transform-origin: left center;
+}
+.concept-five .story-kicker {
+  margin-bottom: 24px;
+  color: var(--s5-mint);
+}
+.concept-five .hero-copy .section-label { display: none; }
+.concept-five .hero-title {
+  margin: 0;
+  font-size: clamp(52px, 6.4vw, 96px);
+  line-height: 0.99;
+  letter-spacing: -0.085em;
+}
+.concept-five .headline-line {
+  display: block;
+  white-space: nowrap;
+}
+.concept-five .headline-line-indent { margin-left: 0.48em; }
+.concept-five .hero-title-accent { color: var(--s5-mint); }
+.concept-five .hero-copy .lead {
+  max-width: 590px;
+  margin-top: 34px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
+}
+.concept-five .hero-actions { margin-top: 38px; }
+
+.concept-five .story-stage {
+  position: relative;
+  min-height: 650px;
+  perspective: 1500px;
+  transform: translate3d(0, var(--hero-stage-y, 0), 0) scale(var(--hero-stage-scale, 1));
+}
+.concept-five .story-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.concept-five .halo-a {
+  width: 610px;
+  height: 610px;
+  margin: -305px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transform: rotate(var(--halo-a-r, 0deg));
+}
+.concept-five .halo-b {
+  width: 470px;
+  height: 470px;
+  margin: -235px;
+  border: 1px dashed rgba(148, 243, 218, 0.26);
+  transform: rotate(var(--halo-b-r, 0deg));
+}
+.concept-five .halo-a::after,
+.concept-five .halo-b::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--s5-mint);
+  box-shadow: 0 0 32px rgba(148, 243, 218, 0.8);
+}
+.concept-five .halo-b::after {
+  top: 18%;
+  right: auto;
+  left: -6px;
+  width: 11px;
+  height: 11px;
+  background: var(--s5-coral);
+}
+
+.concept-five .story-frame {
+  position: absolute;
+  inset: 70px 0 auto 5%;
+  z-index: 1;
+  width: 94%;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 44px 100px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(30%, 12%, -130px) rotateY(-12deg) scale(0.78);
+  transition: opacity 0.65s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+.concept-five .story-frame.is-active {
+  z-index: 4;
+  opacity: 1;
+  pointer-events: auto;
+  transform:
+    translate3d(var(--frame-x, 0), var(--frame-y, 0), 0)
+    rotateX(var(--frame-rx, 0deg))
+    rotateY(var(--frame-ry, -4deg))
+    scale(1);
+}
+.concept-five .story-frame.was-active {
+  z-index: 2;
+  opacity: 0;
+  transform: translate3d(-28%, -9%, -110px) rotateY(10deg) scale(0.84);
+}
+.concept-five .story-frame img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  object-fit: contain;
+  background: #edf0f3;
+}
+.concept-five .story-frame p {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin: 0;
+  padding: 13px 10px 5px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 11px;
+  font-weight: 750;
+}
+.concept-five .story-frame p span {
+  color: var(--s5-mint);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+.concept-five .story-stage-status {
+  position: absolute;
+  right: 2%;
+  bottom: 24px;
+  z-index: 7;
+  display: flex;
+  gap: 7px;
+}
+.concept-five .story-stage-status span {
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.36);
+  background: rgba(8, 8, 18, 0.45);
+  font: 8px ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+.concept-five .story-stage-status span.is-active {
+  color: var(--s5-ink);
+  background: var(--s5-mint);
+}
+.concept-five .hero-tags {
+  position: absolute;
+  bottom: 22px;
+  left: 5%;
+  z-index: 7;
+  gap: 7px;
+  margin: 0;
+}
+.concept-five .hero-tags span,
+.concept-five .hero-tags span:nth-child(n) {
+  padding: 8px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(8, 8, 18, 0.44);
+  font-size: 9px;
+}
+.concept-five .story-scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  z-index: 8;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+.concept-five .story-scroll-cue span {
+  position: relative;
+  width: 1px;
+  height: 46px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.2);
+}
+.concept-five .story-scroll-cue span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--s5-mint);
+  animation: s5-scroll-cue 1.8s ease-in-out infinite;
+}
+.concept-five .story-scroll-cue p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.54);
+  font: 8px ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.16em;
+}
+@keyframes s5-scroll-cue {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
