@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Chessは、人間関係まで考慮できるシフト管理サービスです。管理者のシフト作成を楽にし、従業員はアカウント作成不要で希望シフトを提出できます。" />
-  <title>Chess | 人間関係、そして業務スキルまで考えるシフト管理サービス</title>
+  <meta name="description" content="Chessは、相性・業務スキル・公平性を考慮して、管理者のシフト作成を支援するWebサービスです。従業員はアカウント作成不要で希望シフトを提出できます。" />
+  <title>Chess | 相性・業務スキル・公平性を考えるシフト管理サービス</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 
@@ -29,7 +29,7 @@
         <a href="#screens">画面イメージ</a>
         <a href="#flow">使い方</a>
         <a class="nav-button primary" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
-        <a class="nav-button secondary" href="./readme.html">READMEを見る</a>
+        <a class="nav-button secondary" href="./readme.html">詳しい使い方</a>
       </nav>
     </div>
   </header>
@@ -42,17 +42,17 @@
           <h1 class="hero-title">
             <span class="headline-line">シフト作成を、</span>
             <span class="headline-line headline-line-indent">もっとかんたんに。</span>
-            <span class="headline-line hero-title-accent">人間関係、そして</span>
-            <span class="headline-line hero-title-accent headline-line-indent">業務スキルまで考える。</span>
+            <span class="headline-line hero-title-accent">相性、業務スキル、</span>
+            <span class="headline-line hero-title-accent headline-line-indent">公平性まで考える。</span>
           </h1>
           <p class="lead">
             Chessは、管理者がシフトを作成・管理できるWebサービスです。
             従業員は組織IDとメールアドレスでログインし、希望を提出できます。
-            人間関係、業務スキルの情報も考慮して、働きやすいシフト作成をサポートします。
+            相性、業務スキル、月内の希望時間も考慮して、働きやすく偏りの少ないシフト作成をサポートします。
           </p>
           <div class="hero-actions">
             <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
-            <a class="button light" href="./readme.html">READMEを見る</a>
+            <a class="button light" href="./readme.html">詳しい使い方</a>
           </div>
         </div>
 
@@ -65,8 +65,8 @@
           <div class="hero-tags">
             <span>管理者</span>
             <span>従業員</span>
-            <span>人間関係を考慮</span>
-            <span>業務スキルを考慮</span>
+            <span>相性・スキル</span>
+            <span>公平性を考慮</span>
           </div>
         </div>
       </div>
@@ -107,16 +107,16 @@
       <div class="container feature-grid">
         <div>
           <p class="section-label">Main Feature</p>
-          <h2>人間関係を考慮したシフト作成</h2>
+          <h2>働きやすさと公平性を考えたシフト作成</h2>
           <p class="section-text">
-            従業員が「一緒に入りづらい相手」などの情報を登録すると、システムが情報を整理。
-            管理者は、働きやすさと人間関係の両方を考えながら、
-            バランスの取れたシフト作成ができます。
+            従業員が入力した「一緒に働きやすさ」、管理者が設定した業務スキル、
+            さらに月内の希望時間をもとに、おすすめの承認候補を表示します。
+            管理者は、チームの相性と勤務機会の偏りを見ながら最終判断できます。
           </p>
         </div>
         <div class="photo-card">
           <div class="photo-placeholder">
-            <img src="./assets/screenshots/relationship-input.png" alt="人間関係入力画面のスクリーンショット" />
+            <img src="./assets/screenshots/current/admin-settings.png" alt="公平性スコアを設定する管理者設定画面" />
           </div>
         </div>
       </div>
@@ -124,18 +124,18 @@
       <div class="container card-grid three">
         <article class="small-card">
           <span class="number amber">01</span>
-          <h3>従業員が入力</h3>
-          <p>一緒に入りづらい相手を選択し、理由も任意で入力できます。</p>
+          <h3>一緒に働きやすさ</h3>
+          <p>従業員同士が-5から+5で入力した相性を、組み合わせの判断材料にします。</p>
         </article>
         <article class="small-card">
           <span class="number amber">02</span>
-          <h3>情報を整理</h3>
-          <p>システムが希望日と人間関係の情報をまとめて整理します。</p>
+          <h3>業務スキル</h3>
+          <p>管理者が登録した業務スキルを使い、現場での任せやすさも考慮します。</p>
         </article>
-        <article class="small-card">
+        <article class="small-card fairness-card">
           <span class="number amber">03</span>
-          <h3>管理者が確認</h3>
-          <p>配慮が必要な組み合わせを見ながらシフトを調整できます。</p>
+          <h3>公平性スコア</h3>
+          <p>月内の希望時間が少ない人を優先し、勤務機会の偏りを抑える判断を支援します。</p>
         </article>
       </div>
     </section>
@@ -147,7 +147,7 @@
           <h2>従業員はアカウント作成不要で使える</h2>
           <p class="section-text">
             従業員は自分でパスワードを作ったり、新規登録したりする必要がありません。
-            管理者が登録したメールアドレスと組織IDを入力して、確認用コードを受け取るだけで
+            管理者が登録したメールアドレスと6桁の組織IDを入力するだけで、
             すぐに希望の提出が可能です。
           </p>
         </div>
@@ -166,8 +166,8 @@
         </article>
         <article class="small-card">
           <span class="number green">02</span>
-          <h3>従業員が本人確認</h3>
-          <p>組織IDとメールアドレスを入力し、確認用コードで本人確認します。</p>
+          <h3>従業員がログイン</h3>
+          <p>6桁の組織IDと、管理者が登録したメールアドレスを入力します。</p>
         </article>
         <article class="small-card">
           <span class="number amber">03</span>
@@ -181,10 +181,10 @@
       <div class="container feature-grid">
         <div>
           <p class="section-label">Skill</p>
-          <h2>優秀な人材を選びやすく</h2>
+          <h2>業務スキルも判断材料に</h2>
           <p class="section-text">
             管理者が従業員ごとの業務スキルを数値で評価し、その結果をシフト作成に反映する機能。
-            相性だけに偏らず、能力や信頼度も考慮して、より安定したシフトを組めるのが特徴です。
+            相性だけに偏らず、業務上の任せやすさも確認しながら、より安定したシフトを組めるのが特徴です。
           </p>
         </div>
         <div class="photo-card">
@@ -216,13 +216,13 @@
           </article>
           <article class="feature-card">
             <span class="number amber">3</span>
-            <h3>シフト枠の追加・編集・削除</h3>
-            <p>日付、開始時間、終了時間、募集人数を登録・変更できます。</p>
+            <h3>ポジション別のシフト枠</h3>
+            <p>日付、時間、ポジション、募集人数を設定し、同じ曜日の枠を月内でまとめて作成できます。</p>
           </article>
           <article class="feature-card">
             <span class="number green">4</span>
-            <h3>希望シフトの承認管理</h3>
-            <p>従業員の希望を一覧で確認し、承認・未承認を管理できます。</p>
+            <h3>公平性を含むおすすめ承認</h3>
+            <p>相性、業務スキル、月内の希望時間を見ながら、おすすめ候補を確認できます。</p>
           </article>
           <article class="feature-card">
             <span class="number blue">5</span>
@@ -231,24 +231,24 @@
           </article>
           <article class="feature-card">
             <span class="number orange">6</span>
-            <h3>勤務時間管理</h3>
-            <p>承認済みシフトをもとに、勤務時間を確認できます。</p>
+            <h3>勤務時間・給与管理</h3>
+            <p>承認済みシフトを集計し、勤務後は実時間・実給与・メモも補正できます。</p>
           </article>
           <article class="feature-card">
             <span class="number green">7</span>
             <h3>従業員ホーム</h3>
-            <p>直近のシフト、勤務時間、シフト希望一覧を確認できます。</p>
+            <p>確定シフトのマイカレンダー、勤務履歴、勤務時間と給与を確認できます。</p>
           </article>
           <article class="feature-card">
             <span class="number amber">8</span>
             <h3>希望シフト入力</h3>
-            <p>カレンダーから希望日を選び、募集枠に希望を提出できます。</p>
+            <p>募集枠への希望に加え、管理者が許可した場合は募集枠のない時間にも希望を提出できます。</p>
           </article>
         </div>
 
         <div class="highlight-box">
           <span>★</span>
-          <p>人間関係を考慮したシフト作成は、Chessの主要な特長です。</p>
+          <p>相性・業務スキル・公平性を一緒に見られることが、Chessの主要な特長です。</p>
         </div>
       </div>
     </section>
@@ -276,9 +276,10 @@
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/shift-management.png" alt="シフト管理画面のスクリーンショット" />
+              <img src="./assets/screenshots/current/admin-recommendation.png" alt="おすすめ承認と公平性スコア画面のスクリーンショット" />
             </div>
-            <h3>シフト管理画面</h3>
+            <h3>おすすめ承認 / 公平性</h3>
+            <p>相性・スキル・希望時間を並べて確認できます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
@@ -324,7 +325,7 @@
           <article class="flow-card">
             <span>03</span>
             <h3>管理者が枠を作成</h3>
-            <p>日付・時間・募集人数を設定します。</p>
+            <p>日付・時間・ポジション・募集人数を設定します。</p>
           </article>
           <article class="flow-card">
             <span>04</span>
@@ -334,7 +335,12 @@
           <article class="flow-card">
             <span>05</span>
             <h3>管理者が承認</h3>
-            <p>希望を確認し、確定シフトを作成します。</p>
+            <p>希望とおすすめ候補を確認し、確定シフトを作成します。</p>
+          </article>
+          <article class="flow-card">
+            <span>06</span>
+            <h3>従業員が確認</h3>
+            <p>承認済みシフトをマイカレンダーで確認します。</p>
           </article>
         </div>
       </div>
@@ -350,7 +356,7 @@
             <h3>管理者側のメリット</h3>
             <ul>
               <li>シフト作成の手間を大幅に削減できる</li>
-              <li>人間関係も考慮した、働きやすいシフトを作れる</li>
+              <li>相性・業務スキル・公平性を見ながら判断できる</li>
               <li>希望の可視化で、調整ややり直しを減らせる</li>
               <li>勤務時間の記録・集計を効率的に管理できる</li>
             </ul>
@@ -361,7 +367,7 @@
               <li>自分の希望を簡単に提出できる</li>
               <li>人間関係の配慮があるので、安心して働ける</li>
               <li>アカウント作成不要で、すぐに利用開始できる</li>
-              <li>自分のシフトや勤務状況をいつでも確認できる</li>
+              <li>確定シフトをカレンダーや外部アプリで確認できる</li>
             </ul>
           </article>
         </div>
@@ -373,13 +379,13 @@
         <div class="cta-card">
           <div>
             <h2>
-              <span>人間関係</span>まで考える。従業員は登録不要。<br />
+              <span>相性・スキル・公平性</span>まで考える。従業員は登録不要。<br />
               管理者はシフト作成をもっと楽に。
             </h2>
           </div>
           <div class="cta-actions">
             <a class="button gold" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
-            <a class="button white" href="./readme.html">READMEを見る</a>
+            <a class="button white" href="./readme.html">詳しい使い方</a>
           </div>
         </div>
       </div>

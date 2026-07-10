@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Chessの各機能ごとの詳しい操作手順をまとめたREADMEページです。管理者・従業員それぞれの使い方を手順中心で確認できます。" />
-  <title>Chess README | 操作マニュアル</title>
+  <meta name="description" content="Chessの現在の操作方法を、管理者・従業員それぞれの流れに沿って説明する使い方ガイドです。" />
+  <title>Chess 操作マニュアル | 現在の使い方</title>
   <link rel="stylesheet" href="./style.css" />
   <style>
     html {
@@ -665,6 +665,66 @@
         padding-top: 6px;
       }
     }
+    .status-grid,
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .status-grid article,
+    .score-grid article {
+      display: grid;
+      gap: 8px;
+      padding: 18px;
+      border: 1px solid #dbe4ef;
+      border-radius: 18px;
+      background: #f8fafc;
+    }
+
+    .status-grid strong,
+    .score-grid strong { color: #172033; font-size: 15px; }
+    .status-grid span,
+    .score-grid span { color: #64748b; font-size: 13px; line-height: 1.7; }
+    .score-grid article:nth-child(1) { border-color: #bfdbfe; background: #eff6ff; }
+    .score-grid article:nth-child(2) { border-color: #fde68a; background: #fffbeb; }
+    .score-grid article:nth-child(3) { border-color: #c4b5fd; background: linear-gradient(145deg, #faf5ff, #f5f3ff); }
+    .fairness-manual-card { border-color: #c4b5fd; box-shadow: 0 18px 44px rgba(109, 40, 217, 0.09); }
+
+    .manual-shot {
+      margin: 24px 0 4px;
+      padding: 12px;
+      border: 1px solid #dbe4ef;
+      border-radius: 22px;
+      background: #f8fafc;
+    }
+
+    .manual-shot img {
+      display: block;
+      width: 100%;
+      max-height: 660px;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      background: #fff;
+      object-fit: contain;
+    }
+
+    .manual-shot figcaption {
+      padding: 12px 6px 3px;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .compact-shot { width: min(520px, 100%); }
+
+    @media (max-width: 720px) {
+      .status-grid, .score-grid { grid-template-columns: 1fr; }
+      .manual-shot { margin-right: -4px; margin-left: -4px; padding: 7px; border-radius: 16px; }
+      .manual-shot img { border-radius: 11px; }
+    }
   </style>
 </head>
 <body>
@@ -672,18 +732,11 @@
     <div class="readme-header-inner">
       <a class="brand" href="./index.html" aria-label="Chess アピールページへ戻る">
         <img class="brand-logo" src="./assets/screenshots/blIAaSTQdn9rzX81781509686_1781509855.png" alt="Chess ロゴ" />
-        <span class="brand-main">Chess</span>
-        <span class="brand-sub">README</span>
+        <span class="brand-main">Chess</span><span class="brand-sub">GUIDE</span>
       </a>
       <button class="toc-toggle" type="button" aria-label="目次を開く" aria-controls="readme-toc" aria-expanded="false">
-        <span class="toc-toggle-icon" aria-hidden="true">
-          <span></span>
-          <span></span>
-        </span>
-        <span class="toc-toggle-copy">
-          <span class="toc-toggle-label">目次</span>
-          <span class="toc-toggle-current">現在地を確認</span>
-        </span>
+        <span class="toc-toggle-icon" aria-hidden="true"><span></span><span></span></span>
+        <span class="toc-toggle-copy"><span class="toc-toggle-label">目次</span><span class="toc-toggle-current">現在地を確認</span></span>
       </button>
       <div class="readme-header-actions">
         <a class="nav-button secondary" href="./index.html">アピールページへ戻る</a>
@@ -694,625 +747,247 @@
 
   <main class="readme-page">
     <section class="readme-hero" aria-labelledby="readme-title">
-      <p class="section-label">README</p>
+      <p class="section-label">User Guide</p>
       <h1 id="readme-title">Chess 操作マニュアル</h1>
-      <p class="readme-lead">
-        このページは、デプロイ済みのChessを実際に操作するためのREADMEです。
-        管理者が行う操作、従業員が行う操作、各画面でできることを手順中心でまとめています。
-        見たい項目へすぐ移動できるように、目次とジャンプリンクを用意しています。
-      </p>
+      <p class="readme-lead">管理者と従業員それぞれの操作を、現在の画面に沿って説明します。募集枠の作成、希望提出、相性・業務スキル・公平性を使った承認、確定シフト、勤務時間・給与、出力・カレンダー連携まで確認できます。</p>
       <div class="hero-actions">
         <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
         <a class="button light" href="./index.html">アピールページへ戻る</a>
       </div>
       <div class="jump-links" aria-label="よく見る項目へのジャンプ">
-        <a href="#first-flow">初回利用の流れ</a>
-        <a href="#admin">管理者の操作</a>
-        <a href="#employee">従業員の操作</a>
-        <a href="#admin-shift-create">シフト枠作成</a>
-        <a href="#employee-submit">希望シフト送信</a>
-        <a href="#compatibility">働きやすさ設定</a>
-        <a href="#faq">困ったとき</a>
+        <a href="#first-flow">初回利用</a><a href="#admin-shift">枠を作る</a><a href="#admin-fairness">公平性</a>
+        <a href="#employee-request">希望を出す</a><a href="#employee-calendar">確定を確認</a><a href="#faq">困ったとき</a>
       </div>
     </section>
 
     <div class="readme-layout">
       <button class="toc-backdrop" type="button" aria-label="目次を閉じる"></button>
-
-      <aside class="toc-card" id="readme-toc" aria-label="README目次">
-        <div class="toc-card-header">
-          <h2>目次</h2>
-          <button class="toc-close" type="button" aria-label="目次を閉じる">×</button>
-        </div>
+      <aside class="toc-card" id="readme-toc" aria-label="操作マニュアル目次">
+        <div class="toc-card-header"><h2>目次</h2><button class="toc-close" type="button" aria-label="目次を閉じる">×</button></div>
         <p>項目を押すと、その説明へ移動できます。</p>
-
-        <div class="toc-group">
-          <strong>はじめに</strong>
-          <nav class="toc-links">
-            <a href="#first-flow">利用開始の流れ</a>
-            <a href="#screens">画面一覧</a>
-          </nav>
-        </div>
-
-        <div class="toc-group">
-          <strong>管理者</strong>
-          <nav class="toc-links">
-            <a href="#admin-signup">新規登録</a>
-            <a href="#admin-login">ログイン</a>
-            <a href="#admin-org-create">組織追加・選択</a>
-            <a href="#admin-employee-create">従業員登録</a>
-            <a href="#admin-employee-edit">従業員編集・削除</a>
-            <a href="#admin-shift-create">シフト枠追加</a>
-            <a href="#admin-shift-edit">シフト枠編集・削除</a>
-            <a href="#admin-approve">希望確認・承認</a>
-            <a href="#admin-recommend">おすすめ承認</a>
-            <a href="#admin-list">従業員シフト表</a>
-            <a href="#admin-timesheet">勤務時間・給与設定</a>
-            <a href="#admin-org-delete">組織削除</a>
-          </nav>
-        </div>
-
-        <div class="toc-group">
-          <strong>従業員</strong>
-          <nav class="toc-links">
-            <a href="#employee-login">ログイン</a>
-            <a href="#employee-home">ホーム確認</a>
-            <a href="#employee-date">日付・枠選択</a>
-            <a href="#employee-submit">希望シフト送信</a>
-            <a href="#employee-status">承認待ち・承認済み</a>
-            <a href="#employee-hours">勤務時間・給与確認</a>
-            <a href="#compatibility">働きやすさ設定</a>
-            <a href="#employee-logout">ログアウト</a>
-          </nav>
-        </div>
-
-        <div class="toc-group">
-          <strong>補足</strong>
-          <nav class="toc-links">
-            <a href="#faq">よくある困りごと</a>
-          </nav>
-        </div>
+        <div class="toc-group"><strong>はじめに</strong><nav class="toc-links"><a href="#first-flow">利用開始の流れ</a><a href="#screens">画面と状態</a></nav></div>
+        <div class="toc-group"><strong>管理者</strong><nav class="toc-links">
+          <a href="#admin-start">登録・組織</a><a href="#admin-people">従業員・ポジション</a><a href="#admin-shift">シフト枠</a>
+          <a href="#admin-approve">希望・承認</a><a href="#admin-fairness">おすすめ・公平性</a><a href="#admin-settings">設定</a>
+          <a href="#admin-results">勤務実績・給与</a><a href="#admin-export">出力・印刷</a>
+        </nav></div>
+        <div class="toc-group"><strong>従業員</strong><nav class="toc-links">
+          <a href="#employee-start">ログイン・ホーム</a><a href="#employee-request">希望提出</a><a href="#employee-own">自主希望・撤回</a>
+          <a href="#employee-calendar">カレンダー・履歴</a><a href="#compatibility">働きやすさ</a><a href="#employee-export">出力・連携</a>
+        </nav></div>
+        <div class="toc-group"><strong>補足</strong><nav class="toc-links"><a href="#faq">よくある困りごと</a><a href="#safety">変更・共有の注意</a></nav></div>
       </aside>
 
       <div class="manual-content">
         <section class="manual-section" id="first-flow">
-          <p class="section-label">Start</p>
-          <h2>利用開始の流れ</h2>
-          <p>初めて使う場合は、管理者が先に組織、従業員、シフト枠を準備します。その後、従業員が希望シフトを提出し、管理者が承認します。</p>
+          <p class="section-label">Start</p><h2>利用開始の流れ</h2>
           <ol class="step-list">
-            <li>管理者がアカウントを新規登録します。</li>
-            <li>管理者がメール確認を完了します。</li>
-            <li>管理者がログインします。</li>
-            <li>管理者が組織を作成します。</li>
-            <li>管理者が従業員を登録します。</li>
-            <li>管理者がシフト枠を作成します。</li>
-            <li>従業員が組織IDとメールアドレスでログインします。</li>
-            <li>従業員が希望シフトを追加して送信します。</li>
-            <li>管理者が提出された希望シフトを確認します。</li>
-            <li>管理者が希望シフトを承認します。</li>
-            <li>従業員が承認済みシフトを確認します。</li>
+            <li>管理者がアカウントを作り、確認メールのリンクを開きます。</li>
+            <li>組織を作成し、シフトで使うポジションを追加します。</li>
+            <li>従業員の氏名、メールアドレス、雇用形態、業務スキルを登録します。</li>
+            <li>従業員へ6桁の組織IDと登録済みメールアドレスを共有します。</li>
+            <li>管理者が日時、ポジション、募集人数を指定してシフト枠を作ります。</li>
+            <li>従業員が希望を追加し、内容を確認して送信します。</li>
+            <li>管理者が希望者とおすすめ候補を確認し、承認します。</li>
+            <li>従業員がマイカレンダーで確定シフトを確認します。</li>
+            <li>勤務後は必要に応じて、管理者が実時間・実給与・メモを補正します。</li>
           </ol>
-          <p class="note">従業員に共有する必要がある情報は、管理者ホームに表示される6桁の組織IDと、従業員登録で登録したメールアドレスです。</p>
+          <p class="note">従業員のログインにパスワードや確認用コードは不要です。「6桁の組織ID」と「管理者が登録したメールアドレス」を使います。</p>
           <a class="back-to-top" href="#top">ページ上部へ戻る</a>
         </section>
 
         <section class="manual-section" id="screens">
-          <p class="section-label">Screens</p>
-          <h2>画面一覧</h2>
-          <p>Chessでは、管理者用と従業員用で画面が分かれています。</p>
+          <p class="section-label">Map</p><h2>主な画面とステータス</h2>
           <div class="route-list">
-            <article class="route-card"><strong>利用者選択</strong><span>管理者として使うか、従業員として使うかを選びます。</span></article>
-            <article class="route-card"><strong>従業員確認</strong><span>組織IDとメールアドレスを入力します。</span></article>
-            <article class="route-card"><strong>従業員ホーム</strong><span>直近のシフト、勤務時間、給与目安、希望一覧を確認します。</span></article>
-            <article class="route-card"><strong>希望シフト入力</strong><span>日付とシフト枠を選び、希望シフトを送信します。</span></article>
-            <article class="route-card"><strong>一緒に働きやすさ設定</strong><span>他の従業員との働きやすさを-5から+5で入力します。</span></article>
-            <article class="route-card"><strong>管理者ログイン</strong><span>メールアドレスとパスワードでログインします。</span></article>
-            <article class="route-card"><strong>管理者新規登録</strong><span>管理者アカウントを作成します。</span></article>
-            <article class="route-card"><strong>組織選択</strong><span>管理する組織を選択します。</span></article>
-            <article class="route-card"><strong>組織追加</strong><span>新しい組織を作成します。</span></article>
-            <article class="route-card"><strong>管理者ホーム</strong><span>管理者向けメニューと概要を表示します。</span></article>
-            <article class="route-card"><strong>シフト管理</strong><span>シフト枠の追加、編集、削除、承認を行います。</span></article>
-            <article class="route-card"><strong>従業員登録</strong><span>従業員の登録、編集、削除を行います。</span></article>
-            <article class="route-card"><strong>従業員シフト表</strong><span>従業員ごとのシフト希望を確認します。</span></article>
-            <article class="route-card"><strong>勤務時間</strong><span>勤務時間、給与目安、給与設定を確認します。</span></article>
+            <article class="route-card"><strong>管理者ホーム</strong><span>シフト管理、従業員、勤務時間、設定、出力への入口です。</span></article>
+            <article class="route-card"><strong>シフト管理</strong><span>月間カレンダーと日別時間帯ビューで募集・希望・承認を管理します。</span></article>
+            <article class="route-card"><strong>従業員シフト表</strong><span>従業員別の予定と勤務済みシフトを確認し、実績を補正します。</span></article>
+            <article class="route-card"><strong>設定</strong><span>公平性、自動承認、自主希望、給与、実績表示などを設定します。</span></article>
+            <article class="route-card"><strong>従業員ホーム</strong><span>直近の確定シフト、マイカレンダー、勤務時間・給与を確認します。</span></article>
+            <article class="route-card"><strong>希望シフト入力</strong><span>募集枠または自主希望を追加し、まとめて送信します。</span></article>
+            <article class="route-card"><strong>勤務履歴・予定</strong><span>勤務予定、承認待ち、勤務済みを年月ごとに確認します。</span></article>
+            <article class="route-card"><strong>一緒に働きやすさ</strong><span>他の従業員との働きやすさを-5から+5で入力します。</span></article>
+          </div>
+          <div class="status-grid">
+            <article><strong>承認待ち</strong><span>送信済みで、まだ管理者が確定していない希望です。</span></article>
+            <article><strong>勤務予定</strong><span>管理者が承認した、これからの確定シフトです。</span></article>
+            <article><strong>勤務済み</strong><span>終了時刻を過ぎた承認済みシフトです。</span></article>
           </div>
           <a class="back-to-top" href="#top">ページ上部へ戻る</a>
         </section>
 
         <section class="manual-section" id="admin">
-          <p class="section-label">Admin</p>
-          <h2>管理者の操作手順</h2>
-          <p>管理者は、組織、従業員、シフト枠、希望シフト、勤務時間、給与設定を管理します。</p>
+          <p class="section-label">Admin</p><h2>管理者の操作</h2>
 
-          <h3 id="admin-signup">1. 新規登録</h3>
+          <h3 id="admin-start">1. 登録・ログイン・組織作成</h3>
           <div class="manual-card">
-            <h4>操作手順</h4>
             <ol class="step-list">
-              <li>サービスのURLを開きます。</li>
-              <li>利用者選択画面で「管理者」を選択します。</li>
-              <li>管理者ログイン画面で「新規登録」を押します。</li>
-              <li>メールアドレスを入力します。</li>
-              <li>パスワードを入力します。</li>
-              <li>「登録」を押します。</li>
-              <li>入力したメールアドレスに届く確認メールを開きます。</li>
-              <li>メール内の確認リンクを開きます。</li>
-              <li>メール確認を完了します。</li>
-              <li>管理者ログイン画面に戻ります。</li>
+              <li>利用者選択で「管理者」を選び、ログイン画面から「新規登録」へ進みます。</li>
+              <li>メールアドレスと6文字以上のパスワードを入力します。</li>
+              <li>届いた確認メールのリンクを開き、登録した情報でログインします。</li>
+              <li>「組織を追加」から組織名と、必要に応じて部署・拠点名を入力します。</li>
+              <li>管理者ホームに表示される6桁の組織IDを確認します。</li>
             </ol>
-            <p class="warning">メール確認が完了していない場合、管理者としてログインできません。パスワードは6文字以上で入力してください。</p>
+            <p class="note">1つの管理者アカウントで複数組織を作り、ログイン後に切り替えられます。</p>
           </div>
 
-          <h3 id="admin-login">2. ログイン</h3>
+          <h3 id="admin-people">2. 従業員とポジションを登録</h3>
           <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>サービスのURLを開きます。</li>
-              <li>利用者選択画面で「管理者」を選択します。</li>
-              <li>メールアドレスを入力します。</li>
-              <li>パスワードを入力します。</li>
-              <li>「次へ」を押します。</li>
-              <li>組織選択画面へ移動します。</li>
-            </ol>
-            <h4>ログインできない場合</h4>
-            <ul class="plain-list">
-              <li>メールアドレスが間違っていないか確認します。</li>
-              <li>パスワードが間違っていないか確認します。</li>
-              <li>メール確認が完了しているか確認します。</li>
-              <li>新規登録したアカウントでログインしているか確認します。</li>
-            </ul>
+            <h4>ポジションを追加</h4>
+            <ol class="step-list"><li>管理者ホームから「従業員登録」を開きます。</li><li>ホール・キッチン・レジなどのポジション名を追加します。</li><li>一覧に表示されたことを確認します。</li></ol>
+            <h4>従業員を登録</h4>
+            <ol class="step-list"><li>姓、名、メールアドレスを入力します。</li><li>正社員・アルバイト・契約社員から雇用形態を選びます。</li><li>業務スキルを-5から+5で設定します。</li><li>登録し、発行された従業員IDを確認します。</li><li>従業員へ組織IDと登録済みメールアドレスを伝えます。</li></ol>
+            <p class="warning">ログインに使うのは従業員IDではありません。従業員IDは、希望や履歴を紐づけるための識別情報です。</p>
           </div>
 
-          <h3 id="admin-org-create">3. 組織を追加・選択</h3>
+          <h3 id="admin-shift">3. シフト枠を作る</h3>
           <div class="manual-card">
-            <h4>組織を追加する手順</h4>
             <ol class="step-list">
-              <li>管理者としてログインします。</li>
-              <li>組織選択画面で「組織を追加」を押します。</li>
-              <li>組織名を入力します。</li>
-              <li>必要に応じて部署・拠点名を入力します。</li>
-              <li>「登録」を押します。</li>
-              <li>組織が作成され、管理者ホームへ移動します。</li>
+              <li>管理者ホームから「シフト管理」を開きます。</li><li>対象月を表示し、「シフト枠を追加」を押します。</li>
+              <li>日付、開始・終了時刻、ポジション、募集人数を入力します。</li>
+              <li>毎週同じ枠を作る場合は「この曜日で月内一括作成」を選びます。</li>
+              <li>保存後、カレンダーの日付を押し、時間帯ビューと枠カードを確認します。</li>
             </ol>
-            <h4>組織を選択する手順</h4>
-            <ol class="step-list">
-              <li>管理者としてログインします。</li>
-              <li>組織選択画面を確認します。</li>
-              <li>管理したい組織を選択します。</li>
-              <li>「次へ」を押します。</li>
-              <li>選択した組織の管理者ホームへ移動します。</li>
-            </ol>
-            <p class="note">組織を作成すると、従業員ログインに使う6桁の組織IDが自動発行されます。従業員には「組織ID」と「登録済みメールアドレス」を共有してください。</p>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-shift-calendar.png" alt="管理者の月間シフトカレンダー" /><figcaption>日ごとの募集枠・希望・承認状況を月全体で確認できます。</figcaption></figure>
+            <p class="note">終了時刻が開始時刻より早い場合は翌日終了の夜勤として扱われます。月内一括作成では既存の同一枠は除外されます。</p>
+            <p class="warning">希望者がいる枠では日付・時間・ポジションを変更できません。枠を削除すると、その枠への希望も削除されます。</p>
           </div>
 
-          <h3 id="admin-employee-create">4. 従業員登録</h3>
+          <h3 id="admin-approve">4. 希望を確認・承認</h3>
           <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>管理者ホームを開きます。</li>
-              <li>「従業員登録」を押します。</li>
-              <li>姓を入力します。</li>
-              <li>名を入力します。</li>
-              <li>メールアドレスを入力します。</li>
-              <li>雇用形態を選択します。</li>
-              <li>業務スキルを設定します。</li>
-              <li>「登録」を押します。</li>
-              <li>登録完了メッセージを確認します。</li>
-              <li>発行された従業員IDを確認します。</li>
-            </ol>
-            <table class="simple-table">
-              <tr><th>姓</th><td>従業員の名字を入力します。</td></tr>
-              <tr><th>名</th><td>従業員の名前を入力します。</td></tr>
-              <tr><th>メールアドレス</th><td>従業員ログインに使用するメールアドレスです。</td></tr>
-              <tr><th>雇用形態</th><td>正社員、アルバイト、契約社員などから選択します。</td></tr>
-              <tr><th>業務スキル</th><td>管理者目線で、業務を任せやすい度合いを-5から+5で設定します。おすすめ承認の組み合わせ計算に使われます。</td></tr>
-            </table>
-            <p class="note">業務スキルは後から編集できます。未設定の従業員は0点として扱われます。</p>
-            <p class="warning">同じメールアドレスを重複して登録することはできません。従業員はここで登録されたメールアドレスを使ってログインします。</p>
+            <ol class="step-list"><li>カレンダーで希望がある日を選びます。</li><li>枠カードの「承認待ち」と「承認済み」を確認します。</li><li>個別に確定する場合は承認ボタンを押します。</li><li>承認を戻す場合は「承認取消」を使います。</li><li>希望そのものを消す場合は削除の確認内容を読んで実行します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-shift-day.png" alt="管理者の日別時間帯ビュー" /><figcaption>ポジション別の時間帯と、各枠の希望状況を確認できます。</figcaption></figure>
+            <p class="note">承認取消は希望を削除せず「承認待ち」に戻します。</p>
+            <p class="warning">募集人数に達した枠へ追加承認はできません。終了済みシフトでは承認・削除・承認取消を行えません。</p>
           </div>
 
-          <h3 id="admin-employee-edit">5. 従業員編集・削除</h3>
-          <div class="manual-card">
-            <h4>編集手順</h4>
-            <ol class="step-list">
-              <li>管理者ホームを開きます。</li>
-              <li>「従業員登録」を押します。</li>
-              <li>登録済み従業員一覧を確認します。</li>
-              <li>編集したい従業員の編集ボタンを押します。</li>
-              <li>姓、名、メールアドレス、雇用形態、業務スキルを変更します。</li>
-              <li>保存します。</li>
-              <li>更新完了メッセージを確認します。</li>
-            </ol>
-            <p class="note">従業員情報を更新すると、その従業員に紐づく希望シフトの従業員名、メールアドレス、雇用形態も更新されます。</p>
-            <h4>削除手順</h4>
-            <ol class="step-list">
-              <li>登録済み従業員一覧を確認します。</li>
-              <li>削除したい従業員のゴミ箱ボタンを押します。</li>
-              <li>確認画面を読みます。</li>
-              <li>削除を実行します。</li>
-              <li>削除完了メッセージを確認します。</li>
-            </ol>
-            <p class="warning">従業員を削除すると、その従業員に紐づく希望シフトも削除されます。削除後は元に戻せないため、実行前に確認してください。</p>
-          </div>
-
-          <h3 id="admin-shift-create">6. シフト枠追加</h3>
-          <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>管理者ホームを開きます。</li>
-              <li>「シフト管理」を押します。</li>
-              <li>「シフト枠を追加」を押します。</li>
-              <li>日付を入力します。</li>
-              <li>開始時刻を入力します。</li>
-              <li>終了時刻を入力します。</li>
-              <li>募集人数を入力します。</li>
-              <li>保存します。</li>
-              <li>シフト管理画面に追加されたことを確認します。</li>
-            </ol>
-            <table class="simple-table">
-              <tr><th>日付</th><td>募集するシフトの日付です。</td></tr>
-              <tr><th>開始時刻</th><td>勤務開始時刻です。</td></tr>
-              <tr><th>終了時刻</th><td>勤務終了時刻です。</td></tr>
-              <tr><th>募集人数</th><td>そのシフトで承認できる人数です。</td></tr>
-            </table>
-            <p class="warning">開始時刻と終了時刻を同じ時刻にすることはできません。終了時刻が開始時刻より早い場合は、翌日の終了時刻として扱われます。</p>
-          </div>
-
-          <h3 id="admin-shift-edit">7. シフト枠編集・削除</h3>
-          <div class="manual-card">
-            <h4>編集手順</h4>
-            <ol class="step-list">
-              <li>管理者ホームを開きます。</li>
-              <li>「シフト管理」を押します。</li>
-              <li>編集したいシフト枠を探します。</li>
-              <li>鉛筆ボタンを押します。</li>
-              <li>内容を変更します。</li>
-              <li>保存します。</li>
-            </ol>
-            <div class="mini-grid">
-              <div class="mini-box"><strong>希望者がいない場合</strong><span>日付、開始時刻、終了時刻、募集人数を編集できます。</span></div>
-              <div class="mini-box"><strong>希望者がいる場合</strong><span>募集人数のみ変更できます。日付、開始時刻、終了時刻は変更できません。</span></div>
+          <h3 id="admin-fairness">5. おすすめ承認と公平性スコア</h3>
+          <div class="manual-card fairness-manual-card">
+            <p>おすすめ候補は、次の3つの材料を組み合わせて表示されます。</p>
+            <div class="score-grid">
+              <article><strong>一緒に働きやすさ</strong><span>従業員同士が入力した双方向の評価を平均します。</span></article>
+              <article><strong>業務スキル</strong><span>管理者が設定した-5から+5の値を使います。</span></article>
+              <article><strong>公平性</strong><span>月内の希望時間が少ない人を優先し、勤務機会の偏りを抑えます。</span></article>
             </div>
-            <h4>削除手順</h4>
-            <ol class="step-list">
-              <li>削除したいシフト枠を探します。</li>
-              <li>ゴミ箱ボタンを押します。</li>
-              <li>確認画面を読みます。</li>
-              <li>削除を実行します。</li>
-            </ol>
-            <p class="warning">シフト枠を削除すると、そのシフト枠に紐づく希望シフトも削除されます。</p>
-          </div>
-
-          <h3 id="admin-approve">8. 希望確認・承認</h3>
-          <div class="manual-card">
-            <h4>希望シフトを確認する手順</h4>
-            <ol class="step-list">
-              <li>管理者ホームを開きます。</li>
-              <li>「シフト管理」を押します。</li>
-              <li>日付ごとのシフト枠を確認します。</li>
-              <li>各シフト枠の希望者を確認します。</li>
-              <li>「承認待ち」に表示されている従業員を確認します。</li>
-            </ol>
-            <h4>承認する手順</h4>
-            <ol class="step-list">
-              <li>承認したいシフト枠を探します。</li>
-              <li>「承認待ち」の従業員を確認します。</li>
-              <li>承認したい従業員の「承認」を押します。</li>
-              <li>対象の従業員が「承認済み」に移動したことを確認します。</li>
-            </ol>
-            <p class="warning">承認済みの人数が募集人数に達している場合、それ以上は承認できません。</p>
-            <h4>承認を取り消す手順</h4>
-            <ol class="step-list">
-              <li>承認を取り消したいシフト枠を探します。</li>
-              <li>「承認済み」の従業員を確認します。</li>
-              <li>対象従業員のゴミ箱ボタンを押します。</li>
-              <li>確認画面を読みます。</li>
-              <li>実行します。</li>
-              <li>対象の希望が「承認待ち」に戻ったことを確認します。</li>
-            </ol>
-            <p class="note">承認済みの希望に対してゴミ箱ボタンを押した場合、希望シフト自体を削除するのではなく、承認を取り消します。</p>
-          </div>
-
-          <h3 id="admin-recommend">9. おすすめ承認</h3>
-          <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>従業員が「一緒に働きやすさ設定」を保存します。</li>
-              <li>管理者が従業員登録画面で業務スキルを設定します。</li>
-              <li>管理者が「シフト管理」を開きます。</li>
-              <li>おすすめ計算の比重を選択します。</li>
-              <li>希望者が複数いるシフト枠を確認します。</li>
-              <li>最終スコア、相性平均、業務スキル平均を確認します。</li>
-              <li>「おすすめ承認組み合わせ」を確認します。</li>
-              <li>問題なければ「おすすめを一括承認」を押します。</li>
-            </ol>
+            <ol class="step-list"><li>設定画面で、おすすめ計算の比重と公平性を設定します。</li><li>希望者がいる管理者作成枠を開きます。</li><li>候補者名、相性、業務スキル、月内の希望時間を確認します。</li><li>問題がなければ「おすすめを一括承認」を押します。</li></ol>
             <table class="simple-table">
-              <tr><th>相性重視</th><td>相性平均70%・業務スキル平均30%で計算します。</td></tr>
-              <tr><th>バランス</th><td>相性平均50%・業務スキル平均50%で計算します。</td></tr>
-              <tr><th>業務スキル重視</th><td>相性平均30%・業務スキル平均70%で計算します。</td></tr>
+              <tr><th>相性のみ</th><td>相性100%</td></tr><tr><th>相性重視</th><td>相性70%・業務スキル30%</td></tr>
+              <tr><th>バランス</th><td>相性50%・業務スキル50%</td></tr><tr><th>スキル重視</th><td>相性30%・業務スキル70%</td></tr>
+              <tr><th>スキルのみ</th><td>業務スキル100%</td></tr>
             </table>
-            <p class="note">おすすめ承認組み合わせは、従業員同士の相性平均と、管理者が設定した業務スキル平均を比重付きで計算して表示します。どちらも平均で計算するため、希望人数が少ない場合でも多い場合でもスコアが偏りにくくなります。</p>
-            <p class="warning">おすすめは判断材料です。最終的に承認するかどうかは、勤務経験や当日の状況を踏まえて管理者が判断してください。</p>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-recommendation.png" alt="公平性を含むおすすめ承認候補" /><figcaption>公平性が有効な場合は月内の希望時間を優先し、同条件で相性・業務スキルを比較します。</figcaption></figure>
+            <p class="note">公平性の時間には、承認済みだけでなく承認待ちを含む月内の希望が使われます。</p>
+            <p class="warning">おすすめは判断材料です。勤務経験や当日の事情を確認し、最終判断は管理者が行ってください。</p>
           </div>
 
-          <h3 id="admin-list">10. 従業員シフト表</h3>
+          <h3 id="admin-settings">6. 各種設定</h3>
           <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>管理者ホームを開きます。</li>
-              <li>「従業員シフト表」を押します。</li>
-              <li>従業員一覧を確認します。</li>
-              <li>確認したい従業員を選択します。</li>
-              <li>その従業員のシフト希望を確認します。</li>
-            </ol>
-            <p>検索欄では、従業員名、メールアドレス、従業員IDで絞り込めます。</p>
+            <p>管理者ホームの「設定」では、次の項目を管理できます。</p>
+            <ul class="plain-list">
+              <li>相性・業務スキルの比重と公平性スコア</li><li>手動、期限到達、期間ごとの自動承認ルール</li>
+              <li>自主希望を許可するか、自動承認へ含めるか</li><li>実績補正を従業員画面に表示するか</li>
+              <li>雇用形態別時給、深夜時間帯、深夜倍率</li><li>組織の削除</li>
+            </ul>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-settings.png" alt="公平性と自動承認を含む管理者設定" /><figcaption>おすすめ、公平性、自主希望、給与などを設定画面にまとめています。</figcaption></figure>
+            <p class="warning">自動承認を設定した場合も、シフト管理画面で対象と結果を確認してください。手動で確定したシフトは変更されません。</p>
           </div>
 
-          <h3 id="admin-timesheet">11. 勤務時間・給与設定</h3>
+          <h3 id="admin-results">7. 勤務時間・給与・実績補正</h3>
           <div class="manual-card">
-            <h4>勤務時間を確認する手順</h4>
-            <ol class="step-list">
-              <li>管理者ホームを開きます。</li>
-              <li>「勤務時間」を押します。</li>
-              <li>対象月を選択します。</li>
-              <li>総勤務時間を確認します。</li>
-              <li>従業員ごとの勤務時間を確認します。</li>
-              <li>月ごとの給与目安を確認します。</li>
-              <li>年間給与目安を確認します。</li>
-            </ol>
-            <p class="note">勤務時間と給与は、承認済みかつ終了済みのシフトをもとに計算されます。承認待ちのシフトや、まだ終了していないシフトは集計されません。</p>
-            <h4>給与設定を変更する手順</h4>
-            <ol class="step-list">
-              <li>勤務時間画面を開きます。</li>
-              <li>給与設定エリアを確認します。</li>
-              <li>雇用形態ごとの時給を入力します。</li>
-              <li>深夜開始時刻を入力します。</li>
-              <li>深夜終了時刻を入力します。</li>
-              <li>深夜倍率を入力します。</li>
-              <li>保存します。</li>
-            </ol>
+            <h4>月全体を確認</h4>
+            <ol class="step-list"><li>管理者ホームから「勤務時間」を開きます。</li><li>対象月を選びます。</li><li>平均・合計の勤務時間と給与、出勤人数を確認します。</li><li>従業員別の時間、給与、シフト件数を確認します。</li></ol>
+            <h4>勤務後の実績を補正</h4>
+            <ol class="step-list"><li>「従業員シフト表」で従業員と対象月を選びます。</li><li>「勤務済み」から補正する承認済みシフトを開きます。</li><li>実開始時刻、実終了時刻、実給与、メモを入力します。</li><li>プレビューを確認して保存します。</li><li>元に戻す場合は補正を解除します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/admin-actual-pay-edit.png" alt="実時間と実給与の補正画面" /><figcaption>予定と実績が異なる場合に、実時間・実給与・メモを記録できます。</figcaption></figure>
+            <p class="note">実績補正を従業員画面に表示するかは、設定で切り替えられます。</p>
+          </div>
+
+          <h3 id="admin-export">8. PDF・CSV・Excel・印刷</h3>
+          <div class="manual-card">
+            <ol class="step-list"><li>管理者ホーム上部の出力メニューを開きます。</li><li>形式と対象範囲を選びます。</li><li>対象月または日付を指定して出力します。</li></ol>
             <table class="simple-table">
-              <tr><th>時給</th><td>雇用形態ごとの1時間あたりの給与です。</td></tr>
-              <tr><th>深夜開始時刻</th><td>深夜手当を開始する時刻です。</td></tr>
-              <tr><th>深夜終了時刻</th><td>深夜手当を終了する時刻です。</td></tr>
-              <tr><th>深夜倍率</th><td>深夜時間にかける倍率です。</td></tr>
+              <tr><th>PDF・印刷</th><td>月単位、月単位（一日ずつ）、日単位</td></tr>
+              <tr><th>CSV</th><td>月単位、日単位</td></tr><tr><th>Excel</th><td>日単位</td></tr>
             </table>
-          </div>
-
-          <h3 id="admin-org-delete">12. 組織削除</h3>
-          <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>管理者ホームを開きます。</li>
-              <li>組織削除ボタンを押します。</li>
-              <li>確認画面を読みます。</li>
-              <li>削除を実行します。</li>
-            </ol>
-            <p>組織を削除すると、従業員、シフト枠、希望シフト、働きやすさ設定、給与設定が削除されます。</p>
-            <p class="warning">削除後は元に戻せません。本当に削除してよい組織か確認してから実行してください。</p>
+            <figure class="manual-shot compact-shot"><img src="./assets/screenshots/current/admin-export-menu.png" alt="管理者ホームの出力メニュー" /><figcaption>用途に合わせて形式と範囲を選びます。</figcaption></figure>
+            <p class="note">管理者の出力対象は承認済みシフトです。</p>
           </div>
           <a class="back-to-top" href="#top">ページ上部へ戻る</a>
         </section>
 
         <section class="manual-section" id="employee">
-          <p class="section-label">Employee</p>
-          <h2>従業員の操作手順</h2>
-          <p>従業員は、管理者が登録した組織IDとメールアドレスを使ってログインし、希望シフトの提出やシフト確認を行います。</p>
+          <p class="section-label">Employee</p><h2>従業員の操作</h2>
 
-          <h3 id="employee-login">1. ログイン</h3>
+          <h3 id="employee-start">1. ログイン・ホーム</h3>
           <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>サービスのURLを開きます。</li>
-              <li>利用者選択画面で「従業員」を選択します。</li>
-              <li>組織IDを入力します。</li>
-              <li>メールアドレスを入力します。</li>
-              <li>「次へ」を押します。</li>
-              <li>確認用コード画面へ移動します。</li>
-              <li>確認用コードを入力します。</li>
-              <li>「次へ」を押します。</li>
-              <li>従業員ホームへ移動します。</li>
-            </ol>
-            <table class="simple-table">
-              <tr><th>組織ID</th><td>管理者ホームに表示される6桁の数字です。</td></tr>
-              <tr><th>メールアドレス</th><td>管理者が従業員登録で登録したメールアドレスです。</td></tr>
-            </table>
+            <ol class="step-list"><li>利用者選択で「従業員」を選びます。</li><li>管理者から共有された6桁の組織IDを入力します。</li><li>管理者が登録したメールアドレスを入力します。</li><li>「従業員ページへ」を押します。</li></ol>
+            <p class="ok-box">パスワード、確認用コード、従業員IDは必要ありません。</p>
+            <p>ホームでは、直近7日間の確定シフト、承認待ち件数、今月の勤務時間・給与、マイカレンダー、各機能への入口を確認できます。</p>
           </div>
 
-          <h3 id="employee-home">2. ホーム確認</h3>
+          <h3 id="employee-request">2. 募集枠へ希望を提出</h3>
           <div class="manual-card">
-            <p>従業員ホームでは、自分に関するシフト情報を確認できます。</p>
-            <ul class="plain-list">
-              <li>自分の名前</li>
-              <li>所属組織</li>
-              <li>雇用形態</li>
-              <li>直近の確定シフト</li>
-              <li>今月の勤務時間</li>
-              <li>年間の勤務時間</li>
-              <li>今月の給与目安</li>
-              <li>年間の給与目安</li>
-              <li>承認待ちの希望シフト</li>
-              <li>承認済みのシフト</li>
-            </ul>
+            <ol class="step-list"><li>ホームから「希望シフトを入力」を開きます。</li><li>対象月と未来の日付を選びます。</li><li>時間帯ビューで時間とポジションを確認します。</li><li>希望する枠を送信前リストへ追加します。</li><li>毎週同じ希望には「月内追加」を使います。</li><li>不要な項目を削除し、「シフト希望を送信」を押します。</li><li>確認画面から送信します。</li></ol>
+            <p class="note">「月内追加」は、同じ月の同一曜日・同一時間・同一ポジションの募集枠をまとめて追加します。希望済み・追加済みは除外されます。</p>
+            <p class="warning">過去の日付や開始済みの枠には希望を出せません。送信後の希望は直接編集できません。</p>
           </div>
 
-          <h3 id="employee-date">3. 日付・枠選択</h3>
+          <h3 id="employee-own">3. 自主希望・希望の撤回</h3>
           <div class="manual-card">
-            <h4>希望シフト入力画面を開く</h4>
-            <ol class="step-list">
-              <li>従業員ホームを開きます。</li>
-              <li>「希望シフト入力」を押します。</li>
-              <li>希望シフト入力画面へ移動します。</li>
-            </ol>
-            <h4>日付を選択する</h4>
-            <ol class="step-list">
-              <li>カレンダーを確認します。</li>
-              <li>希望を出したい日付を探します。</li>
-              <li>選択できる日付を押します。</li>
-              <li>選択した日付のシフト枠を確認します。</li>
-            </ol>
-            <h4>シフト枠を選択する</h4>
-            <ol class="step-list">
-              <li>シフト枠のプルダウンを開きます。</li>
-              <li>希望する時間帯を選択します。</li>
-              <li>募集人数と希望人数を確認します。</li>
-            </ol>
-            <p class="warning">管理者がシフト枠を作成していない日、開始済みのシフト、終了済みのシフト、すでに自分が希望を出しているシフトしかない日は選択できません。</p>
+            <h4>募集枠なしの時間へ希望</h4>
+            <ol class="step-list"><li>管理者が自主希望を許可していることを確認します。</li><li>日付、開始・終了時刻、ポジションを入力します。</li><li>「追加」または「月内追加」を押します。</li><li>通常の希望と一緒に確認して送信します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/employee-generated-request.png" alt="従業員が追加した自主希望" /><figcaption>自主希望は「自主追加枠」と表示され、管理者が通常の希望と一緒に確認します。</figcaption></figure>
+            <h4>承認待ちを撤回</h4>
+            <ol class="step-list"><li>ホームまたは「勤務履歴・予定」で承認待ちの希望を開きます。</li><li>「撤回」を押し、日時・ポジションを確認します。</li><li>「撤回する」を押します。</li><li>必要なら内容を変えて再提出します。</li></ol>
+            <p class="warning">自主希望には管理者の許可とポジション登録が必要です。承認済みシフトは従業員側から撤回できません。</p>
           </div>
 
-          <h3 id="employee-submit">4. 希望シフト送信</h3>
+          <h3 id="employee-calendar">4. マイカレンダー・勤務履歴</h3>
           <div class="manual-card">
-            <h4>希望を追加する手順</h4>
-            <ol class="step-list">
-              <li>シフト枠を選択します。</li>
-              <li>「希望を追加」を押します。</li>
-              <li>右側の「追加したシフト希望」に表示されることを確認します。</li>
-            </ol>
-            <p class="note">この時点では、まだ管理者には送信されていません。送信前であれば、追加した希望を削除できます。</p>
-            <h4>追加した希望を削除する手順</h4>
-            <ol class="step-list">
-              <li>「追加したシフト希望」を確認します。</li>
-              <li>削除したい希望シフトを探します。</li>
-              <li>「削除」を押します。</li>
-              <li>一覧から消えたことを確認します。</li>
-            </ol>
-            <h4>希望シフトを送信する手順</h4>
-            <ol class="step-list">
-              <li>追加したシフト希望を確認します。</li>
-              <li>日付と時間に間違いがないか確認します。</li>
-              <li>「シフト希望を送信」を押します。</li>
-              <li>確認画面を読みます。</li>
-              <li>「送信する」を押します。</li>
-              <li>送信が完了します。</li>
-              <li>従業員ホームに戻ります。</li>
-              <li>シフト希望一覧に表示されることを確認します。</li>
-            </ol>
-            <p class="warning">送信後は、従業員側から変更できません。変更したい場合は、管理者に連絡してください。</p>
+            <h4>確定シフトを確認</h4>
+            <ol class="step-list"><li>ホームの「マイカレンダー」を確認します。</li><li>対象月へ移動します。</li><li>シフトがある日を選び、タイムラインを確認します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/employee-my-calendar.png" alt="従業員のマイカレンダー" /><figcaption>マイカレンダーには、管理者が承認した確定シフトだけが表示されます。</figcaption></figure>
+            <h4>状態別に履歴を確認</h4>
+            <ol class="step-list"><li>「勤務履歴・予定」を開きます。</li><li>年と月を選びます。</li><li>勤務予定、承認待ち、勤務済みを切り替えます。</li><li>選択月と年間の勤務時間・給与を確認します。</li></ol>
+            <figure class="manual-shot"><img src="./assets/screenshots/current/employee-work-history.png" alt="勤務履歴・予定画面" /><figcaption>確定前の希望も含めて、状態別に確認できます。</figcaption></figure>
+            <p class="note">マイカレンダーは承認済み限定です。承認待ちは「勤務履歴・予定」で確認してください。時間・給与の集計は終了済みかつ承認済みのシフトが対象です。</p>
           </div>
 
-          <h3 id="employee-status">5. 承認待ち・承認済み</h3>
+          <h3 id="compatibility">5. 一緒に働きやすさ設定</h3>
           <div class="manual-card">
-            <h4>承認待ちシフトを確認する手順</h4>
-            <ol class="step-list">
-              <li>従業員ホームを開きます。</li>
-              <li>「シフト希望一覧」を確認します。</li>
-              <li>「承認待ち」を確認します。</li>
-            </ol>
-            <p>承認待ちのシフトは、まだ確定していません。管理者が承認すると、承認済みに移動します。</p>
-            <h4>承認済みシフトを確認する手順</h4>
-            <ol class="step-list">
-              <li>従業員ホームを開きます。</li>
-              <li>「シフト希望一覧」を確認します。</li>
-              <li>「承認済み」を確認します。</li>
-            </ol>
-            <p class="ok-box">承認済みのシフトは、管理者が承認した確定シフトです。</p>
+            <ol class="step-list"><li>ホームから「一緒に働きやすさ設定」を開きます。</li><li>自分以外の従業員ごとに-5から+5で入力します。</li><li>全員分を確認し「保存する」を押します。</li></ol>
+            <table class="simple-table"><tr><th>+5</th><td>とても一緒に働きやすい</td></tr><tr><th>0</th><td>普通・未入力時の基準</td></tr><tr><th>-5</th><td>一緒に働きにくい</td></tr></table>
+            <p class="note">双方の評価を平均した値がおすすめ候補に使われます。未入力の相手は0として扱われます。</p>
           </div>
 
-          <h3 id="employee-hours">6. 勤務時間・給与確認</h3>
+          <h3 id="employee-export">6. PNG・ICS・カレンダー購読</h3>
           <div class="manual-card">
-            <h4>直近のシフトを確認する手順</h4>
-            <ol class="step-list">
-              <li>従業員ホームを開きます。</li>
-              <li>「直近のシフト」を確認します。</li>
-              <li>日付、時間、給与目安、ステータスを確認します。</li>
-            </ol>
-            <p>直近に承認済みシフトがない場合は、「直近のシフトはありません」と表示されます。</p>
-            <h4>勤務時間を確認する手順</h4>
-            <ol class="step-list">
-              <li>従業員ホームを開きます。</li>
-              <li>「今月の勤務時間」を確認します。</li>
-              <li>「年間の勤務時間」を確認します。</li>
-            </ol>
-            <h4>給与目安を確認する手順</h4>
-            <ol class="step-list">
-              <li>従業員ホームを開きます。</li>
-              <li>「今月のお給料」を確認します。</li>
-              <li>「年間のお給料」を確認します。</li>
-            </ol>
-            <p class="note">勤務時間と給与は、承認済みかつ終了済みのシフトをもとに計算されます。実際の給与額と完全に一致するとは限りません。</p>
-          </div>
-
-          <h3 id="compatibility">7. 働きやすさ設定</h3>
-          <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>従業員ホームを開きます。</li>
-              <li>「一緒に働きやすさ設定」を押します。</li>
-              <li>他の従業員一覧を確認します。</li>
-              <li>各従業員ごとにスライダーを動かします。</li>
-              <li>-5から+5の範囲で設定します。</li>
-              <li>全員分を確認します。</li>
-              <li>「保存する」を押します。</li>
-              <li>保存完了メッセージを確認します。</li>
-            </ol>
-            <table class="simple-table">
-              <tr><th>+5</th><td>とても一緒に働きやすい。</td></tr>
-              <tr><th>0</th><td>普通。</td></tr>
-              <tr><th>-5</th><td>一緒に働きにくい。</td></tr>
-            </table>
-            <p class="note">未入力の相手は0点として保存されます。この設定は、管理者側の相性スコアやおすすめ承認組み合わせに使われます。</p>
-          </div>
-
-          <h3 id="employee-logout">8. ログアウト</h3>
-          <div class="manual-card">
-            <h4>操作手順</h4>
-            <ol class="step-list">
-              <li>従業員ホームを開きます。</li>
-              <li>右上のログアウトボタンを押します。</li>
-              <li>ログイン画面へ戻ります。</li>
-            </ol>
-            <p class="warning">共有端末を使っている場合は、利用後に必ずログアウトしてください。</p>
+            <ol class="step-list"><li>従業員ホームの出力メニューを開きます。</li><li>画像保存は「PNG」、月のカレンダーファイルは「ICS」を選びます。</li><li>外部カレンダーへ継続的に追加する場合は「ICS（カレンダー購読）」を選びます。</li><li>コピーされたURLをカレンダーアプリの購読機能へ登録します。</li></ol>
+            <table class="simple-table"><tr><th>PNG</th><td>選択月の確定シフトを画像で保存</td></tr><tr><th>ICS</th><td>選択月の確定シフトをファイルで保存</td></tr><tr><th>購読URL</th><td>アクセス時点の承認済みシフトを取得</td></tr></table>
+            <p class="warning">購読URLを知っている人はカレンダーを取得できるため、第三者へ共有しないでください。反映間隔はカレンダーアプリ側の仕様によって異なります。</p>
           </div>
           <a class="back-to-top" href="#top">ページ上部へ戻る</a>
         </section>
 
         <section class="manual-section" id="faq">
-          <p class="section-label">FAQ</p>
-          <h2>よくある困りごと</h2>
-
-          <h3>管理者でログインできない</h3>
-          <ul class="plain-list">
-            <li>メールアドレスが正しいか確認します。</li>
-            <li>パスワードが正しいか確認します。</li>
-            <li>メール確認が完了しているか確認します。</li>
-            <li>登録したアカウントでログインしているか確認します。</li>
-          </ul>
-
-          <h3>従業員でログインできない</h3>
-          <ul class="plain-list">
-            <li>組織IDが6桁の数字になっているか確認します。</li>
-            <li>組織IDが正しいか確認します。</li>
-            <li>メールアドレスが正しいか確認します。</li>
-            <li>管理者がそのメールアドレスを登録しているか確認します。</li>
-            <li>別の組織IDを入力していないか確認します。</li>
-          </ul>
-
-          <h3>希望できる日付が表示されない</h3>
-          <ul class="plain-list">
-            <li>管理者がシフト枠を作成しているか確認します。</li>
-            <li>そのシフトが開始済みではないか確認します。</li>
-            <li>すでに同じシフトへ希望を出していないか確認します。</li>
-            <li>別の月を表示していないか確認します。</li>
-          </ul>
-
-          <h3>シフトを承認できない</h3>
-          <ul class="plain-list">
-            <li>募集人数に達していないか確認します。</li>
-            <li>対象のシフト枠が削除されていないか確認します。</li>
-            <li>承認対象がすでに承認済みではないか確認します。</li>
-          </ul>
-
-          <h3>勤務時間や給与が表示されない</h3>
-          <p>勤務時間と給与は、承認済みかつ終了済みのシフトだけが対象です。承認待ちのシフト、まだ終了していないシフト、削除されたシフトは集計されません。</p>
+          <p class="section-label">FAQ</p><h2>よくある困りごと</h2>
+          <h3>従業員でログインできない</h3><ul class="plain-list"><li>組織IDが6桁の数字か確認します。</li><li>管理者が登録したメールアドレスと同じか確認します。</li><li>従業員IDや確認用コードを入力しようとしていないか確認します。</li></ul>
+          <h3>希望できる枠がない</h3><ul class="plain-list"><li>管理者が対象月に募集枠を作成しているか確認します。</li><li>過去または開始済みの枠ではないか確認します。</li><li>すでに同じ枠へ希望を出していないか確認します。</li><li>自主希望は管理者が許可しているか確認します。</li></ul>
+          <h3>希望を撤回できない</h3><p>従業員が撤回できるのは承認待ちだけです。承認済みシフトの変更は管理者へ相談してください。</p>
+          <h3>マイカレンダーに表示されない</h3><p>マイカレンダーには承認済みシフトだけが表示されます。承認待ちは「勤務履歴・予定」で確認してください。</p>
+          <h3>給与や勤務時間が表示されない</h3><p>従業員側の集計は、終了済みかつ承認済みのシフトが対象です。実績補正の表示は管理者設定によって異なります。</p>
+          <h3>購読カレンダーがすぐ更新されない</h3><p>取得間隔は、利用するカレンダーアプリ側に依存します。</p>
           <a class="back-to-top" href="#top">ページ上部へ戻る</a>
         </section>
 
+        <section class="manual-section" id="safety">
+          <p class="section-label">Safety</p><h2>変更・削除・共有時の注意</h2>
+          <ul class="plain-list"><li>従業員やシフト枠を削除すると、関連する希望も削除される場合があります。</li><li>組織削除は設定画面から行い、組織に紐づくデータも削除対象になります。</li><li>承認済みシフトは従業員側から撤回できません。</li><li>共有端末では、利用後にログアウトしてください。</li><li>カレンダー購読URLは第三者へ共有しないでください。</li><li>おすすめ候補や給与表示は判断・確認を支援する機能です。最終判断は管理者が行ってください。</li></ul>
+        </section>
+
         <section class="readme-cta">
-          <h2>実際の画面で操作を確認する</h2>
-          <p>READMEで手順を確認したら、デプロイ済みのサービス画面で実際の操作感を確認できます。</p>
-          <div class="hero-actions center">
-            <a class="button light" href="./index.html">アピールページへ戻る</a>
-            <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
-          </div>
+          <h2>実際の画面で操作する</h2><p>手順を確認したら、サービス画面で管理者または従業員を選んで操作を始められます。</p>
+          <div class="hero-actions center"><a class="button light" href="./index.html">アピールページへ戻る</a><a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a></div>
         </section>
       </div>
     </div>

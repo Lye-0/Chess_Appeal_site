@@ -407,6 +407,11 @@ h3 {
   background: var(--green-light);
 }
 
+.hero-tags span:nth-child(4) {
+  color: var(--purple);
+  background: var(--purple-light);
+}
+
 .problem-grid {
   align-items: stretch;
 }
@@ -481,6 +486,14 @@ h3 {
 
 .small-card {
   padding: 26px;
+}
+
+.fairness-card {
+  border-color: #c4b5fd;
+  background:
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.12), transparent 48%),
+    linear-gradient(145deg, #ffffff, #faf8ff);
+  box-shadow: 0 18px 42px rgba(109, 40, 217, 0.1);
 }
 
 .number {
@@ -627,9 +640,17 @@ h3 {
   font-size: 16px;
 }
 
+.screen-card > p {
+  margin: 9px 6px 2px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+}
+
 .flow-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 18px;
   margin-top: 42px;
 }
