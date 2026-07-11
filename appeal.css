@@ -68,7 +68,7 @@
   width: 38px;
   height: 38px;
   border-radius: 11px;
-  filter: saturate(0) brightness(2.4);
+  filter: none;
 }
 .appeal-site .brand-main {
   font-size: 26px;

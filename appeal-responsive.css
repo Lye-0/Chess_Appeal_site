@@ -266,6 +266,10 @@
     display: none;
   }
 
+  .appeal-site .hero-tags {
+    display: none;
+  }
+
   .appeal-site.story-enhanced .screen-card {
     width: min(420px, 40vw);
   }
