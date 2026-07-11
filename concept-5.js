@@ -87,7 +87,7 @@ if (conceptFive) {
       const screenStageProgress = clamp((screensProgress - 0.13) / 0.17);
       const screenCardProgress = clamp((screensProgress - 0.22) / 0.78);
       const screenStageStart = window.innerWidth <= 980 ? 250 : 320;
-      const screenStageEnd = window.innerWidth <= 980 ? 92 : 108;
+      const screenStageEnd = window.innerWidth <= 980 ? 52 : 62;
       screensSection?.style.setProperty(
         "--screens-copy-opacity",
         String(1 - screenCopyExit)
