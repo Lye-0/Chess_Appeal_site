@@ -33,6 +33,33 @@ if (appealSite) {
     return clamp((rawProgress - leadIn) / activeRange);
   };
 
+  const progressThroughMobileStage = (stage) => {
+    if (!stage) return 0;
+    const bounds = stage.getBoundingClientRect();
+    const startLine = window.innerHeight * 0.78;
+    const travel = window.innerHeight * 0.62 + bounds.height;
+    return clamp((startLine - bounds.top) / Math.max(travel, 1));
+  };
+
+  const documentOffsetTop = (element) => {
+    let offset = 0;
+    let current = element;
+    while (current) {
+      offset += current.offsetTop;
+      current = current.offsetParent;
+    }
+    return offset;
+  };
+
+  const progressThroughPinnedMobileStage = (stage) => {
+    if (!stage) return 0;
+    const track = stage.parentElement;
+    const stickyTop = parseFloat(getComputedStyle(stage).top) || 0;
+    const start = documentOffsetTop(track) - stickyTop;
+    const travel = (track?.offsetHeight || 0) - stage.offsetHeight;
+    return clamp((window.scrollY - start) / Math.max(travel, 1));
+  };
+
   const setActiveFrame = (nextIndex) => {
     heroFrames.forEach((frame, index) => {
       const active = index === nextIndex;
@@ -63,7 +90,11 @@ if (appealSite) {
     appealSite.classList.toggle("is-screen-tour-active", screenTourActive);
 
     if (!reducedMotion) {
-      const heroProgress = progressThrough(hero, 0.06, 0.04);
+      const heroProgress = window.innerWidth <= 640
+        ? progressThroughPinnedMobileStage(storyStage)
+        : window.innerWidth <= 980
+          ? progressThroughMobileStage(storyStage)
+          : progressThrough(hero, 0.06, 0.04);
       const copyExit = clamp((heroProgress - 0.52) / 0.36);
       appealSite.style.setProperty("--hero-copy-y", `${copyExit * -110}px`);
       appealSite.style.setProperty("--hero-copy-scale", String(1 - copyExit * 0.06));
@@ -206,8 +237,9 @@ if (appealSite) {
 
     const chapterId =
       currentChapter?.id || currentChapter?.dataset.storyChapter || "top";
+    const storyMapId = currentChapter?.dataset.storyMapTarget || chapterId;
     mapItems.forEach((item) =>
-      item.classList.toggle("is-current", item.dataset.storyMap === chapterId)
+      item.classList.toggle("is-current", item.dataset.storyMap === storyMapId)
     );
     navLinks.forEach((link) =>
       link.classList.toggle("is-current", link.getAttribute("href") === `#${chapterId}`)

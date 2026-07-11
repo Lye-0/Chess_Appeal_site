@@ -137,6 +137,14 @@
   .appeal-site h2 { font-size: clamp(36px, 11.5vw, 54px); }
   .appeal-site .story-hero,
   .appeal-site.story-enhanced .story-hero { padding: 112px 0 76px; }
+  .appeal-site.story-enhanced .story-hero {
+    overflow: visible;
+  }
+  .appeal-site.story-enhanced .story-stage-track {
+    display: block;
+    min-width: 0;
+    min-height: calc(405px + 135svh);
+  }
   .appeal-site .story-kicker {
     margin-bottom: 18px;
     font-size: 8px;
@@ -161,6 +169,12 @@
   .appeal-site .story-stage {
     width: 100%;
     min-height: 405px;
+  }
+  .appeal-site.story-enhanced .story-stage {
+    position: sticky;
+    top: 88px;
+    z-index: 3;
+    align-self: start;
   }
   .appeal-site .halo-a {
     width: 400px;
@@ -215,7 +229,15 @@
     border-radius: 28px;
   }
   .appeal-site .cta-card h2 {
-    font-size: clamp(36px, 10.5vw, 52px);
+    font-size: clamp(26px, 7.7vw, 32px);
+    line-height: 1.18;
+    letter-spacing: -0.035em;
+  }
+  .appeal-site .cta-heading-line + .cta-heading-line {
+    margin-top: 0.22em;
+  }
+  .appeal-site .cta-phrase {
+    display: inline-block;
   }
   .appeal-site .site-footer {
     flex-direction: column;

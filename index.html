@@ -73,31 +73,33 @@
           </div>
         </div>
 
-        <div class="hero-visual story-stage" aria-label="スクロールに合わせて変化するChessの主要画面">
-          <div class="story-halo halo-a" aria-hidden="true"></div>
-          <div class="story-halo halo-b" aria-hidden="true"></div>
-          <article class="story-frame is-active" data-story-frame="0">
-            <img src="./assets/screenshots/current/admin-shift-calendar.png" alt="月間カレンダーでシフト状況を確認する管理画面" />
-            <p><span>01</span> 全体を見渡す</p>
-          </article>
-          <article class="story-frame" data-story-frame="1">
-            <img src="./assets/screenshots/current/admin-time-view.png" alt="ポジション別のシフト枠を確認する時間帯ビュー" />
-            <p><span>02</span> 一日の流れを読む</p>
-          </article>
-          <article class="story-frame" data-story-frame="2">
-            <img src="./assets/screenshots/current/admin-recommendation.png" alt="相性・業務スキル・公平性を確認するおすすめ承認画面" />
-            <p><span>03</span> チームを整える</p>
-          </article>
-          <div class="story-stage-status" aria-hidden="true">
-            <span class="is-active">OVERVIEW</span>
-            <span>TIME VIEW</span>
-            <span>RECOMMEND</span>
-          </div>
-          <div class="hero-tags">
-            <span>管理者</span>
-            <span>従業員</span>
-            <span>相性・スキル</span>
-            <span>公平性を考慮</span>
+        <div class="story-stage-track">
+          <div class="hero-visual story-stage" aria-label="スクロールに合わせて変化するChessの主要画面">
+            <div class="story-halo halo-a" aria-hidden="true"></div>
+            <div class="story-halo halo-b" aria-hidden="true"></div>
+            <article class="story-frame is-active" data-story-frame="0">
+              <img src="./assets/screenshots/current/admin-shift-calendar.png" alt="月間カレンダーでシフト状況を確認する管理画面" />
+              <p><span>01</span> 全体を見渡す</p>
+            </article>
+            <article class="story-frame" data-story-frame="1">
+              <img src="./assets/screenshots/current/admin-time-view.png" alt="ポジション別のシフト枠を確認する時間帯ビュー" />
+              <p><span>02</span> 一日の流れを読む</p>
+            </article>
+            <article class="story-frame" data-story-frame="2">
+              <img src="./assets/screenshots/current/admin-recommendation.png" alt="相性・業務スキル・公平性を確認するおすすめ承認画面" />
+              <p><span>03</span> チームを整える</p>
+            </article>
+            <div class="story-stage-status" aria-hidden="true">
+              <span class="is-active">OVERVIEW</span>
+              <span>TIME VIEW</span>
+              <span>RECOMMEND</span>
+            </div>
+            <div class="hero-tags">
+              <span>管理者</span>
+              <span>従業員</span>
+              <span>相性・スキル</span>
+              <span>公平性を考慮</span>
+            </div>
           </div>
         </div>
       </div>
@@ -172,7 +174,7 @@
       </div>
     </section>
 
-    <section id="accountless" class="section" data-story-chapter="accountless">
+    <section id="accountless" class="section" data-story-chapter="accountless" data-story-map-target="main-feature">
       <div class="container feature-grid reverse">
         <div>
           <p class="section-label">Appeal</p>
@@ -209,7 +211,7 @@
       </div>
     </section>
 
-    <section id="skill-feature" class="section" data-story-chapter="skill-feature">
+    <section id="skill-feature" class="section" data-story-chapter="skill-feature" data-story-map-target="main-feature">
       <div class="container feature-grid">
         <div>
           <p class="section-label">Skill</p>
@@ -227,7 +229,7 @@
       </div>
     </section>
 
-    <section id="features" class="section" data-story-chapter="features">
+    <section id="features" class="section" data-story-chapter="features" data-story-map-target="main-feature">
       <div class="container">
         <p class="section-label">Features</p>
         <h2><span class="heading-phrase">現在の実装に</span><wbr /><span class="heading-phrase">合わせた主な機能</span></h2>
@@ -442,14 +444,14 @@
       </div>
     </section>
 
-    <section class="section cta-section" data-story-chapter="cta">
+    <section class="section cta-section" data-story-chapter="cta" data-story-map-target="benefits">
       <div class="container">
         <div class="cta-card">
           <div>
             <h2>
-              <span class="cta-heading-line"><strong>相性・スキル・公平性</strong>まで考える。</span>
-              <span class="cta-heading-line">従業員は登録不要。</span>
-              <span class="cta-heading-line">管理者はシフト作成をもっと楽に。</span>
+              <span class="cta-heading-line"><span class="cta-phrase"><strong>相性・スキル・公平性</strong></span><span class="cta-phrase">まで考える。</span></span>
+              <span class="cta-heading-line"><span class="cta-phrase">従業員は</span><span class="cta-phrase">登録不要。</span></span>
+              <span class="cta-heading-line"><span class="cta-phrase">管理者は</span><span class="cta-phrase">シフト作成を</span><span class="cta-phrase">もっと楽に。</span></span>
             </h2>
           </div>
           <div class="cta-actions">

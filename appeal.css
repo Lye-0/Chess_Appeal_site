@@ -329,6 +329,10 @@
 }
 .appeal-site .hero-actions { margin-top: 38px; }
 
+.appeal-site .story-stage-track {
+  display: contents;
+}
+
 .appeal-site .story-stage {
   position: relative;
   min-height: 650px;
