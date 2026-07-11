@@ -53,9 +53,10 @@ if (appealSite) {
 
   const progressThroughPinnedMobileStage = (stage) => {
     if (!stage) return 0;
-    const stickyTop = 88;
-    const start = documentOffsetTop(stage.parentElement) - stickyTop;
-    const travel = window.innerHeight * 1.25;
+    const track = stage.parentElement;
+    const stickyTop = parseFloat(getComputedStyle(stage).top) || 0;
+    const start = documentOffsetTop(track) - stickyTop;
+    const travel = (track?.offsetHeight || 0) - stage.offsetHeight;
     return clamp((window.scrollY - start) / Math.max(travel, 1));
   };
 
