@@ -1201,7 +1201,8 @@ h3 {
 .appeal-page h1,
 .appeal-page h2,
 .appeal-page h3 {
-  text-wrap: balance;
+  line-break: strict;
+  overflow-wrap: anywhere;
 }
 
 .appeal-page h2 {
@@ -1832,7 +1833,7 @@ h3 {
   }
 
   .appeal-page .hero {
-    min-height: auto;
+    min-height: 0;
     padding: 84px 0 92px;
   }
 
@@ -1957,7 +1958,7 @@ h3 {
   .appeal-page .feature-card,
   .appeal-page .flow-card,
   .appeal-page .ui-points article {
-    min-height: auto;
+    min-height: 0;
     padding: 28px;
   }
 

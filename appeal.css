@@ -220,9 +220,8 @@
 .appeal-site h2,
 .appeal-site h3 {
   line-break: strict;
-  overflow-wrap: normal;
-  text-wrap: pretty;
-  word-break: auto-phrase;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 .appeal-site .heading-phrase {
   display: inline-block;

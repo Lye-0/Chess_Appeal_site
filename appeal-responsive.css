@@ -11,7 +11,7 @@
   .appeal-site.story-enhanced .story-hero,
   .appeal-site.story-enhanced .story-screens,
   .appeal-site.story-enhanced .story-flow {
-    min-height: auto;
+    min-height: 0;
     overflow: hidden;
   }
   .appeal-site.story-enhanced .story-hero .hero-grid,
@@ -56,7 +56,7 @@
   }
   .appeal-site .story-hero,
   .appeal-site.story-enhanced .story-hero {
-    min-height: auto;
+    min-height: 0;
     padding: 136px 0 96px;
     overflow: hidden;
   }
@@ -91,7 +91,7 @@
   .appeal-site .cta-card { transform: none !important; }
   .appeal-site.story-enhanced .story-screens,
   .appeal-site.story-enhanced .story-flow {
-    min-height: auto;
+    min-height: 0;
     overflow: hidden;
   }
   .appeal-site.story-enhanced .story-screens > .container,
@@ -202,14 +202,14 @@
   }
   .appeal-site .small-card,
   .appeal-site .feature-card,
-  .appeal-site .flow-card { min-height: auto; }
+  .appeal-site .flow-card { min-height: 0; }
   .appeal-site .feature-card h3,
   .appeal-site .flow-card h3 { margin-top: 40px; }
   .appeal-site .benefit-card {
-    min-height: auto;
+    min-height: 0;
     padding: 34px 26px;
   }
-  .appeal-site .cta-section { min-height: auto; }
+  .appeal-site .cta-section { min-height: 0; }
   .appeal-site .cta-card {
     padding: 36px 26px;
     border-radius: 28px;
