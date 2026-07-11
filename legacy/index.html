@@ -3,19 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
   <meta name="description" content="Chessは、相性・業務スキル・公平性を考慮して、管理者のシフト作成を支援するWebサービスです。従業員はアカウント作成不要で希望シフトを提出できます。" />
-  <title>Chess | シフト作成をもっとかんたんに</title>
+  <title>Chess | 相性・業務スキル・公平性を考えるシフト管理サービス</title>
   <link rel="stylesheet" href="./style.css" />
-  <link rel="stylesheet" href="./appeal.css" />
-  <link rel="stylesheet" href="./appeal-sections.css" />
-  <link rel="stylesheet" href="./appeal-responsive.css" />
 </head>
 
-<body class="appeal-site">
+<body>
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="Chess トップへ">
-        <img class="brand-logo" src="./assets/screenshots/blIAaSTQdn9rzX81781509686_1781509855.png" alt="Chess ロゴ" />
+        <img class="brand-logo" src="../assets/screenshots/blIAaSTQdn9rzX81781509686_1781509855.png" alt="Chess ロゴ" />
         <span class="brand-main">Chess</span>
         <span class="brand-sub">SHIFT MANAGEMENT</span>
       </a>
@@ -32,29 +30,15 @@
         <a href="#screens">見やすいUI</a>
         <a href="#flow">使い方</a>
         <a class="nav-button primary" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
-        <a class="nav-button secondary" href="./guide.html">詳しい使い方</a>
+        <a class="nav-button secondary" href="../guide.html">詳しい使い方</a>
       </nav>
     </div>
   </header>
 
-  <aside class="story-map" aria-hidden="true">
-    <span class="story-map-line"><i></i></span>
-    <ol>
-      <li class="is-current" data-story-map="top">01</li>
-      <li data-story-map="problem">02</li>
-      <li data-story-map="main-feature">03</li>
-      <li data-story-map="screens">04</li>
-      <li data-story-map="flow">05</li>
-      <li data-story-map="benefits">06</li>
-    </ol>
-    <p>SCROLL STORY</p>
-  </aside>
-
   <main id="top">
-    <section class="hero section story-hero" data-story-chapter="top">
+    <section class="hero section">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="story-kicker">A SHIFT STORY IN SIX CHAPTERS</p>
           <p class="section-label">Top</p>
           <h1 class="hero-title">
             <span class="headline-line">シフト作成を、</span>
@@ -69,29 +53,15 @@
           </p>
           <div class="hero-actions">
             <a class="button dark" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
-            <a class="button light" href="./guide.html">詳しい使い方</a>
+            <a class="button light" href="../guide.html">詳しい使い方</a>
           </div>
         </div>
 
-        <div class="hero-visual story-stage" aria-label="スクロールに合わせて変化するChessの主要画面">
-          <div class="story-halo halo-a" aria-hidden="true"></div>
-          <div class="story-halo halo-b" aria-hidden="true"></div>
-          <article class="story-frame is-active" data-story-frame="0">
-            <img src="./assets/screenshots/current/admin-shift-calendar.png" alt="月間カレンダーでシフト状況を確認する管理画面" />
-            <p><span>01</span> 全体を見渡す</p>
-          </article>
-          <article class="story-frame" data-story-frame="1">
-            <img src="./assets/screenshots/current/admin-time-view.png" alt="ポジション別のシフト枠を確認する時間帯ビュー" />
-            <p><span>02</span> 一日の流れを読む</p>
-          </article>
-          <article class="story-frame" data-story-frame="2">
-            <img src="./assets/screenshots/current/admin-recommendation.png" alt="相性・業務スキル・公平性を確認するおすすめ承認画面" />
-            <p><span>03</span> チームを整える</p>
-          </article>
-          <div class="story-stage-status" aria-hidden="true">
-            <span class="is-active">OVERVIEW</span>
-            <span>TIME VIEW</span>
-            <span>RECOMMEND</span>
+        <div class="hero-visual">
+          <div class="photo-card large">
+            <div class="photo-placeholder">
+              <img src="../assets/screenshots/current/login-select.png" alt="Chessの管理者・従業員を選ぶ利用者選択画面" />
+            </div>
           </div>
           <div class="hero-tags">
             <span>管理者</span>
@@ -101,10 +71,9 @@
           </div>
         </div>
       </div>
-      <div class="story-scroll-cue" aria-hidden="true"><span></span><p>SCROLL TO BEGIN</p></div>
     </section>
 
-    <section id="problem" class="section" data-story-chapter="problem">
+    <section id="problem" class="section">
       <div class="container problem-grid">
         <div>
           <p class="section-label">Problem</p>
@@ -135,11 +104,11 @@
 
     </section>
 
-    <section id="main-feature" class="section story-feature" data-story-chapter="main-feature">
+    <section id="main-feature" class="section">
       <div class="container feature-grid">
         <div>
           <p class="section-label">Main Feature</p>
-          <h2><span class="heading-phrase">働きやすさと</span><wbr /><span class="heading-phrase">公平性を考えた</span><wbr /><span class="heading-phrase">シフト作成</span></h2>
+          <h2>働きやすさと公平性を考えたシフト作成</h2>
           <p class="section-text">
             従業員が入力した「一緒に働きやすさ」、管理者が設定した業務スキル、
             さらに月内の希望時間をもとに、おすすめの承認候補を表示します。
@@ -148,7 +117,7 @@
         </div>
         <div class="photo-card">
           <div class="photo-placeholder">
-            <img src="./assets/screenshots/current/admin-recommendation.png" alt="相性・業務スキル・公平性を確認するおすすめ承認画面" />
+            <img src="../assets/screenshots/current/admin-recommendation.png" alt="相性・業務スキル・公平性を確認するおすすめ承認画面" />
           </div>
         </div>
       </div>
@@ -172,11 +141,11 @@
       </div>
     </section>
 
-    <section id="accountless" class="section" data-story-chapter="accountless">
+    <section id="accountless" class="section">
       <div class="container feature-grid reverse">
         <div>
           <p class="section-label">Appeal</p>
-          <h2><span class="heading-phrase">従業員は</span><wbr /><span class="heading-phrase">アカウント作成</span><wbr /><span class="heading-phrase">不要で使える</span></h2>
+          <h2>従業員はアカウント作成不要で使える</h2>
           <p class="section-text">
             従業員は自分でパスワードを作ったり、新規登録したりする必要がありません。
             管理者が登録したメールアドレスと6桁の組織IDを入力するだけで、
@@ -185,7 +154,7 @@
         </div>
         <div class="photo-card">
           <div class="photo-placeholder">
-            <img src="./assets/screenshots/current/employee-login.png" alt="従業員ログイン画面のスクリーンショット" />
+            <img src="../assets/screenshots/current/employee-login.png" alt="従業員ログイン画面のスクリーンショット" />
           </div>
         </div>
       </div>
@@ -209,11 +178,11 @@
       </div>
     </section>
 
-    <section id="skill-feature" class="section" data-story-chapter="skill-feature">
+    <section id="skill-feature" class="section">
       <div class="container feature-grid">
         <div>
           <p class="section-label">Skill</p>
-          <h2><span class="heading-phrase">業務スキルも</span><wbr /><span class="heading-phrase">判断材料に</span></h2>
+          <h2>業務スキルも判断材料に</h2>
           <p class="section-text">
             管理者が従業員ごとの業務スキルを数値で評価し、その結果をシフト作成に反映する機能。
             相性だけに偏らず、業務上の任せやすさも確認しながら、より安定したシフトを組めるのが特徴です。
@@ -221,16 +190,16 @@
         </div>
         <div class="photo-card">
           <div class="photo-placeholder">
-            <img src="./assets/screenshots/current/employee-registration.png" alt="従業員の基本情報と業務スキルを登録する画面" />
+            <img src="../assets/screenshots/current/employee-registration.png" alt="従業員の基本情報と業務スキルを登録する画面" />
           </div>
         </div>
       </div>
     </section>
 
-    <section id="features" class="section" data-story-chapter="features">
+    <section id="features" class="section">
       <div class="container">
         <p class="section-label">Features</p>
-        <h2><span class="heading-phrase">現在の実装に</span><wbr /><span class="heading-phrase">合わせた主な機能</span></h2>
+        <h2>現在の実装に合わせた主な機能</h2>
         <p class="section-text">
           Chessは現在も進化を続けています。以下の機能を中心に、シフト作成をよりスムーズにします。
         </p>
@@ -287,10 +256,10 @@
       </div>
     </section>
 
-    <section id="screens" class="section story-screens" data-story-chapter="screens">
+    <section id="screens" class="section">
       <div class="container">
         <p class="section-label">Screens</p>
-        <h2><span class="heading-phrase">カレンダー中心の、</span><wbr /><span class="heading-phrase">見やすいUI</span></h2>
+        <h2>カレンダー中心の、見やすいUI</h2>
         <p class="section-text">
           管理者・従業員それぞれのホームから目的の画面へすぐ移動できます。月間カレンダーと日別表示を使い分け、募集・希望・確定の状態も分かりやすく整理しています。
         </p>
@@ -315,63 +284,51 @@
         <div class="screens-grid">
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/current/admin-shift-calendar.png" alt="管理者向けの月間シフトカレンダー画面" />
+              <img src="../assets/screenshots/current/admin-home.png" alt="現在の管理者ホーム画面" />
             </div>
-            <div class="screen-caption">
-              <h3><span class="screen-title-line">月間シフト</span><span class="screen-title-line">カレンダー</span></h3>
-              <p>募集・希望・確定の状態を、月単位で分かりやすく見渡せます。</p>
-            </div>
+            <h3>管理者ホーム</h3>
+            <p>募集、従業員、勤務時間、設定をひとつの画面から開けます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/current/admin-time-view.png" alt="シフト枠を時間軸で確認する管理者の時間帯ビュー" />
+              <img src="../assets/screenshots/current/admin-time-view.png" alt="シフト枠を時間軸で確認する管理者の時間帯ビュー" />
             </div>
-            <div class="screen-caption">
-              <h3><span class="screen-title-line">シフト時間帯</span><span class="screen-title-line">ビュー</span></h3>
-              <p>ポジション別のシフト枠を時間軸で見比べられます。</p>
-            </div>
+            <h3>シフト時間帯ビュー</h3>
+            <p>ポジション別のシフト枠を時間軸で見比べられます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/current/admin-recommendation.png" alt="おすすめ承認と公平性スコア画面" />
+              <img src="../assets/screenshots/current/admin-recommendation.png" alt="おすすめ承認と公平性スコア画面" />
             </div>
-            <div class="screen-caption">
-              <h3><span class="screen-title-line">おすすめ承認</span><span class="screen-title-line">/ 公平性</span></h3>
-              <p>相性・スキル・希望時間を並べて確認できます。</p>
-            </div>
+            <h3>おすすめ承認 / 公平性</h3>
+            <p>相性・スキル・希望時間を並べて確認できます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/current/employee-home.png" alt="現在の従業員ホーム画面" />
+              <img src="../assets/screenshots/current/employee-home.png" alt="現在の従業員ホーム画面" />
             </div>
-            <div class="screen-caption">
-              <h3>従業員ホーム</h3>
-              <p>確定シフト、希望、履歴、勤務時間を見渡せます。</p>
-            </div>
+            <h3>従業員ホーム</h3>
+            <p>確定シフト、希望、履歴、勤務時間を見渡せます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/current/employee-shift-request.png" alt="カレンダーと時間帯表示を使った希望シフト入力画面" />
+              <img src="../assets/screenshots/current/employee-shift-request.png" alt="カレンダーと時間帯表示を使った希望シフト入力画面" />
             </div>
-            <div class="screen-caption">
-              <h3>希望シフト入力</h3>
-              <p>月間カレンダーと時間帯表示から直感的に希望を選べます。</p>
-            </div>
+            <h3>希望シフト入力</h3>
+            <p>月間カレンダーと時間帯表示から直感的に希望を選べます。</p>
           </article>
           <article class="screen-card">
             <div class="mini-photo">
-              <img src="./assets/screenshots/current/employee-my-calendar.png" alt="従業員の確定シフトを表示するマイカレンダー" />
+              <img src="../assets/screenshots/current/employee-my-calendar.png" alt="従業員の確定シフトを表示するマイカレンダー" />
             </div>
-            <div class="screen-caption">
-              <h3>マイカレンダー</h3>
-              <p>承認済みシフトを月と日の両方から確認できます。</p>
-            </div>
+            <h3>マイカレンダー</h3>
+            <p>承認済みシフトを月と日の両方から確認できます。</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="flow" class="section story-flow" data-story-chapter="flow">
+    <section id="flow" class="section">
       <div class="container">
         <p class="section-label">Flow</p>
         <h2>利用の流れ</h2>
@@ -414,10 +371,10 @@
       </div>
     </section>
 
-    <section id="benefits" class="section" data-story-chapter="benefits">
+    <section id="benefits" class="section">
       <div class="container">
         <p class="section-label">Benefits</p>
-        <h2><span class="heading-phrase">管理者にも、</span><wbr /><span class="heading-phrase">従業員にも、</span><wbr /><span class="heading-phrase">使いやすい</span></h2>
+        <h2>管理者にも、従業員にも、使いやすい</h2>
 
         <div class="benefits-grid">
           <article class="benefit-card">
@@ -442,7 +399,7 @@
       </div>
     </section>
 
-    <section class="section cta-section" data-story-chapter="cta">
+    <section class="section cta-section">
       <div class="container">
         <div class="cta-card">
           <div>
@@ -454,7 +411,7 @@
           </div>
           <div class="cta-actions">
             <a class="button gold" href="https://chess-nine-xi.vercel.app/">サービスを見る</a>
-            <a class="button white" href="./guide.html">詳しい使い方</a>
+            <a class="button white" href="../guide.html">詳しい使い方</a>
           </div>
         </div>
       </div>
@@ -463,10 +420,8 @@
 
   <footer class="site-footer">
     <p>© <span id="year"></span> Chess. Shift Management Service.</p>
-      <p class="site-signature" aria-hidden="true">CHESS / SHIFT MANAGEMENT</p>
   </footer>
 
-  <script src="./navigation.js"></script>
-  <script src="./appeal.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
