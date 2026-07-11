@@ -1,22 +1,22 @@
-const conceptFive = document.querySelector(".concept-five");
+const appealSite = document.querySelector(".appeal-site");
 
-if (conceptFive) {
+if (appealSite) {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(pointer: fine)").matches;
-  const header = conceptFive.querySelector(".site-header");
-  const hero = conceptFive.querySelector(".story-hero");
-  const heroFrames = [...conceptFive.querySelectorAll(".story-frame")];
-  const heroStatuses = [...conceptFive.querySelectorAll(".story-stage-status span")];
-  const storyStage = conceptFive.querySelector(".story-stage");
-  const screensSection = conceptFive.querySelector(".story-screens");
-  const screenCards = [...conceptFive.querySelectorAll(".screen-card")];
-  const flowSection = conceptFive.querySelector(".story-flow");
-  const flowCards = [...conceptFive.querySelectorAll(".flow-card")];
-  const mapItems = [...conceptFive.querySelectorAll("[data-story-map]")];
-  const navLinks = [...conceptFive.querySelectorAll('.site-nav a[href^="#"]')];
-  const chapters = [...conceptFive.querySelectorAll("[data-story-chapter]")];
+  const header = appealSite.querySelector(".site-header");
+  const hero = appealSite.querySelector(".story-hero");
+  const heroFrames = [...appealSite.querySelectorAll(".story-frame")];
+  const heroStatuses = [...appealSite.querySelectorAll(".story-stage-status span")];
+  const storyStage = appealSite.querySelector(".story-stage");
+  const screensSection = appealSite.querySelector(".story-screens");
+  const screenCards = [...appealSite.querySelectorAll(".screen-card")];
+  const flowSection = appealSite.querySelector(".story-flow");
+  const flowCards = [...appealSite.querySelectorAll(".flow-card")];
+  const mapItems = [...appealSite.querySelectorAll("[data-story-map]")];
+  const navLinks = [...appealSite.querySelectorAll('.site-nav a[href^="#"]')];
+  const chapters = [...appealSite.querySelectorAll("[data-story-chapter]")];
   const revealTargets = [
-    ...conceptFive.querySelectorAll(
+    ...appealSite.querySelectorAll(
       ".section-label, h2, .section-text, .quote-card, .photo-card, .small-card, .feature-card, .benefit-card"
     ),
   ];
@@ -51,7 +51,7 @@ if (conceptFive) {
 
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
     const pageProgress = scrollable > 0 ? clamp(window.scrollY / scrollable) : 0;
-    conceptFive.style.setProperty("--s5-page-progress", String(pageProgress));
+    appealSite.style.setProperty("--s5-page-progress", String(pageProgress));
     header?.style.setProperty("--s5-page-progress", String(pageProgress));
     header?.classList.toggle("is-scrolled", window.scrollY > 28);
     const screensBounds = screensSection?.getBoundingClientRect();
@@ -60,21 +60,21 @@ if (conceptFive) {
       screensBounds.top <= 0 &&
       screensBounds.bottom >= window.innerHeight
     );
-    conceptFive.classList.toggle("is-screen-tour-active", screenTourActive);
+    appealSite.classList.toggle("is-screen-tour-active", screenTourActive);
 
     if (!reducedMotion) {
       const heroProgress = progressThrough(hero, 0.06, 0.04);
       const copyExit = clamp((heroProgress - 0.52) / 0.36);
-      conceptFive.style.setProperty("--hero-copy-y", `${copyExit * -110}px`);
-      conceptFive.style.setProperty("--hero-copy-scale", String(1 - copyExit * 0.06));
-      conceptFive.style.setProperty("--hero-copy-opacity", String(1 - copyExit * 0.63));
-      conceptFive.style.setProperty("--hero-stage-y", `${(0.5 - heroProgress) * 48}px`);
-      conceptFive.style.setProperty("--hero-stage-scale", String(0.94 + heroProgress * 0.13));
-      conceptFive.style.setProperty("--hero-orbit-y", `${heroProgress * 150}px`);
-      conceptFive.style.setProperty("--hero-orbit-x", `${heroProgress * 110}px`);
-      conceptFive.style.setProperty("--hero-orbit-r", `${heroProgress * 95}deg`);
-      conceptFive.style.setProperty("--halo-a-r", `${heroProgress * 190}deg`);
-      conceptFive.style.setProperty("--halo-b-r", `${heroProgress * -260}deg`);
+      appealSite.style.setProperty("--hero-copy-y", `${copyExit * -110}px`);
+      appealSite.style.setProperty("--hero-copy-scale", String(1 - copyExit * 0.06));
+      appealSite.style.setProperty("--hero-copy-opacity", String(1 - copyExit * 0.63));
+      appealSite.style.setProperty("--hero-stage-y", `${(0.5 - heroProgress) * 48}px`);
+      appealSite.style.setProperty("--hero-stage-scale", String(0.94 + heroProgress * 0.13));
+      appealSite.style.setProperty("--hero-orbit-y", `${heroProgress * 150}px`);
+      appealSite.style.setProperty("--hero-orbit-x", `${heroProgress * 110}px`);
+      appealSite.style.setProperty("--hero-orbit-r", `${heroProgress * 95}deg`);
+      appealSite.style.setProperty("--halo-a-r", `${heroProgress * 190}deg`);
+      appealSite.style.setProperty("--halo-b-r", `${heroProgress * -260}deg`);
 
       const heroIndex = Math.min(
         heroFrames.length - 1,
@@ -148,7 +148,7 @@ if (conceptFive) {
         card.classList.toggle("is-story-active", index === Math.max(flowIndex, 0))
       );
 
-      conceptFive.querySelectorAll(".quote-card").forEach((card) => {
+      appealSite.querySelectorAll(".quote-card").forEach((card) => {
         const bounds = card.getBoundingClientRect();
         const progress = clamp(
           (window.innerHeight - bounds.top) / (window.innerHeight + bounds.height)
@@ -157,7 +157,7 @@ if (conceptFive) {
         card.style.setProperty("--quote-r", `${(0.5 - progress) * 3}deg`);
       });
 
-      conceptFive.querySelectorAll(".feature-grid .photo-card").forEach((card, index) => {
+      appealSite.querySelectorAll(".feature-grid .photo-card").forEach((card, index) => {
         const bounds = card.getBoundingClientRect();
         const progress = clamp(
           (window.innerHeight - bounds.top) / (window.innerHeight + bounds.height)
@@ -168,7 +168,7 @@ if (conceptFive) {
         card.style.setProperty("--image-scale", String(0.96 + progress * 0.07));
       });
 
-      conceptFive.querySelectorAll(".feature-card").forEach((card, index) => {
+      appealSite.querySelectorAll(".feature-card").forEach((card, index) => {
         const bounds = card.getBoundingClientRect();
         const progress = clamp(
           (window.innerHeight - bounds.top) / (window.innerHeight + bounds.height)
@@ -177,7 +177,7 @@ if (conceptFive) {
         card.style.setProperty("--feature-y", `${wave * -16}px`);
       });
 
-      conceptFive.querySelectorAll(".benefit-card").forEach((card, index) => {
+      appealSite.querySelectorAll(".benefit-card").forEach((card, index) => {
         const bounds = card.getBoundingClientRect();
         const progress = clamp(
           (window.innerHeight - bounds.top) / (window.innerHeight + bounds.height)
@@ -186,8 +186,8 @@ if (conceptFive) {
         card.style.setProperty("--benefit-r", `${(0.5 - progress) * (index ? -2 : 2)}deg`);
       });
 
-      const cta = conceptFive.querySelector(".cta-section");
-      const ctaCard = conceptFive.querySelector(".cta-card");
+      const cta = appealSite.querySelector(".cta-section");
+      const ctaCard = appealSite.querySelector(".cta-card");
       if (cta && ctaCard) {
         const bounds = cta.getBoundingClientRect();
         const progress = clamp(
@@ -221,7 +221,7 @@ if (conceptFive) {
   };
 
   if (!reducedMotion) {
-    conceptFive.classList.add("story-enhanced");
+    appealSite.classList.add("story-enhanced");
     revealTargets.forEach((element) => element.classList.add("story-reveal"));
 
     if ("IntersectionObserver" in window) {
@@ -249,7 +249,7 @@ if (conceptFive) {
         const bounds = storyStage.getBoundingClientRect();
         const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
         const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
-        const activeFrame = conceptFive.querySelector(".story-frame.is-active");
+        const activeFrame = appealSite.querySelector(".story-frame.is-active");
         activeFrame?.style.setProperty("--frame-x", `${horizontal * 18}px`);
         activeFrame?.style.setProperty("--frame-y", `${vertical * 14}px`);
         activeFrame?.style.setProperty("--frame-rx", `${vertical * -4}deg`);
