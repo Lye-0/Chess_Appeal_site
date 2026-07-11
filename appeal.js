@@ -33,6 +33,14 @@ if (appealSite) {
     return clamp((rawProgress - leadIn) / activeRange);
   };
 
+  const progressThroughMobileStage = (stage) => {
+    if (!stage) return 0;
+    const bounds = stage.getBoundingClientRect();
+    const startLine = window.innerHeight * 0.78;
+    const travel = window.innerHeight * 0.62 + bounds.height;
+    return clamp((startLine - bounds.top) / Math.max(travel, 1));
+  };
+
   const setActiveFrame = (nextIndex) => {
     heroFrames.forEach((frame, index) => {
       const active = index === nextIndex;
@@ -63,7 +71,9 @@ if (appealSite) {
     appealSite.classList.toggle("is-screen-tour-active", screenTourActive);
 
     if (!reducedMotion) {
-      const heroProgress = progressThrough(hero, 0.06, 0.04);
+      const heroProgress = window.innerWidth <= 980
+        ? progressThroughMobileStage(storyStage)
+        : progressThrough(hero, 0.06, 0.04);
       const copyExit = clamp((heroProgress - 0.52) / 0.36);
       appealSite.style.setProperty("--hero-copy-y", `${copyExit * -110}px`);
       appealSite.style.setProperty("--hero-copy-scale", String(1 - copyExit * 0.06));

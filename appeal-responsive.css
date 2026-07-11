@@ -215,7 +215,15 @@
     border-radius: 28px;
   }
   .appeal-site .cta-card h2 {
-    font-size: clamp(36px, 10.5vw, 52px);
+    font-size: clamp(26px, 7.7vw, 32px);
+    line-height: 1.18;
+    letter-spacing: -0.035em;
+  }
+  .appeal-site .cta-heading-line + .cta-heading-line {
+    margin-top: 0.22em;
+  }
+  .appeal-site .cta-phrase {
+    display: inline-block;
   }
   .appeal-site .site-footer {
     flex-direction: column;
