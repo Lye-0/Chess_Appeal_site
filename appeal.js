@@ -236,8 +236,9 @@ if (appealSite) {
 
     const chapterId =
       currentChapter?.id || currentChapter?.dataset.storyChapter || "top";
+    const storyMapId = currentChapter?.dataset.storyMapTarget || chapterId;
     mapItems.forEach((item) =>
-      item.classList.toggle("is-current", item.dataset.storyMap === chapterId)
+      item.classList.toggle("is-current", item.dataset.storyMap === storyMapId)
     );
     navLinks.forEach((link) =>
       link.classList.toggle("is-current", link.getAttribute("href") === `#${chapterId}`)

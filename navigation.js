@@ -7,15 +7,22 @@ if (year) {
 }
 
 if (menuButton && siteNav) {
-  menuButton.addEventListener("click", () => {
-    const isOpen = siteNav.classList.toggle("is-open");
+  const setMenuState = (isOpen) => {
+    siteNav.classList.toggle("is-open", isOpen);
     menuButton.setAttribute("aria-expanded", String(isOpen));
+    menuButton.setAttribute(
+      "aria-label",
+      isOpen ? "メニューを閉じる" : "メニューを開く"
+    );
+  };
+
+  menuButton.addEventListener("click", () => {
+    setMenuState(!siteNav.classList.contains("is-open"));
   });
 
   siteNav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      siteNav.classList.remove("is-open");
-      menuButton.setAttribute("aria-expanded", "false");
+      setMenuState(false);
     });
   });
 }
