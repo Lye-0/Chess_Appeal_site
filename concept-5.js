@@ -54,6 +54,13 @@ if (conceptFive) {
     conceptFive.style.setProperty("--s5-page-progress", String(pageProgress));
     header?.style.setProperty("--s5-page-progress", String(pageProgress));
     header?.classList.toggle("is-scrolled", window.scrollY > 28);
+    const screensBounds = screensSection?.getBoundingClientRect();
+    const screenTourActive = Boolean(
+      screensBounds &&
+      screensBounds.top <= 0 &&
+      screensBounds.bottom >= window.innerHeight
+    );
+    conceptFive.classList.toggle("is-screen-tour-active", screenTourActive);
 
     if (!reducedMotion) {
       const heroProgress = progressThrough(hero, 0.06, 0.04);
@@ -77,8 +84,10 @@ if (conceptFive) {
 
       const screensProgress = progressThrough(screensSection, 0.1, 0.05);
       const screenCopyExit = clamp((screensProgress - 0.02) / 0.18);
-      const screenStageStart = window.innerWidth <= 980 ? 180 : 210;
-      const screenStageEnd = window.innerWidth <= 980 ? 54 : 70;
+      const screenStageProgress = clamp((screensProgress - 0.13) / 0.17);
+      const screenCardProgress = clamp((screensProgress - 0.22) / 0.78);
+      const screenStageStart = window.innerWidth <= 980 ? 250 : 320;
+      const screenStageEnd = window.innerWidth <= 980 ? 92 : 108;
       screensSection?.style.setProperty(
         "--screens-copy-opacity",
         String(1 - screenCopyExit)
@@ -89,32 +98,20 @@ if (conceptFive) {
       );
       screensSection?.style.setProperty(
         "--screens-stage-top",
-        `${screenStageStart - (screenStageStart - screenStageEnd) * screenCopyExit}px`
+        `${screenStageStart - (screenStageStart - screenStageEnd) * screenStageProgress}px`
       );
+      screensSection?.style.setProperty("--screen-tour-progress", String(screenCardProgress));
+      const screenPosition = screenCardProgress * screenCards.length;
       const activeScreenIndex = Math.min(
         screenCards.length - 1,
-        Math.floor(screensProgress * screenCards.length)
+        Math.floor(screenPosition)
       );
+      const activeScreenPhase = clamp(screenPosition - activeScreenIndex);
 
       screenCards.forEach((card, index) => {
         const distance = index - activeScreenIndex;
         const active = distance === 0;
         const previous = distance < 0;
-        const image = card.querySelector("img");
-        const aspect =
-          image?.naturalWidth && image?.naturalHeight
-            ? image.naturalWidth / image.naturalHeight
-            : 1.6;
-        const mobileScreen = window.innerWidth <= 980;
-        const widthLimit = Math.min(
-          window.innerWidth * (mobileScreen ? 0.96 : 0.88),
-          mobileScreen ? 900 : 1200
-        );
-        const heightLimit = Math.max(
-          window.innerHeight - (mobileScreen ? 150 : 180),
-          320
-        );
-        const fittedWidth = Math.min(widthLimit, heightLimit * aspect);
         const x = previous ? -96 : distance * 15;
         const y = previous ? -120 : distance * 19;
         const scale = active
@@ -127,11 +124,14 @@ if (conceptFive) {
           : previous
             ? 0
             : Math.max(0.22, 0.72 - distance * 0.1);
+        const imageScale = active ? 1.015 - activeScreenPhase * 0.015 : 1.01;
+        const imageShift = active ? (0.5 - activeScreenPhase) * 4 : 0;
 
         card.classList.toggle("is-screen-active", active);
-        card.style.setProperty("--screen-card-width", `${fittedWidth}px`);
         card.style.setProperty("--screen-x", `${x}px`);
         card.style.setProperty("--screen-y", `${y}px`);
+        card.style.setProperty("--screen-image-scale", String(imageScale));
+        card.style.setProperty("--screen-image-x", `${imageShift}px`);
         card.style.setProperty("--screen-depth", `${distance * -34}px`);
         card.style.setProperty("--screen-r", `${previous ? -4 : distance * 1.35}deg`);
         card.style.setProperty("--screen-scale", String(scale));
@@ -271,12 +271,6 @@ if (conceptFive) {
 
   window.addEventListener("scroll", scheduleStoryUpdate, { passive: true });
   window.addEventListener("resize", scheduleStoryUpdate);
-  screenCards.forEach((card) => {
-    const image = card.querySelector("img");
-    if (image && !image.complete) {
-      image.addEventListener("load", scheduleStoryUpdate, { once: true });
-    }
-  });
 
   setActiveFrame(0);
   updateStory();

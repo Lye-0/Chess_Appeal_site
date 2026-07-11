@@ -508,3 +508,10 @@
   to { transform: translateY(100%); }
 }
 
+
+/* Keep oversized story layers visual-only; never create horizontal page scroll. */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
