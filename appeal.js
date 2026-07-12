@@ -72,11 +72,7 @@ if (appealSite) {
   };
 
   const touchLayout = window.matchMedia("(pointer: coarse) and (max-width: 980px)").matches;
-  const documentOffset = (element) => {
-    let top = 0;
-    for (let current = element; current; current = current.offsetParent) top += current.offsetTop;
-    return top;
-  };
+  const documentOffset = documentOffsetTop;
   let touchMetrics = null;
   let flowCardCenters = [];
   let lastFlowIndex = -1;
