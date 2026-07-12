@@ -96,6 +96,19 @@ if (appealSite) {
       0
     );
   };
+  const isSingleColumnFlow = () => window.innerWidth <= 640;
+  const getFlowIndexFromProgress = (progress) =>
+    Math.min(flowCards.length - 1, Math.floor(progress * flowCards.length));
+  const getTouchFlowIndex = (scrollY, viewportHeight) => {
+    if (isSingleColumnFlow()) return getFlowIndexAtViewportCenter();
+    const flowTravel = Math.max(touchMetrics.flowHeight - viewportHeight, 1);
+    const rawProgress = clamp((scrollY - touchMetrics.flowTop) / flowTravel);
+    return getFlowIndexFromProgress(clamp((rawProgress - 0.14) / 0.78));
+  };
+  const getFlowIndexForCurrentLayout = () =>
+    isSingleColumnFlow()
+      ? getFlowIndexAtViewportCenter()
+      : getFlowIndexFromProgress(progressThrough(flowSection, 0.14, 0.08));
   const setActiveFlowCard = (nextIndex) => {
     if (!flowCards.length) return;
     const index = Math.max(0, Math.min(flowCards.length - 1, nextIndex));
@@ -146,7 +159,7 @@ if (appealSite) {
     const screenCardProgress = clamp((screensProgress - 0.22) / 0.78);
     const screenPosition = screenCardProgress * screenCards.length;
     const activeScreenIndex = Math.min(screenCards.length - 1, Math.floor(screenPosition));
-    const flowIndex = getFlowIndexAtViewportCenter();
+    const flowIndex = getTouchFlowIndex(scrollY, viewportHeight);
     let chapterIndex = 0;
     touchMetrics.chapterTops.forEach((top, index) => {
       if (top - scrollY <= viewportHeight * 0.48) chapterIndex = index;
@@ -291,7 +304,7 @@ if (appealSite) {
         card.style.setProperty("--screen-z", String(active ? 100 : 100 - distance));
       });
 
-      const flowIndex = getFlowIndexAtViewportCenter();
+      const flowIndex = getFlowIndexForCurrentLayout();
       setActiveFlowCard(flowIndex);
 
       appealSite.querySelectorAll(".quote-card").forEach((card) => {
@@ -418,6 +431,7 @@ if (appealSite) {
 
   window.addEventListener("scroll", scheduleStoryUpdate, { passive: true });
   window.addEventListener("resize", () => {
+    lastFlowIndex = -1;
     measureFlowCards();
     if (touchLayout) measureTouchLayout();
     scheduleStoryUpdate();

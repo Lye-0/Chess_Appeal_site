@@ -823,3 +823,42 @@
     align-self: start;
   }
 }
+/* Tablet grids use the same pinned flow story as desktop; phones stay in normal flow. */
+@media (min-width: 641px) and (max-width: 980px) {
+  .appeal-site.story-enhanced .story-flow {
+    min-height: 370svh;
+    overflow: visible;
+  }
+
+  .appeal-site.story-enhanced .story-flow > .container {
+    position: sticky;
+    top: 70px;
+    height: calc(100svh - 70px);
+    padding-top: 18px;
+    overflow: hidden;
+  }
+}
+/* Keep every card visible during the pinned story on short landscape tablets. */
+@media (min-width: 760px) and (max-width: 980px) and (max-height: 700px) {
+  .appeal-site.story-enhanced .story-flow .flow-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .appeal-site.story-enhanced .story-flow .flow-card {
+    min-height: 0;
+    padding: 13px;
+  }
+
+  .appeal-site.story-enhanced .story-flow .flow-card h3 {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .appeal-site.story-enhanced .story-flow .flow-card p {
+    margin-top: 6px;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+}

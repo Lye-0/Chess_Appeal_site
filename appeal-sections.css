@@ -290,14 +290,14 @@
     var(--s5-ink);
 }
 .appeal-site.story-enhanced .story-flow {
-  min-height: 0;
+  min-height: 255vh;
   overflow: visible;
 }
 .appeal-site.story-enhanced .story-flow > .container {
-  position: relative;
-  top: auto;
-  height: auto;
-  padding-top: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding-top: 116px;
 }
 .appeal-site .flow-grid {
   position: relative;
@@ -442,14 +442,14 @@
 }
 
 .appeal-site.story-enhanced .story-flow {
-  min-height: 0;
+  min-height: 370vh;
 }
 
 .appeal-site.story-enhanced .story-flow > .container {
-  top: auto;
-  height: auto;
-  padding-top: 0;
-  overflow: visible;
+  top: 76px;
+  height: calc(100vh - 76px);
+  padding-top: 28px;
+  overflow: hidden;
 }
 
 .appeal-site .story-flow h2 {
