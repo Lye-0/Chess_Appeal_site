@@ -71,7 +71,8 @@ if (appealSite) {
     );
   };
 
-  const touchLayout = window.matchMedia("(pointer: coarse) and (max-width: 980px)").matches;
+  const touchLayoutQuery = window.matchMedia("(pointer: coarse) and (max-width: 980px)");
+  const isTouchLayout = () => touchLayoutQuery.matches;
   const documentOffset = documentOffsetTop;
   let touchMetrics = null;
   let flowCardCenters = [];
@@ -121,7 +122,7 @@ if (appealSite) {
       documentHeight: document.documentElement.scrollHeight,
       stageTop: documentOffset(storyStage),
       stageHeight: storyStage?.offsetHeight || 0,
-      stageStickyTop: parseFloat(getComputedStyle(storyStage).top) || 0,
+      stageStickyTop: storyStage ? parseFloat(getComputedStyle(storyStage).top) || 0 : 0,
       trackTop: documentOffset(storyStage?.parentElement),
       trackHeight: storyStage?.parentElement?.offsetHeight || 0,
       screensTop: documentOffset(screensSection),
@@ -135,7 +136,7 @@ if (appealSite) {
 
   const updateTouchStory = () => {
     ticking = false;
-    if (reducedMotion) {
+    if (reducedMotion || !isTouchLayout()) {
       updateStory();
       return;
     }
@@ -210,6 +211,10 @@ if (appealSite) {
   let ticking = false;
 
   const updateStory = () => {
+    if (!reducedMotion && isTouchLayout()) {
+      updateTouchStory();
+      return;
+    }
     ticking = false;
 
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
@@ -377,7 +382,22 @@ if (appealSite) {
   const scheduleStoryUpdate = () => {
     if (ticking) return;
     ticking = true;
-    window.requestAnimationFrame(touchLayout ? updateTouchStory : updateStory);
+    window.requestAnimationFrame(
+      reducedMotion || !isTouchLayout() ? updateStory : updateTouchStory
+    );
+  };
+
+  const refreshLayoutMetrics = () => {
+    lastFlowIndex = -1;
+    lastTouchScreenIndex = -1;
+    lastTouchChapterId = "";
+    measureFlowCards();
+    if (isTouchLayout()) {
+      measureTouchLayout();
+    } else {
+      touchMetrics = null;
+    }
+    scheduleStoryUpdate();
   };
 
   if (!reducedMotion) {
@@ -430,20 +450,15 @@ if (appealSite) {
   }
 
   window.addEventListener("scroll", scheduleStoryUpdate, { passive: true });
-  window.addEventListener("resize", () => {
-    lastFlowIndex = -1;
-    measureFlowCards();
-    if (touchLayout) measureTouchLayout();
-    scheduleStoryUpdate();
-  });
-  window.addEventListener("load", () => {
-    measureFlowCards();
-    if (touchLayout) measureTouchLayout();
-    scheduleStoryUpdate();
-  }, { once: true });
+  window.addEventListener("resize", refreshLayoutMetrics);
+  window.addEventListener("load", refreshLayoutMetrics, { once: true });
+  const handleTouchLayoutChange = () => refreshLayoutMetrics();
+  if (typeof touchLayoutQuery.addEventListener === "function") {
+    touchLayoutQuery.addEventListener("change", handleTouchLayoutChange);
+  } else if (typeof touchLayoutQuery.addListener === "function") {
+    touchLayoutQuery.addListener(handleTouchLayoutChange);
+  }
 
   setActiveFrame(0);
-  measureFlowCards();
-  if (touchLayout) measureTouchLayout();
-  (touchLayout ? updateTouchStory : updateStory)();
+  refreshLayoutMetrics();
 }
