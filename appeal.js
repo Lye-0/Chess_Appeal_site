@@ -86,6 +86,7 @@ if (appealSite) {
       documentHeight: document.documentElement.scrollHeight,
       stageTop: documentOffset(storyStage),
       stageHeight: storyStage?.offsetHeight || 0,
+      stageStickyTop: parseFloat(getComputedStyle(storyStage).top) || 0,
       trackTop: documentOffset(storyStage?.parentElement),
       trackHeight: storyStage?.parentElement?.offsetHeight || 0,
       screensTop: documentOffset(screensSection),
@@ -105,10 +106,11 @@ if (appealSite) {
     const pageTravel = touchMetrics.documentHeight - viewportHeight;
     const pageProgress = pageTravel > 0 ? clamp(scrollY / pageTravel) : 0;
     const stageTravel = Math.max(touchMetrics.trackHeight - touchMetrics.stageHeight, 1);
-    const heroProgress = window.innerWidth <= 640
-      ? clamp((scrollY - (touchMetrics.trackTop - 88)) / stageTravel)
-      : clamp((viewportHeight * 0.78 - (touchMetrics.stageTop - scrollY)) /
-          Math.max(viewportHeight * 0.62 + touchMetrics.stageHeight, 1));
+    // Drive the hero from the actual sticky track travel so every viewport
+    // reaches the final frame exactly when the pinned track ends.
+    const heroProgress = clamp(
+      (scrollY - (touchMetrics.trackTop - touchMetrics.stageStickyTop)) / stageTravel
+    );
     const screensTravel = Math.max(touchMetrics.screensHeight - viewportHeight, 1);
     const screensRaw = clamp((scrollY - touchMetrics.screensTop) / screensTravel);
     const screensProgress = clamp((screensRaw - 0.1) / 0.85);
@@ -190,11 +192,9 @@ if (appealSite) {
     appealSite.classList.toggle("is-screen-tour-active", screenTourActive);
 
     if (!reducedMotion) {
-      const heroProgress = window.innerWidth <= 640
+      const heroProgress = window.innerWidth <= 980
         ? progressThroughPinnedMobileStage(storyStage)
-        : window.innerWidth <= 980
-          ? progressThroughMobileStage(storyStage)
-          : progressThrough(hero, 0.06, 0.04);
+        : progressThrough(hero, 0.06, 0.04);
       const copyExit = clamp((heroProgress - 0.52) / 0.36);
       appealSite.style.setProperty("--hero-copy-y", `${copyExit * -110}px`);
       appealSite.style.setProperty("--hero-copy-scale", String(1 - copyExit * 0.06));

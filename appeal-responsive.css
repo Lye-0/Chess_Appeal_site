@@ -804,3 +804,22 @@
     box-shadow: 0 12px 32px rgba(18, 20, 34, 0.16);
   }
 }
+/* Tablet touch layouts need the same pinned hero track as phones. */
+@media (min-width: 641px) and (max-width: 980px) {
+  .appeal-site.story-enhanced .story-hero {
+    overflow: visible;
+  }
+
+  .appeal-site.story-enhanced .story-stage-track {
+    display: block;
+    min-width: 0;
+    min-height: calc(620px + 135svh);
+  }
+
+  .appeal-site.story-enhanced .story-stage {
+    position: sticky;
+    top: 88px;
+    z-index: 3;
+    align-self: start;
+  }
+}
