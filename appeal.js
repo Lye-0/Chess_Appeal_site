@@ -71,9 +71,150 @@ if (appealSite) {
     );
   };
 
+  const touchLayoutQuery = window.matchMedia("(pointer: coarse) and (max-width: 980px)");
+  const isTouchLayout = () => touchLayoutQuery.matches;
+  const documentOffset = documentOffsetTop;
+  let touchMetrics = null;
+  let flowCardCenters = [];
+  let lastFlowIndex = -1;
+  const measureFlowCards = () => {
+    flowCardCenters = flowCards.map(
+      (card) => documentOffset(card) + card.offsetHeight / 2
+    );
+  };
+  const getFlowIndexAtViewportCenter = () => {
+    if (!flowCardCenters.length) measureFlowCards();
+    const viewportCenter = window.scrollY + window.innerHeight / 2;
+    return flowCardCenters.reduce((closestIndex, center, index) =>
+      Math.abs(center - viewportCenter) <
+        Math.abs(flowCardCenters[closestIndex] - viewportCenter)
+        ? index
+        : closestIndex,
+      0
+    );
+  };
+  const isSingleColumnFlow = () => window.innerWidth <= 640;
+  const getFlowIndexFromProgress = (progress) =>
+    Math.min(flowCards.length - 1, Math.floor(progress * flowCards.length));
+  const getTouchFlowIndex = (scrollY, viewportHeight) => {
+    if (isSingleColumnFlow()) return getFlowIndexAtViewportCenter();
+    const flowTravel = Math.max(touchMetrics.flowHeight - viewportHeight, 1);
+    const rawProgress = clamp((scrollY - touchMetrics.flowTop) / flowTravel);
+    return getFlowIndexFromProgress(clamp((rawProgress - 0.14) / 0.78));
+  };
+  const getFlowIndexForCurrentLayout = () =>
+    isSingleColumnFlow()
+      ? getFlowIndexAtViewportCenter()
+      : getFlowIndexFromProgress(progressThrough(flowSection, 0.14, 0.08));
+  const setActiveFlowCard = (nextIndex) => {
+    if (!flowCards.length) return;
+    const index = Math.max(0, Math.min(flowCards.length - 1, nextIndex));
+    if (index === lastFlowIndex) return;
+    lastFlowIndex = index;
+    flowCards.forEach((card, cardIndex) =>
+      card.classList.toggle("is-story-active", cardIndex === index)
+    );
+  };
+  let lastTouchScreenIndex = -1;
+  let lastTouchChapterId = "";
+  const measureTouchLayout = () => {
+    touchMetrics = {
+      documentHeight: document.documentElement.scrollHeight,
+      stageTop: documentOffset(storyStage),
+      stageHeight: storyStage?.offsetHeight || 0,
+      stageStickyTop: storyStage ? parseFloat(getComputedStyle(storyStage).top) || 0 : 0,
+      trackTop: documentOffset(storyStage?.parentElement),
+      trackHeight: storyStage?.parentElement?.offsetHeight || 0,
+      screensTop: documentOffset(screensSection),
+      screensHeight: screensSection?.offsetHeight || 0,
+      flowTop: documentOffset(flowSection),
+      flowHeight: flowSection?.offsetHeight || 0,
+      chapterTops: chapters.map(documentOffset),
+    };
+    measureFlowCards();
+  };
+
+  const updateTouchStory = () => {
+    ticking = false;
+    if (reducedMotion || !isTouchLayout()) {
+      updateStory();
+      return;
+    }
+    if (!touchMetrics) measureTouchLayout();
+
+    const viewportHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+    const pageTravel = touchMetrics.documentHeight - viewportHeight;
+    const pageProgress = pageTravel > 0 ? clamp(scrollY / pageTravel) : 0;
+    const stageTravel = Math.max(touchMetrics.trackHeight - touchMetrics.stageHeight, 1);
+    // Drive the hero from the actual sticky track travel so every viewport
+    // reaches the final frame exactly when the pinned track ends.
+    const heroProgress = clamp(
+      (scrollY - (touchMetrics.trackTop - touchMetrics.stageStickyTop)) / stageTravel
+    );
+    const screensTravel = Math.max(touchMetrics.screensHeight - viewportHeight, 1);
+    const screensRaw = clamp((scrollY - touchMetrics.screensTop) / screensTravel);
+    const screensProgress = clamp((screensRaw - 0.1) / 0.85);
+    const screenCopyExit = clamp((screensProgress - 0.02) / 0.18);
+    const screenStageProgress = clamp((screensProgress - 0.13) / 0.17);
+    const screenCardProgress = clamp((screensProgress - 0.22) / 0.78);
+    const screenPosition = screenCardProgress * screenCards.length;
+    const activeScreenIndex = Math.min(screenCards.length - 1, Math.floor(screenPosition));
+    const flowIndex = getTouchFlowIndex(scrollY, viewportHeight);
+    let chapterIndex = 0;
+    touchMetrics.chapterTops.forEach((top, index) => {
+      if (top - scrollY <= viewportHeight * 0.48) chapterIndex = index;
+    });
+    const currentChapter = chapters[chapterIndex];
+    const chapterId = currentChapter?.id || currentChapter?.dataset.storyChapter || "top";
+    const storyMapId = currentChapter?.dataset.storyMapTarget || chapterId;
+
+    appealSite.style.setProperty("--s5-page-progress", String(pageProgress));
+    header?.style.setProperty("--s5-page-progress", String(pageProgress));
+    header?.classList.toggle("is-scrolled", scrollY > 28);
+    appealSite.classList.toggle(
+      "is-screen-tour-active",
+      touchMetrics.screensTop <= scrollY &&
+        touchMetrics.screensTop + touchMetrics.screensHeight >= scrollY + viewportHeight
+    );
+    setActiveFrame(Math.max(0, Math.min(heroFrames.length - 1, Math.floor(heroProgress * heroFrames.length))));
+    screensSection?.style.setProperty("--screens-copy-opacity", String(1 - screenCopyExit));
+    screensSection?.style.setProperty("--screens-copy-y", `${screenCopyExit * -52}px`);
+    screensSection?.style.setProperty("--screens-stage-top", `${250 - 198 * screenStageProgress}px`);
+    screensSection?.style.setProperty("--screen-tour-progress", String(screenCardProgress));
+    if (activeScreenIndex !== lastTouchScreenIndex) {
+      lastTouchScreenIndex = activeScreenIndex;
+      screenCards.forEach((card, index) => {
+        const distance = index - activeScreenIndex;
+        const active = distance === 0;
+        const previous = distance < 0;
+        card.classList.toggle("is-screen-active", active);
+        card.style.setProperty("--screen-x", `${previous ? -96 : distance * 15}px`);
+        card.style.setProperty("--screen-y", `${previous ? -120 : distance * 19}px`);
+        card.style.setProperty("--screen-depth", "0px");
+        card.style.setProperty("--screen-r", "0deg");
+        card.style.setProperty("--screen-image-x", "0px");
+        card.style.setProperty("--screen-image-scale", "1");
+        card.style.setProperty("--screen-scale", String(active ? 1 : previous ? 0.9 : Math.max(0.82, 1 - distance * 0.035)));
+        card.style.setProperty("--screen-opacity", String(active ? 1 : previous ? 0 : Math.max(0.22, 0.72 - distance * 0.1)));
+        card.style.setProperty("--screen-z", String(active ? 100 : 100 - distance));
+      });
+    }
+    setActiveFlowCard(flowIndex);
+    if (chapterId !== lastTouchChapterId) {
+      lastTouchChapterId = chapterId;
+      mapItems.forEach((item) => item.classList.toggle("is-current", item.dataset.storyMap === storyMapId));
+      navLinks.forEach((link) => link.classList.toggle("is-current", link.getAttribute("href") === `#${chapterId}`));
+    }
+  };
+
   let ticking = false;
 
   const updateStory = () => {
+    if (!reducedMotion && isTouchLayout()) {
+      updateTouchStory();
+      return;
+    }
     ticking = false;
 
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
@@ -90,11 +231,9 @@ if (appealSite) {
     appealSite.classList.toggle("is-screen-tour-active", screenTourActive);
 
     if (!reducedMotion) {
-      const heroProgress = window.innerWidth <= 640
+      const heroProgress = window.innerWidth <= 980
         ? progressThroughPinnedMobileStage(storyStage)
-        : window.innerWidth <= 980
-          ? progressThroughMobileStage(storyStage)
-          : progressThrough(hero, 0.06, 0.04);
+        : progressThrough(hero, 0.06, 0.04);
       const copyExit = clamp((heroProgress - 0.52) / 0.36);
       appealSite.style.setProperty("--hero-copy-y", `${copyExit * -110}px`);
       appealSite.style.setProperty("--hero-copy-scale", String(1 - copyExit * 0.06));
@@ -170,14 +309,8 @@ if (appealSite) {
         card.style.setProperty("--screen-z", String(active ? 100 : 100 - distance));
       });
 
-      const flowProgress = progressThrough(flowSection, 0.14, 0.08);
-      const flowIndex = Math.min(
-        flowCards.length - 1,
-        Math.floor(flowProgress * flowCards.length)
-      );
-      flowCards.forEach((card, index) =>
-        card.classList.toggle("is-story-active", index === Math.max(flowIndex, 0))
-      );
+      const flowIndex = getFlowIndexForCurrentLayout();
+      setActiveFlowCard(flowIndex);
 
       appealSite.querySelectorAll(".quote-card").forEach((card) => {
         const bounds = card.getBoundingClientRect();
@@ -249,7 +382,22 @@ if (appealSite) {
   const scheduleStoryUpdate = () => {
     if (ticking) return;
     ticking = true;
-    window.requestAnimationFrame(updateStory);
+    window.requestAnimationFrame(
+      reducedMotion || !isTouchLayout() ? updateStory : updateTouchStory
+    );
+  };
+
+  const refreshLayoutMetrics = () => {
+    lastFlowIndex = -1;
+    lastTouchScreenIndex = -1;
+    lastTouchChapterId = "";
+    measureFlowCards();
+    if (isTouchLayout()) {
+      measureTouchLayout();
+    } else {
+      touchMetrics = null;
+    }
+    scheduleStoryUpdate();
   };
 
   if (!reducedMotion) {
@@ -302,9 +450,15 @@ if (appealSite) {
   }
 
   window.addEventListener("scroll", scheduleStoryUpdate, { passive: true });
-  window.addEventListener("resize", scheduleStoryUpdate);
+  window.addEventListener("resize", refreshLayoutMetrics);
+  window.addEventListener("load", refreshLayoutMetrics, { once: true });
+  const handleTouchLayoutChange = () => refreshLayoutMetrics();
+  if (typeof touchLayoutQuery.addEventListener === "function") {
+    touchLayoutQuery.addEventListener("change", handleTouchLayoutChange);
+  } else if (typeof touchLayoutQuery.addListener === "function") {
+    touchLayoutQuery.addListener(handleTouchLayoutChange);
+  }
 
   setActiveFrame(0);
-  updateStory();
+  refreshLayoutMetrics();
 }
-

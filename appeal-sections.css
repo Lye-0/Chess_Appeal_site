@@ -314,8 +314,8 @@
   color: #fff;
   background: rgba(255, 255, 255, 0.055);
   opacity: 0.44;
-  transform: scale(0.96);
-  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), background 0.45s ease;
+  transform: none;
+  transition: background 0.16s ease, border-color 0.16s ease;
 }
 .appeal-site .flow-card.is-story-active {
   border-color: rgba(148, 243, 218, 0.56);
@@ -323,7 +323,8 @@
     radial-gradient(circle at 90% 10%, rgba(139, 124, 255, 0.38), transparent 9rem),
     rgba(148, 243, 218, 0.12);
   opacity: 1;
-  transform: scale(1.035);
+  /* Keep the active card inside its grid track; transformed rounded layers can bleed past the edge in Safari. */
+  transform: none;
 }
 .appeal-site .flow-card span {
   color: var(--s5-mint);

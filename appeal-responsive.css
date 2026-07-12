@@ -115,7 +115,7 @@
     transform: none !important;
   }
   .appeal-site .flow-grid { grid-template-columns: repeat(2, 1fr); }
-  .appeal-site .flow-card { opacity: 1; transform: none; }
+  .appeal-site .flow-card { transform: none; }
 }
 
 @media (max-width: 640px) {
@@ -765,5 +765,125 @@
     border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 8px;
     box-shadow: 0 18px 42px rgba(8, 9, 22, 0.24);
+  }
+}
+/* Keep iOS Safari's scroll compositor on cheap, stable layers. */
+@media (pointer: coarse) and (max-width: 980px) {
+  .appeal-site .site-header,
+  .appeal-site .cta-card,
+  .appeal-site.story-enhanced .screen-card::before,
+  .appeal-site.story-enhanced .screen-caption {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .appeal-site .quote-card,
+  .appeal-site .feature-grid .photo-card,
+  .appeal-site .feature-card,
+  .appeal-site .benefit-card,
+  .appeal-site .cta-card {
+    transform: none !important;
+  }
+
+  .appeal-site.story-enhanced .screen-card,
+  .appeal-site.story-enhanced .screen-card .mini-photo img {
+    will-change: auto;
+  }
+
+  .appeal-site.story-enhanced .screen-card .mini-photo::before {
+    display: none;
+  }
+
+  .appeal-site.story-enhanced .screen-card .mini-photo img,
+  .appeal-site.story-enhanced .screen-card.is-screen-active .mini-photo img {
+    filter: none;
+    box-shadow: 0 8px 22px rgba(8, 9, 22, 0.18);
+  }
+
+  .appeal-site.story-enhanced .screen-card {
+    box-shadow: 0 12px 32px rgba(18, 20, 34, 0.16);
+  }
+}
+/* Tablet touch layouts need the same pinned hero track as phones. */
+@media (min-width: 641px) and (max-width: 980px) {
+  .appeal-site.story-enhanced .story-hero {
+    overflow: visible;
+  }
+
+  .appeal-site.story-enhanced .story-stage-track {
+    display: block;
+    min-width: 0;
+    min-height: calc(620px + 135svh);
+  }
+
+  .appeal-site.story-enhanced .story-stage {
+    position: sticky;
+    top: 88px;
+    z-index: 3;
+    align-self: start;
+  }
+}
+/* Tablet grids use the same pinned flow story as desktop; phones stay in normal flow. */
+@media (min-width: 641px) and (max-width: 980px) {
+  .appeal-site.story-enhanced .story-flow {
+    min-height: 370svh;
+    overflow: visible;
+  }
+
+  .appeal-site.story-enhanced .story-flow > .container {
+    position: sticky;
+    top: 70px;
+    height: calc(100svh - 70px);
+    padding-top: 18px;
+    padding-bottom: 16px;
+    overflow: hidden;
+  }
+}
+/* Fit a two-column, three-row flow grid inside the tablet sticky viewport. */
+@media (min-width: 641px) and (max-width: 980px) {
+  .appeal-site.story-enhanced .story-flow > .container {
+    display: grid;
+    grid-template-rows: auto auto auto minmax(0, 1fr);
+    row-gap: 8px;
+  }
+
+  .appeal-site.story-enhanced .story-flow .section-label,
+  .appeal-site.story-enhanced .story-flow h2,
+  .appeal-site.story-enhanced .story-flow .section-text {
+    margin: 0;
+  }
+
+  .appeal-site.story-enhanced .story-flow .flow-grid {
+    min-height: 0;
+    height: 100%;
+    margin-top: 0;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .appeal-site.story-enhanced .story-flow .flow-card {
+    min-height: 0;
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  .appeal-site.story-enhanced .story-flow .flow-card h3 {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.15;
+  }
+
+  .appeal-site.story-enhanced .story-flow .flow-card p {
+    margin-top: 6px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+}
+
+/* Extremely short tablet landscapes switch to two rows so no card is clipped. */
+@media (min-width: 641px) and (max-width: 980px) and (max-height: 520px) {
+  .appeal-site.story-enhanced .story-flow .flow-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
   }
 }
