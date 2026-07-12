@@ -139,6 +139,10 @@ if (appealSite) {
 
   const updateTouchStory = () => {
     ticking = false;
+    if (reducedMotion) {
+      updateStory();
+      return;
+    }
     if (!touchMetrics) measureTouchLayout();
 
     const viewportHeight = window.innerHeight;
