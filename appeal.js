@@ -71,6 +71,106 @@ if (appealSite) {
     );
   };
 
+  const touchLayout = window.matchMedia("(pointer: coarse) and (max-width: 980px)").matches;
+  const documentOffset = (element) => {
+    let top = 0;
+    for (let current = element; current; current = current.offsetParent) top += current.offsetTop;
+    return top;
+  };
+  let touchMetrics = null;
+  let lastTouchScreenIndex = -1;
+  let lastTouchFlowIndex = -1;
+  let lastTouchChapterId = "";
+  const measureTouchLayout = () => {
+    touchMetrics = {
+      documentHeight: document.documentElement.scrollHeight,
+      stageTop: documentOffset(storyStage),
+      stageHeight: storyStage?.offsetHeight || 0,
+      trackTop: documentOffset(storyStage?.parentElement),
+      trackHeight: storyStage?.parentElement?.offsetHeight || 0,
+      screensTop: documentOffset(screensSection),
+      screensHeight: screensSection?.offsetHeight || 0,
+      flowTop: documentOffset(flowSection),
+      flowHeight: flowSection?.offsetHeight || 0,
+      chapterTops: chapters.map(documentOffset),
+    };
+  };
+
+  const updateTouchStory = () => {
+    ticking = false;
+    if (!touchMetrics) measureTouchLayout();
+
+    const viewportHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+    const pageTravel = touchMetrics.documentHeight - viewportHeight;
+    const pageProgress = pageTravel > 0 ? clamp(scrollY / pageTravel) : 0;
+    const stageTravel = Math.max(touchMetrics.trackHeight - touchMetrics.stageHeight, 1);
+    const heroProgress = window.innerWidth <= 640
+      ? clamp((scrollY - (touchMetrics.trackTop - 88)) / stageTravel)
+      : clamp((viewportHeight * 0.78 - (touchMetrics.stageTop - scrollY)) /
+          Math.max(viewportHeight * 0.62 + touchMetrics.stageHeight, 1));
+    const screensTravel = Math.max(touchMetrics.screensHeight - viewportHeight, 1);
+    const screensRaw = clamp((scrollY - touchMetrics.screensTop) / screensTravel);
+    const screensProgress = clamp((screensRaw - 0.1) / 0.85);
+    const screenCopyExit = clamp((screensProgress - 0.02) / 0.18);
+    const screenStageProgress = clamp((screensProgress - 0.13) / 0.17);
+    const screenCardProgress = clamp((screensProgress - 0.22) / 0.78);
+    const screenPosition = screenCardProgress * screenCards.length;
+    const activeScreenIndex = Math.min(screenCards.length - 1, Math.floor(screenPosition));
+    const flowTravel = Math.max(touchMetrics.flowHeight - viewportHeight, 1);
+    const flowRaw = clamp((scrollY - touchMetrics.flowTop) / flowTravel);
+    const flowProgress = clamp((flowRaw - 0.14) / 0.78);
+    const flowIndex = Math.min(flowCards.length - 1, Math.floor(flowProgress * flowCards.length));
+    let chapterIndex = 0;
+    touchMetrics.chapterTops.forEach((top, index) => {
+      if (top - scrollY <= viewportHeight * 0.48) chapterIndex = index;
+    });
+    const currentChapter = chapters[chapterIndex];
+    const chapterId = currentChapter?.id || currentChapter?.dataset.storyChapter || "top";
+    const storyMapId = currentChapter?.dataset.storyMapTarget || chapterId;
+
+    appealSite.style.setProperty("--s5-page-progress", String(pageProgress));
+    header?.style.setProperty("--s5-page-progress", String(pageProgress));
+    header?.classList.toggle("is-scrolled", scrollY > 28);
+    appealSite.classList.toggle(
+      "is-screen-tour-active",
+      touchMetrics.screensTop <= scrollY &&
+        touchMetrics.screensTop + touchMetrics.screensHeight >= scrollY + viewportHeight
+    );
+    setActiveFrame(Math.max(0, Math.min(heroFrames.length - 1, Math.floor(heroProgress * heroFrames.length))));
+    screensSection?.style.setProperty("--screens-copy-opacity", String(1 - screenCopyExit));
+    screensSection?.style.setProperty("--screens-copy-y", `${screenCopyExit * -52}px`);
+    screensSection?.style.setProperty("--screens-stage-top", `${250 - 198 * screenStageProgress}px`);
+    screensSection?.style.setProperty("--screen-tour-progress", String(screenCardProgress));
+    if (activeScreenIndex !== lastTouchScreenIndex) {
+      lastTouchScreenIndex = activeScreenIndex;
+      screenCards.forEach((card, index) => {
+        const distance = index - activeScreenIndex;
+        const active = distance === 0;
+        const previous = distance < 0;
+        card.classList.toggle("is-screen-active", active);
+        card.style.setProperty("--screen-x", `${previous ? -96 : distance * 15}px`);
+        card.style.setProperty("--screen-y", `${previous ? -120 : distance * 19}px`);
+        card.style.setProperty("--screen-depth", "0px");
+        card.style.setProperty("--screen-r", "0deg");
+        card.style.setProperty("--screen-image-x", "0px");
+        card.style.setProperty("--screen-image-scale", "1");
+        card.style.setProperty("--screen-scale", String(active ? 1 : previous ? 0.9 : Math.max(0.82, 1 - distance * 0.035)));
+        card.style.setProperty("--screen-opacity", String(active ? 1 : previous ? 0 : Math.max(0.22, 0.72 - distance * 0.1)));
+        card.style.setProperty("--screen-z", String(active ? 100 : 100 - distance));
+      });
+    }
+    if (flowIndex !== lastTouchFlowIndex) {
+      lastTouchFlowIndex = flowIndex;
+      flowCards.forEach((card, index) => card.classList.toggle("is-story-active", index === Math.max(flowIndex, 0)));
+    }
+    if (chapterId !== lastTouchChapterId) {
+      lastTouchChapterId = chapterId;
+      mapItems.forEach((item) => item.classList.toggle("is-current", item.dataset.storyMap === storyMapId));
+      navLinks.forEach((link) => link.classList.toggle("is-current", link.getAttribute("href") === `#${chapterId}`));
+    }
+  };
+
   let ticking = false;
 
   const updateStory = () => {
@@ -249,7 +349,7 @@ if (appealSite) {
   const scheduleStoryUpdate = () => {
     if (ticking) return;
     ticking = true;
-    window.requestAnimationFrame(updateStory);
+    window.requestAnimationFrame(touchLayout ? updateTouchStory : updateStory);
   };
 
   if (!reducedMotion) {
@@ -302,9 +402,16 @@ if (appealSite) {
   }
 
   window.addEventListener("scroll", scheduleStoryUpdate, { passive: true });
-  window.addEventListener("resize", scheduleStoryUpdate);
+  window.addEventListener("resize", () => {
+    if (touchLayout) measureTouchLayout();
+    scheduleStoryUpdate();
+  });
+  window.addEventListener("load", () => {
+    if (touchLayout) measureTouchLayout();
+    scheduleStoryUpdate();
+  }, { once: true });
 
   setActiveFrame(0);
-  updateStory();
+  if (touchLayout) measureTouchLayout();
+  (touchLayout ? updateTouchStory : updateStory)();
 }
-
