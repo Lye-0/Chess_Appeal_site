@@ -73,6 +73,21 @@ if (appealSite) {
 
   const touchLayoutQuery = window.matchMedia("(pointer: coarse) and (max-width: 980px)");
   const isTouchLayout = () => touchLayoutQuery.matches;
+  const updateHeroFrameScale = () => {
+    const isTabletWidth = window.innerWidth >= 641 && window.innerWidth <= 980;
+    if (!isTabletWidth) {
+      appealSite.style.setProperty("--hero-frame-scale", "1");
+      return;
+    }
+    const frameHeight = heroFrames.reduce(
+      (maximum, frame) => Math.max(maximum, frame.offsetHeight),
+      490
+    );
+    const statusHeight = storyStage?.querySelector(".story-stage-status")?.offsetHeight || 27;
+    const availableHeight = window.innerHeight - 88 - 12 - 24 - statusHeight - 12;
+    const scale = clamp(availableHeight / Math.max(frameHeight, 1), 0.7, 1);
+    appealSite.style.setProperty("--hero-frame-scale", String(scale));
+  };
   const documentOffset = documentOffsetTop;
   let touchMetrics = null;
   let flowCardCenters = [];
@@ -140,6 +155,7 @@ if (appealSite) {
       updateStory();
       return;
     }
+    updateHeroFrameScale();
     if (!touchMetrics) measureTouchLayout();
 
     const viewportHeight = window.innerHeight;
@@ -231,6 +247,7 @@ if (appealSite) {
     appealSite.classList.toggle("is-screen-tour-active", screenTourActive);
 
     if (!reducedMotion) {
+      updateHeroFrameScale();
       const heroProgress = window.innerWidth <= 980
         ? progressThroughPinnedMobileStage(storyStage)
         : progressThrough(hero, 0.06, 0.04);
@@ -388,6 +405,7 @@ if (appealSite) {
   };
 
   const refreshLayoutMetrics = () => {
+    updateHeroFrameScale();
     lastFlowIndex = -1;
     lastTouchScreenIndex = -1;
     lastTouchChapterId = "";
