@@ -115,7 +115,7 @@
     transform: none !important;
   }
   .appeal-site .flow-grid { grid-template-columns: repeat(2, 1fr); }
-  .appeal-site .flow-card { opacity: 1; transform: none; }
+  .appeal-site .flow-card { transform: none; }
 }
 
 @media (max-width: 640px) {

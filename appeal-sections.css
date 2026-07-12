@@ -290,14 +290,14 @@
     var(--s5-ink);
 }
 .appeal-site.story-enhanced .story-flow {
-  min-height: 255vh;
+  min-height: 0;
   overflow: visible;
 }
 .appeal-site.story-enhanced .story-flow > .container {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding-top: 116px;
+  position: relative;
+  top: auto;
+  height: auto;
+  padding-top: 0;
 }
 .appeal-site .flow-grid {
   position: relative;
@@ -314,8 +314,8 @@
   color: #fff;
   background: rgba(255, 255, 255, 0.055);
   opacity: 0.44;
-  transform: scale(0.96);
-  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), background 0.45s ease;
+  transform: none;
+  transition: background 0.16s ease, border-color 0.16s ease;
 }
 .appeal-site .flow-card.is-story-active {
   border-color: rgba(148, 243, 218, 0.56);
@@ -442,14 +442,14 @@
 }
 
 .appeal-site.story-enhanced .story-flow {
-  min-height: 370vh;
+  min-height: 0;
 }
 
 .appeal-site.story-enhanced .story-flow > .container {
-  top: 76px;
-  height: calc(100vh - 76px);
-  padding-top: 28px;
-  overflow: hidden;
+  top: auto;
+  height: auto;
+  padding-top: 0;
+  overflow: visible;
 }
 
 .appeal-site .story-flow h2 {

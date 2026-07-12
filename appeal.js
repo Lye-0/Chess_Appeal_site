@@ -78,8 +78,34 @@ if (appealSite) {
     return top;
   };
   let touchMetrics = null;
+  let flowCardCenters = [];
+  let lastFlowIndex = -1;
+  const measureFlowCards = () => {
+    flowCardCenters = flowCards.map(
+      (card) => documentOffset(card) + card.offsetHeight / 2
+    );
+  };
+  const getFlowIndexAtViewportCenter = () => {
+    if (!flowCardCenters.length) measureFlowCards();
+    const viewportCenter = window.scrollY + window.innerHeight / 2;
+    return flowCardCenters.reduce((closestIndex, center, index) =>
+      Math.abs(center - viewportCenter) <
+        Math.abs(flowCardCenters[closestIndex] - viewportCenter)
+        ? index
+        : closestIndex,
+      0
+    );
+  };
+  const setActiveFlowCard = (nextIndex) => {
+    if (!flowCards.length) return;
+    const index = Math.max(0, Math.min(flowCards.length - 1, nextIndex));
+    if (index === lastFlowIndex) return;
+    lastFlowIndex = index;
+    flowCards.forEach((card, cardIndex) =>
+      card.classList.toggle("is-story-active", cardIndex === index)
+    );
+  };
   let lastTouchScreenIndex = -1;
-  let lastTouchFlowIndex = -1;
   let lastTouchChapterId = "";
   const measureTouchLayout = () => {
     touchMetrics = {
@@ -95,6 +121,7 @@ if (appealSite) {
       flowHeight: flowSection?.offsetHeight || 0,
       chapterTops: chapters.map(documentOffset),
     };
+    measureFlowCards();
   };
 
   const updateTouchStory = () => {
@@ -119,10 +146,7 @@ if (appealSite) {
     const screenCardProgress = clamp((screensProgress - 0.22) / 0.78);
     const screenPosition = screenCardProgress * screenCards.length;
     const activeScreenIndex = Math.min(screenCards.length - 1, Math.floor(screenPosition));
-    const flowTravel = Math.max(touchMetrics.flowHeight - viewportHeight, 1);
-    const flowRaw = clamp((scrollY - touchMetrics.flowTop) / flowTravel);
-    const flowProgress = clamp((flowRaw - 0.14) / 0.78);
-    const flowIndex = Math.min(flowCards.length - 1, Math.floor(flowProgress * flowCards.length));
+    const flowIndex = getFlowIndexAtViewportCenter();
     let chapterIndex = 0;
     touchMetrics.chapterTops.forEach((top, index) => {
       if (top - scrollY <= viewportHeight * 0.48) chapterIndex = index;
@@ -162,10 +186,7 @@ if (appealSite) {
         card.style.setProperty("--screen-z", String(active ? 100 : 100 - distance));
       });
     }
-    if (flowIndex !== lastTouchFlowIndex) {
-      lastTouchFlowIndex = flowIndex;
-      flowCards.forEach((card, index) => card.classList.toggle("is-story-active", index === Math.max(flowIndex, 0)));
-    }
+    setActiveFlowCard(flowIndex);
     if (chapterId !== lastTouchChapterId) {
       lastTouchChapterId = chapterId;
       mapItems.forEach((item) => item.classList.toggle("is-current", item.dataset.storyMap === storyMapId));
@@ -270,14 +291,8 @@ if (appealSite) {
         card.style.setProperty("--screen-z", String(active ? 100 : 100 - distance));
       });
 
-      const flowProgress = progressThrough(flowSection, 0.14, 0.08);
-      const flowIndex = Math.min(
-        flowCards.length - 1,
-        Math.floor(flowProgress * flowCards.length)
-      );
-      flowCards.forEach((card, index) =>
-        card.classList.toggle("is-story-active", index === Math.max(flowIndex, 0))
-      );
+      const flowIndex = getFlowIndexAtViewportCenter();
+      setActiveFlowCard(flowIndex);
 
       appealSite.querySelectorAll(".quote-card").forEach((card) => {
         const bounds = card.getBoundingClientRect();
@@ -403,15 +418,18 @@ if (appealSite) {
 
   window.addEventListener("scroll", scheduleStoryUpdate, { passive: true });
   window.addEventListener("resize", () => {
+    measureFlowCards();
     if (touchLayout) measureTouchLayout();
     scheduleStoryUpdate();
   });
   window.addEventListener("load", () => {
+    measureFlowCards();
     if (touchLayout) measureTouchLayout();
     scheduleStoryUpdate();
   }, { once: true });
 
   setActiveFrame(0);
+  measureFlowCards();
   if (touchLayout) measureTouchLayout();
   (touchLayout ? updateTouchStory : updateStory)();
 }
